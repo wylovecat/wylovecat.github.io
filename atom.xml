@@ -1,0 +1,501 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <id>https://wylovecat.github.io</id>
+    <title>Gridea</title>
+    <updated>2019-06-26T07:59:51.835Z</updated>
+    <generator>https://github.com/jpmonette/feed</generator>
+    <link rel="alternate" href="https://wylovecat.github.io"/>
+    <link rel="self" href="https://wylovecat.github.io/atom.xml"/>
+    <subtitle>温故而知新</subtitle>
+    <logo>https://wylovecat.github.io/images/avatar.png</logo>
+    <icon>https://wylovecat.github.io/favicon.ico</icon>
+    <rights>All rights reserved 2019, Gridea</rights>
+    <entry>
+        <title type="html"><![CDATA[有趣的GitHub项目]]></title>
+        <id>https://wylovecat.github.io/post/_2DLQapwc</id>
+        <link href="https://wylovecat.github.io/post/_2DLQapwc">
+        </link>
+        <updated>2019-06-26T07:59:08.000Z</updated>
+        <summary type="html"><![CDATA[<p>分享一些有趣、有用的GitHub项目。</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>分享一些有趣、有用的GitHub项目。</p>
+<!--more-->
+<h3 id="git的奇技淫巧">Git的奇技淫巧</h3>
+<p>https://github.com/521xueweihan/git-tips</p>
+<p>列举了Git常用的命令和一些小技巧。</p>
+<h3 id="gridea">Gridea</h3>
+<p>https://github.com/getgridea/gridea</p>
+<p>一个静态博客写作客户端。用了它我就抛弃了Hexo。作者更新的很勤快。</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[使用fgets()替换gets()]]></title>
+        <id>https://wylovecat.github.io/post/Y4cNdIzTy</id>
+        <link href="https://wylovecat.github.io/post/Y4cNdIzTy">
+        </link>
+        <updated>2019-05-06T09:10:32.000Z</updated>
+        <content type="html"><![CDATA[<h3 id="原因">原因</h3>
+<blockquote>
+<p>gets()函数不太安全，容易出现数组溢出问题。</p>
+</blockquote>
+<h3 id="举例">举例：</h3>
+<pre><code>char name[3];
+gets(name);
+
+假设我输入&quot;wangxiaoming&quot;，很明显长度超出限制，但是gets()不会对其进行检查。
+</code></pre>
+<p><strong>使用fgets()来进行更安全的输入。</strong></p>
+<h3 id="描述">描述</h3>
+<blockquote>
+<p>C 库函数 char <em>fgets(char</em> str, int n, FILE *stream) 从指定的流 stream 读取一行，并把它存储在 str 所指向的字符串内。当读取 (n-1) 个字符时，或者读取到换行符时，或者到达文件末尾时，它会停止，具体视情况而定。</p>
+</blockquote>
+<h3 id="声明">声明</h3>
+<p>下面是 fgets() 函数的声明。</p>
+<blockquote>
+<p>char <em>fgets(char</em> str, int n, FILE *stream)</p>
+</blockquote>
+<h3 id="参数">参数</h3>
+<p><strong>str</strong> -- 这是指向一个字符数组的指针，该数组存储了要读取的字符串。</p>
+<p><strong>n</strong> -- 这是要读取的最大字符数（包括最后的空字符）。通常是使用以 str 传递的数组长度。</p>
+<p><strong>stream</strong> -- 这是指向 FILE 对象的指针，该 FILE 对象标识了要从中读取字符的流。</p>
+<h3 id="返回值">返回值</h3>
+<ul>
+<li>如果成功，该函数返回相同的 str 参数。如果到达文件末尾或者没有读取到任何字符，str 的内容保持不变，并返回一个空指针。</li>
+<li>如果发生错误，返回一个空指针。</li>
+</ul>
+<h3 id="使用举例">使用举例</h3>
+<pre><code class="language-c++">char name[len];
+fgets(name,len,stdin);
+</code></pre>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[升级DevC++的编译器]]></title>
+        <id>https://wylovecat.github.io/post/1M3vM-kJi</id>
+        <link href="https://wylovecat.github.io/post/1M3vM-kJi">
+        </link>
+        <updated>2019-04-23T07:45:40.000Z</updated>
+        <content type="html"><![CDATA[<hr>
+<h2 id="前言">前言</h2>
+<p>DevC++是采用MinGW来作为C/C++的编译器的，但是由于多年未更新，版本老旧。当然，我们可以继续使用它来进行相关内容学习，如果想对编译器进行更新可以自己下载最新版本的MinGW进行替换。</p>
+<h2 id="安装mingw">安装MinGW</h2>
+<p>MinGW可使用<a href="https://sourceforge.net/projects/mingw/">MinGW Installation Manager</a>进行安装，但是由于资源在境外下载速度比较慢，且在安装后发现版本是在三年前的，虽然比DevC++的新一些。所以推荐采用另一种安装方式<a href="https://nuwen.net/mingw.html#install">MinGW Distro</a>。这个是GCC 8.2.0版本的，并且要用的包全都已经打包好了，下载完成解压即可使用。下载页面分两个，如果在电脑上已经安装好Git可以下载<a href="https://nuwen.net/files/mingw/mingw-16.1-without-git.exe">without-git</a>版本，如果没有就下载<a href="https://nuwen.net/files/mingw/mingw-16.1.exe">完整</a>的就行。</p>
+<p>解压完成后可手动进行环境配置，或者运行里面的自带的bat脚本进行配置。配置完成后打开命令行窗口，输入gcc -v查看版本，观察是否已经成功配置。</p>
+<p><img src="https://cdn.all-dream.com/user/24ea64ea3b034d4ea442e522a4692266/20190423_154705_gcc.png" alt="gcc -v"></p>
+<p>出现上图所示内容代表已经配置成功。</p>
+<h2 id="替换编译器">替换编译器</h2>
+<p>打开DevC++，点击工具-编译环境，在设定编译器配置时，点击第二个绿色加号（由文件夹添加编译器配置），选择我们刚刚解压的MinGW文件夹，他会自动进行配置，点击确定即可完成。</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[进制转换]]></title>
+        <id>https://wylovecat.github.io/post/ZigeFxfIY</id>
+        <link href="https://wylovecat.github.io/post/ZigeFxfIY">
+        </link>
+        <updated>2019-04-19T09:37:06.000Z</updated>
+        <content type="html"><![CDATA[<h1 id="进制转换">进制转换</h1>
+<h2 id="基础">基础</h2>
+<p>十进制与二进制的转换是基础内容，应做到熟练地将十进制的数转为二进制，将二进制的数转为十进制。</p>
+<h3 id="十进制转二进制">十进制转二进制</h3>
+<h4 id="整数转二进制">整数转二进制</h4>
+<p>整数转二进制是最常见的。核心在于除2取余，倒序排列，高位补零。<br /><img src="https://cdn.nlark.com/yuque/0/2019/png/292435/1554633400474-fdf7c01e-f32e-435f-8a9c-a75a7ec3774c.png#align=left&amp;display=inline&amp;height=332&amp;name=image.png&amp;originHeight=664&amp;originWidth=1184&amp;size=87756&amp;status=done&amp;width=592" alt="image.png"><br />不断地将数字除以2，将余数写一边，直到商为0时，停止。下方的为二进制的高位，由高位到低位倒序排列余数，高位不够用0来代替。</p>
+<h4 id="负整数转二进制">负整数转二进制</h4>
+<p>先是将对应的正整数转换成二进制后，对二进制取反然后再加1。以-10为例。10的二进制表达是(00001010),由于高位都是0，所以可以省略，写成(1010) ,（用B来表示表达的是二进制）。</p>
+<ol>
+<li>先取反。取反的意思就是1变成0，0变成1。(00001010)=&gt;(11110101)</li>
+<li>加上1。由于是二进制，所以我们逢二进一。(11110101)=&gt;(11110110)</li>
+</ol>
+<p>由于小数的高位都是1，所以我们也可以将高位省去，只保留(0110)不过注意和正整数进行区别。</p>
+<h4 id="小数转二进制">小数转二进制</h4>
+<p>将小数部分乘以2，取整数(这个整数不是0就是1)，当乘以二后小数部分结果为0或者位数够了，这些整数就是二进制。<br />以0.125为例<br />0.125 * 2 =0.25 整数部分为 0<br />0.25 *  2  = 0.5  整数部分为 0<br />0.5  *  2  = 1.0  整数部分为1，小数部分为0，停止。<br />二进制就为0.001<br />如果是带整数部分的小数进行进制转换，那么分开来处理，先将整数部分，转换成二进制，再将小数部分，转为二进制。<br />**注意 **小数进行二进制转换是存在无法除尽的情况的，这是正常的。根据题意保留足够的位数即可。</p>
+<h3 id="二进制转十进制">二进制转十进制</h3>
+<p>使用按权相加法。</p>
+<h4 id="高位为0">高位为0</h4>
+<p>首先第一步将位数补齐，如果高位是0则是一个正数。将其分离位数，将分离出来的位数按从低位到高位的顺数，依次和2的冥相乘累加。以(1010)为例。<br />分离位数： 1 0 1 0  =》相乘累加 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>0</mn><mo>×</mo><msup><mn>2</mn><mn>0</mn></msup><mo>+</mo><mn>1</mn><mo>×</mo><msup><mn>2</mn><mn>1</mn></msup><mo>+</mo><mn>0</mn><mo>×</mo><msup><mn>2</mn><mn>2</mn></msup><mo>+</mo><mn>1</mn><mo>×</mo><msup><mn>2</mn><mn>3</mn></msup><mo>=</mo><mn>10</mn></mrow><annotation encoding="application/x-tex">0\times2^{0}+1\times2^{1}+0\times2^{2}+1\times2^{3}=10</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.72777em;vertical-align:-0.08333em;"></span><span class="mord">0</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.897438em;vertical-align:-0.08333em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">0</span></span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.72777em;vertical-align:-0.08333em;"></span><span class="mord">1</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.897438em;vertical-align:-0.08333em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">1</span></span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.72777em;vertical-align:-0.08333em;"></span><span class="mord">0</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.897438em;vertical-align:-0.08333em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.72777em;vertical-align:-0.08333em;"></span><span class="mord">1</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.8141079999999999em;vertical-align:0em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">3</span></span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span><span class="mord">0</span></span></span></span></p>
+<h4 id="高位为1">高位为1</h4>
+<p>如果高位为1，则说明是一个负数，那就先减1，再进行取反，在进行转换。以(11110110)<br />减一：(11110101) =&gt; 取反: (00001010)=&gt;按权相加:0<em>2+1</em>2+0<em>2+1</em>2=10</p>
+<h4 id="小数形式">小数形式</h4>
+<p>整数部分和小数部分分开计算。整数部分参考上面。小数部分则是相反。以（0.001）为例。<br />按权相加：<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>0</mn><mo>×</mo><msup><mn>2</mn><mrow><mo>−</mo><mn>1</mn></mrow></msup><mo>+</mo><mn>0</mn><mo>×</mo><msup><mn>2</mn><mrow><mo>−</mo><mn>2</mn></mrow></msup><mo>+</mo><mn>1</mn><mo>×</mo><msup><mn>2</mn><mrow><mo>−</mo><mn>3</mn></mrow></msup><mo>=</mo><mn>0.125</mn></mrow><annotation encoding="application/x-tex">0\times2^{-1}+0\times2^{-2}+1\times2^{-3}=0.125</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.72777em;vertical-align:-0.08333em;"></span><span class="mord">0</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.897438em;vertical-align:-0.08333em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">−</span><span class="mord mtight">1</span></span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.72777em;vertical-align:-0.08333em;"></span><span class="mord">0</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.897438em;vertical-align:-0.08333em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">−</span><span class="mord mtight">2</span></span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.72777em;vertical-align:-0.08333em;"></span><span class="mord">1</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.8141079999999999em;vertical-align:0em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">−</span><span class="mord mtight">3</span></span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">0</span><span class="mord">.</span><span class="mord">1</span><span class="mord">2</span><span class="mord">5</span></span></span></span></p>
+<h2 id="其他进制转换">其他进制转换</h2>
+<p>整体上的方法和十进制与二进制的转换方法类似。转换成x进制的话使用除x取余，倒序排列，高位补零。二进制转换成其他进制还是采用按权相加的方法。</p>
+<h3 id="八进制与十六进制">八进制与十六进制</h3>
+<p>八进制是逢八进一。</p>
+<p>十进制转八进制的话，过程就是不断地将数字除以8，将余数写一边，直到商为0时停止。下方的为二进制的高位，由高位到低位倒序排列余数，高位不够用0来代替。以十进制10转换为八进制例。</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2019/png/292435/1554693614581-4e24b0dc-9e94-4acf-889f-89617bbcc24d.png" alt="image.png"></p>
+<p>十六进制也是类似，需要注意的点是，十六进制的10~15是使用A~F来表示的。</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[递归与分治（一）]]></title>
+        <id>https://wylovecat.github.io/post/Hkqr-7jgZ</id>
+        <link href="https://wylovecat.github.io/post/Hkqr-7jgZ">
+        </link>
+        <updated>2019-03-01T02:50:53.000Z</updated>
+        <content type="html"><![CDATA[<h3 id="递归基本思想">递归基本思想</h3>
+<p><strong>基本要素</strong></p>
+<ol>
+<li>递归终止条件</li>
+<li>终止处理办法</li>
+<li>递归处理办法</li>
+</ol>
+<p><strong>递归-阶乘</strong>
+阶乘计算：从键盘输入正整数N（0&lt;=N&lt;=20）,输出N！。</p>
+<pre><code>int factorial(int n){
+    if(n==0
+        return 1;//递归边界
+    return n*factorial(n-1);//递归调用
+ }
+</code></pre>
+<p><strong>递归-Fibonacci</strong>
+每对兔子每个月不多不少恰好能生一对(一雌一雄)新兔子，而且每对新生兔出生两个月后就成熟并具备生殖能力；另外，假定所有的兔子都不会死亡。假如养了出生的小兔一对，试问第n个月后共有多少对兔子?</p>
+<pre><code>long fib(int n){
+    if(n&lt;=1) return 1;
+    return fib(n-1)+fib(n-2);
+}
+</code></pre>
+<h3 id="递归实例">递归实例</h3>
+<h4 id="全排列问题">全排列问题</h4>
+<blockquote>
+<p>给定一组互不相同的字符，求这组字符的全排列</p>
+</blockquote>
+<p>简单场景：
+输入的字符串长度为1，显然直接输出即可
+问题分解：
+当输入的字符长度超过1时只需要从字符串中选一个字符作为输出字符串首字符，对其余的字符进行递归处理即可。</p>
+<pre><code>void permutations(string str,int i,int n)
+{
+    if(i==n-1){
+        cout&lt;&lt;str&lt;&lt;endl;
+        return;
+    }
+    for(int j=i;j&lt;n;j++){
+        swap(str[i],str[j]);
+        permutations(str,i+1,n);
+        swap(str[i],str[j]);
+    }
+    
+}
+</code></pre>
+<h4 id="stirling数">Stirling数</h4>
+<blockquote>
+<p>n个元素的集合{1,2,...,n}可以划分为若干个非空子集的集合。例如，当n=3时，集合{1,2,3}可以划分为5个不同的非空子集的集合如下：</p>
+</blockquote>
+<pre><code> {{1},{2},{3}}
+ {{1,2},{3}}
+ {{1,3},{2}}
+ {{2,3},{1}}
+ {{1,2,3}}
+</code></pre>
+<blockquote>
+<p>给定正整数n和m，计算出n个元素的集合{1,2,...,n}可以划分为多少个不同的由m个非空子集构成的集合。比如上例中含有1个子集的集合有1个，2个子集的集合有3个，3个自由的集合有1个。</p>
+</blockquote>
+<p>假定有S(n,m)种方法把n个元素的集合划分成m个非空子集构成的集合，S(n,m)种不同划分方法可以分成一下两类:
+先把n-1个元素划分成m个非空子集，按定义其划分数目为S(n-1,m)再将剩下的一个元素插入到m子集种的任意一个,最后把这两部合起来则可构成n个元素集合的m划分，总共有m * S(n-1,m)种划分。</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[枚举算法]]></title>
+        <id>https://wylovecat.github.io/post/jhWRl2dty</id>
+        <link href="https://wylovecat.github.io/post/jhWRl2dty">
+        </link>
+        <updated>2019-02-26T09:15:19.000Z</updated>
+        <content type="html"><![CDATA[<h3 id="基本原理">基本原理</h3>
+<blockquote>
+<p>按照问题本身的性质，一一列举出该问题的所有可能的解，并在列举的过程中，逐一检验每个可能解是否是问题的真正解。若是则采纳这个解，否则抛弃它。</p>
+</blockquote>
+<p><strong>tips:</strong></p>
+<ul>
+<li>不能遗漏，否则导致结果可能不正确</li>
+<li>不要重复，否则导致效率低下</li>
+</ul>
+<p><strong>优点：</strong>
+问题的解准确且全面
+实现简单，可通过循环/递归实现
+<strong>缺点：</strong>
+效率相对来说较低</p>
+<p><strong>枚举法解题步骤</strong></p>
+<ol>
+<li>确定枚举对象</li>
+<li>逐一列举可能解</li>
+<li>逐一验证可能解</li>
+</ol>
+<h3 id="经典问题">经典问题</h3>
+<h4 id="模糊数字问题">模糊数字问题</h4>
+<blockquote>
+<p>一张单据上有一个5位数的编码，因为保管不当，其百位已经变得模糊不清。已知这个数是57和67的倍数。现在设计一个算法，输出所有满足这些条件的5位数，并统计这样的数的个数。
+1 9 ？9 5</p>
+</blockquote>
+<p>利用for循环 遍历0-9</p>
+<blockquote>
+<p>一张单据上有一个5位数的编码，因为保管不当，其百、千、万位已经变得模糊不清。已知这个数是57和67的倍数。现在设计一个算法，输出所有满足这些条件的5位数，并统计这样的数的个数。
+？？ ？9 5</p>
+</blockquote>
+<p>三个枚举对象，使用3层for循环遍历
+改进：一个枚举对象，for循环遍历 100-999</p>
+<h4 id="百钱百鸡问题">百钱百鸡问题</h4>
+<blockquote>
+<p>鸡翁一，值钱5；鸡母一，值钱三；鸡雏三，值钱一。百钱买百鸡，问鸡翁、鸡母、鸡雏各几何？假定鸡种的价格不变，拥有的钱数为m，需要购买的鸡数为n,试求出所有可能的购买方案总数。</p>
+</blockquote>
+<p>解：
+枚举对象(n1-鸡翁,n2-鸡母,n3-鸡雏)</p>
+<pre><code>for(n1=0;n1&lt;n;n1++)
+    for(n2=0;n2&lt;n;n2++)
+        for(n3=0;n3&lt;n;n3++)
+            n1+n2+n3==n,5n1+3n2+n3/3==n
+</code></pre>
+<p>新思路：利用枚举对象之间的线性相关
+鸡翁：n1 0~m/5
+鸡母：n2 0~m/3
+鸡雏：n-n1-n2</p>
+<h4 id="数组配对问题">数组配对问题</h4>
+<blockquote>
+<p>给你一个长度为n的数组A和一个正整数k，问从数组中任选两个数使其和是k的倍数，有多少种选法.</p>
+</blockquote>
+<p>(ai+aj)%k==0 =&gt; (ai%k+aj%k)%k==0
+B0 B1 ... Bk-1
+枚举对象：Bij 0&lt;=i&lt;=k-1
+逐一列举：for(i=0;i&lt;k;i++)
+逐一验证: j=(k-i)%k
+Count=bi * bj</p>
+<pre><code>#define LL long long
+void work()
+{
+    LL ans=0;
+    for(int i=0;i&lt;k;i++)
+    {
+        int j=(k-i%k;
+        if(j&lt;i)break;
+        else if(j==i)
+            ans+=1LL*a[i]*(a[i]-1)/2;
+        else
+            ans+=1LL*a[i]*a[j];
+        
+     }
+
+}
+</code></pre>
+<h3 id="枚举算法优化技巧">枚举算法优化技巧</h3>
+<p>枚举对象优化：
+百钱百鸡：参数独立性
+数组配对：枚举对象转换
+枚举过程优化：
+二分枚举的一般模型</p>
+<p>给定长度为n的单调不下降数列｛a0,...,an-1｝和目标数k，求满足条件ai&gt;=k的最小值i。不存在的情况下输出n。
+枚举对象,0&lt;= i &lt;=n-1
+逐一列举
+一层for循环，按找i从小到大遍历
+逐一验证
+判断ai&gt;=k?第一个满足条件的即为答案
+更有效的枚举方式
+二分法</p>
+<h4 id="绳子切割问题">绳子切割问题</h4>
+<p>有N条绳子，他们长度分别为Li(&lt;=1000)。如果从他们中切割处K条长度相同的绳子的话，这K条绳子每条最长能有多长?答案保留到小数点后2位。</p>
+<p>枚举对象：
+L,0.00&lt;=L&lt;=1000.00 步长 0.001</p>
+<p>放大100 0-100000
+mid=50000</p>
+<p>一般化模型</p>
+<ol>
+<li>“求满足某个条件C(x)的最小的x”,其中C(x)满足性质：如果任意x满足C(x),则所有的x'&gt;=x也满足C(x')</li>
+<li>“求满足某个条件C(x)的最大的x”,其中C(x)满足性质：如果任意x满足C(x),则所有的x'&lt;=x也满足C(x')</li>
+</ol>
+<h4 id="石头移动问题">石头移动问题</h4>
+<blockquote>
+<p>有一条河，和中间有一些石头，石头的数量以及相邻两块石头之间的距离已知。现在可以一处一些石头，假设最多可以移除m块石头(注意：首尾两块石头不可以移除，且假定所有的石头都处于同一直线)，问最多一时爽m块石头后相邻两块石头之间的最小距离的最大值是多少？</p>
+</blockquote>
+<p>枚举对象：
+StoneSet（S1,S2，...，Sm-1,Sm）
+S1 {2,...,n-1}
+Si {Si-1 + 1,...,n-1}
+逐一列举
+循环 m是动态的
+递归</p>
+<pre><code>#include MaxStone 1000
+int globalNum;//石头数量
+int globalFlag[MaxBox],globalAns;//保存状态和最优值的全局变量
+
+void recursiveEnum(int t){
+    if(t==globalNum){
+        int dist=checkStone(globalFlag,globalNum);
+        if(dist&gt;globalAns)
+            globalAns=dist;
+        return;
+    }//end of if
+    globalFlag[t]=1;
+    recursiveFnum(t+1);
+    globalFlag[t]=0;
+    recursiveEnum(t+1);
+}
+</code></pre>
+<p>改进:二分枚举
+问题建模
+C(d)描述为：最多移除m个石头后最近两个石头的距离不小于d
+C(d)满足单调性：如果任意d满足C(d)，则所有的d'&lt;=d也满足C(d'）
+判定：
+应用贪心思想：</p>
+<ol>
+<li>循环一次考虑相邻石头，如果距离小于d，则去掉一个石头</li>
+<li>如果任意相邻石头的距离都不小于d，则返回true</li>
+<li>如果移除的石头个数大于m,则返回false</li>
+</ol>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[使用Markdown输入数学符号]]></title>
+        <id>https://wylovecat.github.io/post/W-00jdL8V</id>
+        <link href="https://wylovecat.github.io/post/W-00jdL8V">
+        </link>
+        <updated>2019-01-14T08:15:28.000Z</updated>
+        <content type="html"><![CDATA[<h4 id="矩阵">矩阵</h4>
+<pre><code class="language-markdown">\left[
+\begin{matrix}
+a &amp; 0 \\
+1 &amp; 1 \\
+2 &amp; 3
+\end{matrix}
+\right]
+\tag{tag}
+</code></pre>
+<h4 id="常用符号">常用符号</h4>
+<p><code>\sum</code></p>
+<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>∑</mo></mrow><annotation encoding="application/x-tex">\sum
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.6000100000000002em;vertical-align:-0.55001em;"></span><span class="mop op-symbol large-op" style="position:relative;top:-0.000004999999999977245em;">∑</span></span></span></span></span></p>
+<p><code>\infty</code></p>
+<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi mathvariant="normal">∞</mi></mrow><annotation encoding="application/x-tex">\infty
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord">∞</span></span></span></span></span></p>
+<p><code>\int</code></p>
+<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>∫</mo></mrow><annotation encoding="application/x-tex">\int
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:2.22225em;vertical-align:-0.86225em;"></span><span class="mop op-symbol large-op" style="margin-right:0.44445em;position:relative;top:-0.0011249999999999316em;">∫</span></span></span></span></span></p>
+<p><code>\Leftrightarrow</code></p>
+<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>↔</mo></mrow><annotation encoding="application/x-tex">\leftrightarrow
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.36687em;vertical-align:0em;"></span><span class="mrel">↔</span></span></span></span></span></p>
+<p><code>{a+b}\over {a+b+\cdots +z}</code></p>
+<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mfrac><mrow><mi>a</mi><mo>+</mo><mi>b</mi></mrow><mrow><mi>a</mi><mo>+</mo><mi>b</mi><mo>+</mo><mo>⋯</mo><mo>+</mo><mi>z</mi></mrow></mfrac></mrow><annotation encoding="application/x-tex">{a+b}\over {a+b+\cdots +z}
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:2.14077em;vertical-align:-0.7693300000000001em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.37144em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathdefault">a</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mord mathdefault">b</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="minner">⋯</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mord mathdefault" style="margin-right:0.04398em;">z</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathdefault">a</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mord mathdefault">b</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.7693300000000001em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></span></p>
+<p><code>\sqrt{2},\sqrt[n]{3}</code></p>
+<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><msqrt><mn>2</mn></msqrt><mo separator="true">,</mo><mroot><mn>3</mn><mi>n</mi></mroot></mrow><annotation encoding="application/x-tex">\sqrt{2},\sqrt[n]{3}
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.150535em;vertical-align:-0.19444em;"></span><span class="mord sqrt"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.956095em;"><span class="svg-align" style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord" style="padding-left:0.833em;"><span class="mord">2</span></span></span><span style="top:-2.916095em;"><span class="pstrut" style="height:3em;"></span><span class="hide-tail" style="min-width:0.853em;height:1.08em;"><svg width='400em' height='1.08em' viewBox='0 0 400000 1080' preserveAspectRatio='xMinYMin slice'><path d='M95,702c-2.7,0,-7.17,-2.7,-13.5,-8c-5.8,-5.3,-9.5,
+-10,-9.5,-14c0,-2,0.3,-3.3,1,-4c1.3,-2.7,23.83,-20.7,67.5,-54c44.2,-33.3,65.8,
+-50.3,66.5,-51c1.3,-1.3,3,-2,5,-2c4.7,0,8.7,3.3,12,10s173,378,173,378c0.7,0,
+35.3,-71,104,-213c68.7,-142,137.5,-285,206.5,-429c69,-144,104.5,-217.7,106.5,
+-221c5.3,-9.3,12,-14,20,-14H400000v40H845.2724s-225.272,467,-225.272,467
+s-235,486,-235,486c-2.7,4.7,-9,7,-19,7c-6,0,-10,-1,-12,-3s-194,-422,-194,-422
+s-65,47,-65,47z M834 80H400000v40H845z'/></svg></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.08390500000000001em;"><span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord sqrt"><span class="root"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.738594em;"><span style="top:-3.023314em;"><span class="pstrut" style="height:2.5em;"></span><span class="sizing reset-size6 size1 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">n</span></span></span></span></span></span></span></span><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.956095em;"><span class="svg-align" style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord" style="padding-left:0.833em;"><span class="mord">3</span></span></span><span style="top:-2.916095em;"><span class="pstrut" style="height:3em;"></span><span class="hide-tail" style="min-width:0.853em;height:1.08em;"><svg width='400em' height='1.08em' viewBox='0 0 400000 1080' preserveAspectRatio='xMinYMin slice'><path d='M95,702c-2.7,0,-7.17,-2.7,-13.5,-8c-5.8,-5.3,-9.5,
+-10,-9.5,-14c0,-2,0.3,-3.3,1,-4c1.3,-2.7,23.83,-20.7,67.5,-54c44.2,-33.3,65.8,
+-50.3,66.5,-51c1.3,-1.3,3,-2,5,-2c4.7,0,8.7,3.3,12,10s173,378,173,378c0.7,0,
+35.3,-71,104,-213c68.7,-142,137.5,-285,206.5,-429c69,-144,104.5,-217.7,106.5,
+-221c5.3,-9.3,12,-14,20,-14H400000v40H845.2724s-225.272,467,-225.272,467
+s-235,486,-235,486c-2.7,4.7,-9,7,-19,7c-6,0,-10,-1,-12,-3s-194,-422,-194,-422
+s-65,47,-65,47z M834 80H400000v40H845z'/></svg></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.08390500000000001em;"><span></span></span></span></span></span></span></span></span></span></p>
+<p><code>\frac{d}{dx} e^{ax} \quad \sum_{i=1}^n (X_i-\overline X)^2</code></p>
+<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mfrac><mi>d</mi><mrow><mi>d</mi><mi>x</mi></mrow></mfrac><msup><mi>e</mi><mrow><mi>a</mi><mi>x</mi></mrow></msup><mspace width="1em"/><munderover><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>n</mi></munderover><mo>(</mo><msub><mi>X</mi><mi>i</mi></msub><mo>−</mo><mover accent="true"><mi>X</mi><mo stretchy="true">‾</mo></mover><msup><mo>)</mo><mn>2</mn></msup></mrow><annotation encoding="application/x-tex">\frac{d}{dx} e^{ax} \quad \sum_{i=1}^n (X_i-\overline X)^2
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:2.929066em;vertical-align:-1.277669em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.37144em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathdefault">d</span><span class="mord mathdefault">x</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathdefault">d</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.686em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mord"><span class="mord mathdefault">e</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.7143919999999999em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">a</span><span class="mord mathdefault mtight">x</span></span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mspace" style="margin-right:1em;"></span><span class="mop op-limits"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.6513970000000002em;"><span style="top:-1.872331em;margin-left:0em;"><span class="pstrut" style="height:3.05em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">i</span><span class="mrel mtight">=</span><span class="mord mtight">1</span></span></span></span><span style="top:-3.050005em;"><span class="pstrut" style="height:3.05em;"></span><span><span class="mop op-symbol large-op">∑</span></span></span><span style="top:-4.3000050000000005em;margin-left:0em;"><span class="pstrut" style="height:3.05em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">n</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.277669em;"><span></span></span></span></span></span><span class="mopen">(</span><span class="mord"><span class="mord mathdefault" style="margin-right:0.07847em;">X</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:-0.07847em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1.13333em;vertical-align:-0.25em;"></span><span class="mord overline"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8833300000000001em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord mathdefault" style="margin-right:0.07847em;">X</span></span><span style="top:-3.80333em;"><span class="pstrut" style="height:3em;"></span><span class="overline-line" style="border-bottom-width:0.04em;"></span></span></span></span></span></span><span class="mclose"><span class="mclose">)</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8641079999999999em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span></span></span></p>
+<p><code>\vec{a}\cdot \vec{b}</code></p>
+<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mover accent="true"><mi>a</mi><mo>⃗</mo></mover><mo>⋅</mo><mover accent="true"><mi>b</mi><mo>⃗</mo></mover></mrow><annotation encoding="application/x-tex">\vec{a}\cdot \vec{b}
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.714em;vertical-align:0em;"></span><span class="mord accent"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.714em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathdefault">a</span></span></span><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="accent-body" style="left:-0.2355em;"><span class="overlay" style="height:0.714em;width:0.471em;"><svg width='0.471em' height='0.714em' style='width:0.471em' viewBox='0 0 471 714' preserveAspectRatio='xMinYMin'><path d='M377 20c0-5.333 1.833-10 5.5-14S391 0 397 0c4.667 0 8.667 1.667 12 5
+3.333 2.667 6.667 9 10 19 6.667 24.667 20.333 43.667 41 57 7.333 4.667 11
+10.667 11 18 0 6-1 10-3 12s-6.667 5-14 9c-28.667 14.667-53.667 35.667-75 63
+-1.333 1.333-3.167 3.5-5.5 6.5s-4 4.833-5 5.5c-1 .667-2.5 1.333-4.5 2s-4.333 1
+-7 1c-4.667 0-9.167-1.833-13.5-5.5S337 184 337 178c0-12.667 15.667-32.333 47-59
+H213l-171-1c-8.667-6-13-12.333-13-19 0-4.667 4.333-11.333 13-20h359
+c-16-25.333-24-45-24-59z'/></svg></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">⋅</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.9774399999999999em;vertical-align:0em;"></span><span class="mord accent"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.9774399999999999em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathdefault">b</span></span></span><span style="top:-3.26344em;"><span class="pstrut" style="height:3em;"></span><span class="accent-body" style="left:-0.2355em;"><span class="overlay" style="height:0.714em;width:0.471em;"><svg width='0.471em' height='0.714em' style='width:0.471em' viewBox='0 0 471 714' preserveAspectRatio='xMinYMin'><path d='M377 20c0-5.333 1.833-10 5.5-14S391 0 397 0c4.667 0 8.667 1.667 12 5
+3.333 2.667 6.667 9 10 19 6.667 24.667 20.333 43.667 41 57 7.333 4.667 11
+10.667 11 18 0 6-1 10-3 12s-6.667 5-14 9c-28.667 14.667-53.667 35.667-75 63
+-1.333 1.333-3.167 3.5-5.5 6.5s-4 4.833-5 5.5c-1 .667-2.5 1.333-4.5 2s-4.333 1
+-7 1c-4.667 0-9.167-1.833-13.5-5.5S337 184 337 178c0-12.667 15.667-32.333 47-59
+H213l-171-1c-8.667-6-13-12.333-13-19 0-4.667 4.333-11.333 13-20h359
+c-16-25.333-24-45-24-59z'/></svg></span></span></span></span></span></span></span></span></span></span></span></p>
+<p><code>\int_3^2 x^2{\rm d}x</code></p>
+<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><msubsup><mo>∫</mo><mn>3</mn><mn>2</mn></msubsup><msup><mi>x</mi><mn>2</mn></msup><mi mathvariant="normal">d</mi><mi>x</mi></mrow><annotation encoding="application/x-tex">\int_3^2 x^2{\rm d}x
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:2.4759580000000003em;vertical-align:-0.9119499999999999em;"></span><span class="mop"><span class="mop op-symbol large-op" style="margin-right:0.44445em;position:relative;top:-0.0011249999999999316em;">∫</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.5640080000000003em;"><span style="top:-1.7880500000000001em;margin-left:-0.44445em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">3</span></span></span><span style="top:-3.8129000000000004em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.9119499999999999em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord mathdefault">x</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8641079999999999em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mord"><span class="mord"><span class="mord mathrm">d</span></span></span><span class="mord mathdefault">x</span></span></span></span></span></p>
+<p><code>\lim_{n\rightarrow + \infty}n</code></p>
+<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><munder><mi>lim</mi><mo>⁡</mo><mrow><mi>n</mi><mo>→</mo><mo>+</mo><mi mathvariant="normal">∞</mi></mrow></munder><mi>n</mi></mrow><annotation encoding="application/x-tex">\lim_{n\rightarrow + \infty}n
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.4527709999999998em;vertical-align:-0.758331em;"></span><span class="mop op-limits"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.69444em;"><span style="top:-2.1em;margin-left:0em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">n</span><span class="mrel mtight">→</span><span class="mord mtight">+</span><span class="mord mtight">∞</span></span></span></span><span style="top:-2.7em;"><span class="pstrut" style="height:2.7em;"></span><span><span class="mop">lim</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.758331em;"><span></span></span></span></span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">n</span></span></span></span></span></p>
+<p><code>\sin</code></p>
+<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>sin</mi><mo>⁡</mo></mrow><annotation encoding="application/x-tex">\sin
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.66786em;vertical-align:0em;"></span><span class="mop">sin</span></span></span></span></span></p>
+<p><code>\forall,\exists,\lnot,\nabla,\partial</code></p>
+<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi mathvariant="normal">∀</mi><mo separator="true">,</mo><mi mathvariant="normal">∃</mi><mo separator="true">,</mo><mi mathvariant="normal">¬</mi><mo separator="true">,</mo><mi mathvariant="normal">∇</mi><mo separator="true">,</mo><mi mathvariant="normal">∂</mi></mrow><annotation encoding="application/x-tex">\forall,\exists,\lnot,\nabla,\partial
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord">∀</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">∃</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">¬</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">∇</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord" style="margin-right:0.05556em;">∂</span></span></span></span></span></p>
+<p><code>\times,\div</code></p>
+<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>×</mo><mo separator="true">,</mo><mo>÷</mo></mrow><annotation encoding="application/x-tex">\times ,\div
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.7777700000000001em;vertical-align:-0.19444em;"></span><span class="mord">×</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">÷</span></span></span></span></span></p>
+<p><code>\alpha ,\beta ,\gamma ,\epsilon ,\varepsilon ,\theta ,\psi</code></p>
+<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>α</mi><mo separator="true">,</mo><mi>β</mi><mo separator="true">,</mo><mi>γ</mi><mo separator="true">,</mo><mi>ϵ</mi><mo separator="true">,</mo><mi>ε</mi><mo separator="true">,</mo><mi>θ</mi><mo separator="true">,</mo><mi>ψ</mi></mrow><annotation encoding="application/x-tex">\alpha ,\beta ,\gamma ,\epsilon ,\varepsilon ,\theta ,\psi
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord mathdefault" style="margin-right:0.0037em;">α</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault" style="margin-right:0.05278em;">β</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault" style="margin-right:0.05556em;">γ</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">ϵ</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">ε</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">θ</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault" style="margin-right:0.03588em;">ψ</span></span></span></span></span></p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[极限的概念与性质]]></title>
+        <id>https://wylovecat.github.io/post/uCn-GTST3</id>
+        <link href="https://wylovecat.github.io/post/uCn-GTST3">
+        </link>
+        <updated>2019-01-14T08:08:47.000Z</updated>
+        <content type="html"><![CDATA[<h2 id="极限的定义">极限的定义</h2>
+<h3 id="数列的极限">数列的极限</h3>
+<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>l</mi><mi>i</mi><mi>m</mi><msub><mi>x</mi><mi>n</mi></msub><mo>=</mo><mi>A</mi><mo>↔</mo><mi mathvariant="normal">∀</mi><mi>ε</mi><mo>&gt;</mo><mn>0</mn><mo separator="true">,</mo><mi mathvariant="normal">∃</mi><mi mathvariant="normal">正</mi><mi mathvariant="normal">整</mi><mi mathvariant="normal">数</mi><mi>N</mi><mi mathvariant="normal">，</mi><mi mathvariant="normal">使</mi><mi mathvariant="normal">得</mi><mi mathvariant="normal">当</mi><mi>n</mi><mo>&gt;</mo><mi>N</mi><mi mathvariant="normal">时</mi><mi mathvariant="normal">就</mi><mi mathvariant="normal">有</mi><mi mathvariant="normal">∣</mi><msub><mi>x</mi><mi>n</mi></msub><mo>−</mo><mi>A</mi><mi mathvariant="normal">∣</mi><mo>&lt;</mo><mi>ε</mi><mi mathvariant="normal">。</mi></mrow><annotation encoding="application/x-tex">limx_n = A \leftrightarrow \forall\varepsilon &gt; 0,\exists 正整数N，使得当n&gt;N时就有 |x_n - A|&lt;\varepsilon 。
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.84444em;vertical-align:-0.15em;"></span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord mathdefault">i</span><span class="mord mathdefault">m</span><span class="mord"><span class="mord mathdefault">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">n</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault">A</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">↔</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.73354em;vertical-align:-0.0391em;"></span><span class="mord">∀</span><span class="mord mathdefault">ε</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">&gt;</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord">0</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">∃</span><span class="mord cjk_fallback">正</span><span class="mord cjk_fallback">整</span><span class="mord cjk_fallback">数</span><span class="mord mathdefault" style="margin-right:0.10903em;">N</span><span class="mord cjk_fallback">，</span><span class="mord cjk_fallback">使</span><span class="mord cjk_fallback">得</span><span class="mord cjk_fallback">当</span><span class="mord mathdefault">n</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">&gt;</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.10903em;">N</span><span class="mord cjk_fallback">时</span><span class="mord cjk_fallback">就</span><span class="mord cjk_fallback">有</span><span class="mord">∣</span><span class="mord"><span class="mord mathdefault">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">n</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">A</span><span class="mord">∣</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">&lt;</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">ε</span><span class="mord cjk_fallback">。</span></span></span></span></span></p>
+<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi mathvariant="normal">若</mi><mi mathvariant="normal">数</mi><mi mathvariant="normal">列</mi><mo>{</mo><msub><mi>x</mi><mi>n</mi></msub><mo>}</mo><mi mathvariant="normal">存</mi><mi mathvariant="normal">在</mi><mi mathvariant="normal">极</mi><mi mathvariant="normal">限</mi><mo>(</mo><mi mathvariant="normal">有</mi><mi mathvariant="normal">限</mi><mi mathvariant="normal">数</mi><mo>)</mo><mi mathvariant="normal">，</mi><mi mathvariant="normal">又</mi><mi mathvariant="normal">称</mi><mi mathvariant="normal">数</mi><mi mathvariant="normal">列</mi><mo>{</mo><mi>n</mi><mo>}</mo><mi mathvariant="normal">收</mi><mi mathvariant="normal">敛</mi><mi mathvariant="normal">，</mi><mi mathvariant="normal">否</mi><mi mathvariant="normal">则</mi><mi mathvariant="normal">称</mi><mi mathvariant="normal">数</mi><mi mathvariant="normal">列</mi><mo>{</mo><msub><mi>x</mi><mi>n</mi></msub><mo>}</mo><mi mathvariant="normal">发</mi><mi mathvariant="normal">散</mi><mi mathvariant="normal">。</mi></mrow><annotation encoding="application/x-tex">若数列\{x_n\}存在极限(有限数)，又称数列\{n\}收敛，否则称数列\{x_n\}发散。
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord cjk_fallback">若</span><span class="mord cjk_fallback">数</span><span class="mord cjk_fallback">列</span><span class="mopen">{</span><span class="mord"><span class="mord mathdefault">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">n</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose">}</span><span class="mord cjk_fallback">存</span><span class="mord cjk_fallback">在</span><span class="mord cjk_fallback">极</span><span class="mord cjk_fallback">限</span><span class="mopen">(</span><span class="mord cjk_fallback">有</span><span class="mord cjk_fallback">限</span><span class="mord cjk_fallback">数</span><span class="mclose">)</span><span class="mord cjk_fallback">，</span><span class="mord cjk_fallback">又</span><span class="mord cjk_fallback">称</span><span class="mord cjk_fallback">数</span><span class="mord cjk_fallback">列</span><span class="mopen">{</span><span class="mord mathdefault">n</span><span class="mclose">}</span><span class="mord cjk_fallback">收</span><span class="mord cjk_fallback">敛</span><span class="mord cjk_fallback">，</span><span class="mord cjk_fallback">否</span><span class="mord cjk_fallback">则</span><span class="mord cjk_fallback">称</span><span class="mord cjk_fallback">数</span><span class="mord cjk_fallback">列</span><span class="mopen">{</span><span class="mord"><span class="mord mathdefault">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">n</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose">}</span><span class="mord cjk_fallback">发</span><span class="mord cjk_fallback">散</span><span class="mord cjk_fallback">。</span></span></span></span></span></p>
+<h3 id="函数的极限">函数的极限</h3>
+<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><munder><mi>lim</mi><mo>⁡</mo><mrow><mi>x</mi><mo>→</mo><mi mathvariant="normal">∞</mi></mrow></munder><mo>=</mo><mi>A</mi><mo>↔</mo><mi mathvariant="normal">∀</mi><mi>ε</mi><mo>&gt;</mo><mn>0</mn><mo separator="true">,</mo><mi mathvariant="normal">∃</mi><mi mathvariant="normal">正</mi><mi mathvariant="normal">整</mi><mi mathvariant="normal">数</mi><mi>X</mi><mo separator="true">,</mo><mi mathvariant="normal">使</mi><mi mathvariant="normal">得</mi><mi mathvariant="normal">当</mi><mi mathvariant="normal">∣</mi><mi>x</mi><mi mathvariant="normal">∣</mi><mo>&gt;</mo><mi>X</mi><mi mathvariant="normal">时</mi><mi mathvariant="normal">，</mi><mi mathvariant="normal">就</mi><mi mathvariant="normal">有</mi><mi mathvariant="normal">∣</mi><mi>f</mi><mo>(</mo><mi>x</mi><mo>)</mo><mo>−</mo><mi>A</mi><mi mathvariant="normal">∣</mi><mo>&lt;</mo><mi>ε</mi><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\lim_{x\rightarrow\infty}=A\leftrightarrow\forall\varepsilon&gt;0,\exists正整数X,使得当|x|&gt;X时，就有|f(x)-A|&lt;\varepsilon.
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.39444em;vertical-align:-0.7em;"></span><span class="mop op-limits"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.69444em;"><span style="top:-2.1em;margin-left:0em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">x</span><span class="mrel mtight">→</span><span class="mord mtight">∞</span></span></span></span><span style="top:-2.7em;"><span class="pstrut" style="height:2.7em;"></span><span><span class="mop">lim</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.7em;"><span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault">A</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">↔</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.73354em;vertical-align:-0.0391em;"></span><span class="mord">∀</span><span class="mord mathdefault">ε</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">&gt;</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">0</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">∃</span><span class="mord cjk_fallback">正</span><span class="mord cjk_fallback">整</span><span class="mord cjk_fallback">数</span><span class="mord mathdefault" style="margin-right:0.07847em;">X</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord cjk_fallback">使</span><span class="mord cjk_fallback">得</span><span class="mord cjk_fallback">当</span><span class="mord">∣</span><span class="mord mathdefault">x</span><span class="mord">∣</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">&gt;</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.07847em;">X</span><span class="mord cjk_fallback">时</span><span class="mord cjk_fallback">，</span><span class="mord cjk_fallback">就</span><span class="mord cjk_fallback">有</span><span class="mord">∣</span><span class="mord mathdefault" style="margin-right:0.10764em;">f</span><span class="mopen">(</span><span class="mord mathdefault">x</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">A</span><span class="mord">∣</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">&lt;</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">ε</span><span class="mord">.</span></span></span></span></span></p>
+<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi mathvariant="normal">类</mi><mi mathvariant="normal">似</mi><mi mathvariant="normal">可</mi><mi mathvariant="normal">定</mi><mi mathvariant="normal">义</mi><mi mathvariant="normal">单</mi><mi mathvariant="normal">侧</mi><mi mathvariant="normal">极</mi><mi mathvariant="normal">限</mi><munder><mi>lim</mi><mo>⁡</mo><mrow><mi>x</mi><mo>→</mo><mo>−</mo><mi mathvariant="normal">∞</mi></mrow></munder><mo>=</mo><mi>A</mi><mi mathvariant="normal">与</mi><munder><mi>lim</mi><mo>⁡</mo><mrow><mi>x</mi><mo>→</mo><mo>+</mo><mi mathvariant="normal">∞</mi></mrow></munder><mo>=</mo><mi>A</mi></mrow><annotation encoding="application/x-tex">类似可定义单侧极限\lim_{x\rightarrow-\infty}=A 与\lim_{x\rightarrow+\infty}=A
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.4527709999999998em;vertical-align:-0.758331em;"></span><span class="mord cjk_fallback">类</span><span class="mord cjk_fallback">似</span><span class="mord cjk_fallback">可</span><span class="mord cjk_fallback">定</span><span class="mord cjk_fallback">义</span><span class="mord cjk_fallback">单</span><span class="mord cjk_fallback">侧</span><span class="mord cjk_fallback">极</span><span class="mord cjk_fallback">限</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mop op-limits"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.69444em;"><span style="top:-2.1em;margin-left:0em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">x</span><span class="mrel mtight">→</span><span class="mord mtight">−</span><span class="mord mtight">∞</span></span></span></span><span style="top:-2.7em;"><span class="pstrut" style="height:2.7em;"></span><span><span class="mop">lim</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.758331em;"><span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1.4527709999999998em;vertical-align:-0.758331em;"></span><span class="mord mathdefault">A</span><span class="mord cjk_fallback">与</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mop op-limits"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.69444em;"><span style="top:-2.1em;margin-left:0em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">x</span><span class="mrel mtight">→</span><span class="mord mtight">+</span><span class="mord mtight">∞</span></span></span></span><span style="top:-2.7em;"><span class="pstrut" style="height:2.7em;"></span><span><span class="mop">lim</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.758331em;"><span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault">A</span></span></span></span></span></p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[VSCode下配置Python开发环境]]></title>
+        <id>https://wylovecat.github.io/post/INTt_XSMR</id>
+        <link href="https://wylovecat.github.io/post/INTt_XSMR">
+        </link>
+        <updated>2019-01-12T07:41:57.000Z</updated>
+        <content type="html"><![CDATA[<ol>
+<li>
+<p>安装python,设置好环境变量</p>
+</li>
+<li>
+<p>打开Vscode,进入Ctrl+Shift+x进入应用商店，搜索python安装拓展. <!-- more --></p>
+</li>
+<li>
+<p>用Vscode打开任意py源文件，按Ctrl+Shift+B,提示没有配置编译环境，点击新增，选择&quot;others&quot;,vscode会自动创建一个tasks.json文件用来配置程序运行的参数。</p>
+</li>
+<li>
+<p>修改command和args参数</p>
+<pre><code class="language-json">&quot;version&quot;: &quot;2.0.0&quot;,
+    &quot;tasks&quot;: [
+        {
+            &quot;label&quot;: &quot;python&quot;,
+            &quot;type&quot;: &quot;shell&quot;,
+            &quot;command&quot;: &quot;python&quot;,
+            &quot;args&quot;: [
+                &quot;${file}&quot;
+            ],
+            &quot;group&quot;: {
+                &quot;kind&quot;: &quot;build&quot;,
+                &quot;isDefault&quot;: true
+            }
+        }
+    ]`
+</code></pre>
+</li>
+<li>
+<p>再按一次Ctrl+Shift+B,程序即可运行。</p>
+</li>
+</ol>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[在使用Hexo和Gitpage创建博客所遇的问题与解决方案]]></title>
+        <id>https://wylovecat.github.io/post/soWpN2KEp</id>
+        <link href="https://wylovecat.github.io/post/soWpN2KEp">
+        </link>
+        <updated>2019-01-11T07:08:37.000Z</updated>
+        <content type="html"><![CDATA[<ul>
+<li>使用Gulp压缩时报错：AssertionError: Task function must be specified<!--more-->
+错误原因是版本问题，使用<code>gulp -v</code> 查看版本后发现，版本不一致。卸载gulp，并重新安装.
+<code>npm unintsall gulp npm install gulp@3</code></li>
+</ul>
+]]></content>
+    </entry>
+</feed>

@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" >
+
+<title>枚举算法 | Gridea</title>
+<meta name="description" content="温故而知新">
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<link rel="shortcut icon" href="https://wylovecat.github.io/favicon.ico?v=1561535980797">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="stylesheet" href="https://unpkg.com/papercss@1.6.1/dist/paper.min.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link rel="stylesheet" href="https://wylovecat.github.io/styles/main.css">
+
+
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+
+
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+
+  </head>
+  <body>
+  
+    <nav class="navbar border fixed split-nav">
+  <div class="nav-brand">
+    <h3><a href="https://wylovecat.github.io">Gridea</a></h3>
+  </div>
+  <div class="collapsible">
+    <input id="collapsible1" type="checkbox" name="collapsible1">
+    <button>
+      <label for="collapsible1">
+        <div class="bar1"></div>
+        <div class="bar2"></div>
+        <div class="bar3"></div>
+      </label>
+    </button>
+    <div class="collapsible-body">
+      <ul class="inline">
+        
+          <li>
+            
+              <a href="/" class="menu">
+                首页
+              </a>
+            
+          </li>
+        
+          <li>
+            
+              <a href="/archives" class="menu">
+                归档
+              </a>
+            
+          </li>
+        
+          <li>
+            
+              <a href="/tags" class="menu">
+                标签
+              </a>
+            
+          </li>
+        
+          <li>
+            
+              <a href="/post/about" class="menu">
+                关于
+              </a>
+            
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div id="top" class="row site">
+      <div class="sm-12 md-8 col">
+        <div class="paper">
+          <article class="article">
+            <h1>枚举算法</h1>
+            <p class="article-meta">
+              2019-02-26
+              
+                <a href="https://wylovecat.github.io/tag/Xml2KtR4g" class="badge success">
+                  算法
+                </a>
+              
+            </p>
+            
+            <div class="post-content">
+              <h3 id="基本原理">基本原理</h3>
+<blockquote>
+<p>按照问题本身的性质，一一列举出该问题的所有可能的解，并在列举的过程中，逐一检验每个可能解是否是问题的真正解。若是则采纳这个解，否则抛弃它。</p>
+</blockquote>
+<p><strong>tips:</strong></p>
+<ul>
+<li>不能遗漏，否则导致结果可能不正确</li>
+<li>不要重复，否则导致效率低下</li>
+</ul>
+<p><strong>优点：</strong>
+问题的解准确且全面
+实现简单，可通过循环/递归实现
+<strong>缺点：</strong>
+效率相对来说较低</p>
+<p><strong>枚举法解题步骤</strong></p>
+<ol>
+<li>确定枚举对象</li>
+<li>逐一列举可能解</li>
+<li>逐一验证可能解</li>
+</ol>
+<h3 id="经典问题">经典问题</h3>
+<h4 id="模糊数字问题">模糊数字问题</h4>
+<blockquote>
+<p>一张单据上有一个5位数的编码，因为保管不当，其百位已经变得模糊不清。已知这个数是57和67的倍数。现在设计一个算法，输出所有满足这些条件的5位数，并统计这样的数的个数。
+1 9 ？9 5</p>
+</blockquote>
+<p>利用for循环 遍历0-9</p>
+<blockquote>
+<p>一张单据上有一个5位数的编码，因为保管不当，其百、千、万位已经变得模糊不清。已知这个数是57和67的倍数。现在设计一个算法，输出所有满足这些条件的5位数，并统计这样的数的个数。
+？？ ？9 5</p>
+</blockquote>
+<p>三个枚举对象，使用3层for循环遍历
+改进：一个枚举对象，for循环遍历 100-999</p>
+<h4 id="百钱百鸡问题">百钱百鸡问题</h4>
+<blockquote>
+<p>鸡翁一，值钱5；鸡母一，值钱三；鸡雏三，值钱一。百钱买百鸡，问鸡翁、鸡母、鸡雏各几何？假定鸡种的价格不变，拥有的钱数为m，需要购买的鸡数为n,试求出所有可能的购买方案总数。</p>
+</blockquote>
+<p>解：
+枚举对象(n1-鸡翁,n2-鸡母,n3-鸡雏)</p>
+<pre><code>for(n1=0;n1&lt;n;n1++)
+    for(n2=0;n2&lt;n;n2++)
+        for(n3=0;n3&lt;n;n3++)
+            n1+n2+n3==n,5n1+3n2+n3/3==n
+</code></pre>
+<p>新思路：利用枚举对象之间的线性相关
+鸡翁：n1 0~m/5
+鸡母：n2 0~m/3
+鸡雏：n-n1-n2</p>
+<h4 id="数组配对问题">数组配对问题</h4>
+<blockquote>
+<p>给你一个长度为n的数组A和一个正整数k，问从数组中任选两个数使其和是k的倍数，有多少种选法.</p>
+</blockquote>
+<p>(ai+aj)%k==0 =&gt; (ai%k+aj%k)%k==0
+B0 B1 ... Bk-1
+枚举对象：Bij 0&lt;=i&lt;=k-1
+逐一列举：for(i=0;i&lt;k;i++)
+逐一验证: j=(k-i)%k
+Count=bi * bj</p>
+<pre><code>#define LL long long
+void work()
+{
+    LL ans=0;
+    for(int i=0;i&lt;k;i++)
+    {
+        int j=(k-i%k;
+        if(j&lt;i)break;
+        else if(j==i)
+            ans+=1LL*a[i]*(a[i]-1)/2;
+        else
+            ans+=1LL*a[i]*a[j];
+        
+     }
+
+}
+</code></pre>
+<h3 id="枚举算法优化技巧">枚举算法优化技巧</h3>
+<p>枚举对象优化：
+百钱百鸡：参数独立性
+数组配对：枚举对象转换
+枚举过程优化：
+二分枚举的一般模型</p>
+<p>给定长度为n的单调不下降数列｛a0,...,an-1｝和目标数k，求满足条件ai&gt;=k的最小值i。不存在的情况下输出n。
+枚举对象,0&lt;= i &lt;=n-1
+逐一列举
+一层for循环，按找i从小到大遍历
+逐一验证
+判断ai&gt;=k?第一个满足条件的即为答案
+更有效的枚举方式
+二分法</p>
+<h4 id="绳子切割问题">绳子切割问题</h4>
+<p>有N条绳子，他们长度分别为Li(&lt;=1000)。如果从他们中切割处K条长度相同的绳子的话，这K条绳子每条最长能有多长?答案保留到小数点后2位。</p>
+<p>枚举对象：
+L,0.00&lt;=L&lt;=1000.00 步长 0.001</p>
+<p>放大100 0-100000
+mid=50000</p>
+<p>一般化模型</p>
+<ol>
+<li>“求满足某个条件C(x)的最小的x”,其中C(x)满足性质：如果任意x满足C(x),则所有的x'&gt;=x也满足C(x')</li>
+<li>“求满足某个条件C(x)的最大的x”,其中C(x)满足性质：如果任意x满足C(x),则所有的x'&lt;=x也满足C(x')</li>
+</ol>
+<h4 id="石头移动问题">石头移动问题</h4>
+<blockquote>
+<p>有一条河，和中间有一些石头，石头的数量以及相邻两块石头之间的距离已知。现在可以一处一些石头，假设最多可以移除m块石头(注意：首尾两块石头不可以移除，且假定所有的石头都处于同一直线)，问最多一时爽m块石头后相邻两块石头之间的最小距离的最大值是多少？</p>
+</blockquote>
+<p>枚举对象：
+StoneSet（S1,S2，...，Sm-1,Sm）
+S1 {2,...,n-1}
+Si {Si-1 + 1,...,n-1}
+逐一列举
+循环 m是动态的
+递归</p>
+<pre><code>#include MaxStone 1000
+int globalNum;//石头数量
+int globalFlag[MaxBox],globalAns;//保存状态和最优值的全局变量
+
+void recursiveEnum(int t){
+    if(t==globalNum){
+        int dist=checkStone(globalFlag,globalNum);
+        if(dist&gt;globalAns)
+            globalAns=dist;
+        return;
+    }//end of if
+    globalFlag[t]=1;
+    recursiveFnum(t+1);
+    globalFlag[t]=0;
+    recursiveEnum(t+1);
+}
+</code></pre>
+<p>改进:二分枚举
+问题建模
+C(d)描述为：最多移除m个石头后最近两个石头的距离不小于d
+C(d)满足单调性：如果任意d满足C(d)，则所有的d'&lt;=d也满足C(d'）
+判定：
+应用贪心思想：</p>
+<ol>
+<li>循环一次考虑相邻石头，如果距离小于d，则去掉一个石头</li>
+<li>如果任意相邻石头的距离都不小于d，则返回true</li>
+<li>如果移除的石头个数大于m,则返回false</li>
+</ol>
+
+            </div>
+          </article>
+        </div>
+        <div class="paper" data-aos="fade-in">
+          
+            <div class="next-post">
+              <div class="next">
+                下一篇
+              </div>
+              <a href="https://wylovecat.github.io/post/W-00jdL8V">
+                <h3 class="post-title">
+                  使用Markdown输入数学符号
+                </h3>
+              </a>
+            </div>
+          
+        </div>
+        
+      </div>
+
+      <div class="sm-12 md-4 col sidebar">
+  <div class="paper info-container">
+    <img src="https://wylovecat.github.io/images/avatar.png?v=1561535980797" class="no-responsive avatar">
+    <div class="text-muted">温故而知新</div>
+    <div class="social-container">
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </div>
+  </div>
+  <div class="paper">
+    <div class="sidebar-title">
+      最新文章
+    </div>
+    <div class="row">
+      <ul>
+        
+          
+            <li>
+              <a href="https://wylovecat.github.io/post/_2DLQapwc">有趣的GitHub项目</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://wylovecat.github.io/post/Y4cNdIzTy">使用fgets()替换gets()</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://wylovecat.github.io/post/1M3vM-kJi">升级DevC++的编译器</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://wylovecat.github.io/post/ZigeFxfIY">进制转换</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://wylovecat.github.io/post/Hkqr-7jgZ">递归与分治（一）</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://wylovecat.github.io/post/jhWRl2dty">枚举算法</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://wylovecat.github.io/post/W-00jdL8V">使用Markdown输入数学符号</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://wylovecat.github.io/post/uCn-GTST3">极限的概念与性质</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://wylovecat.github.io/post/INTt_XSMR">VSCode下配置Python开发环境</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://wylovecat.github.io/post/soWpN2KEp">在使用Hexo和Gitpage创建博客所遇的问题与解决方案</a>
+            </li>
+          
+        
+          
+        
+      </ul>
+    </div>
+  </div>
+  <div class="paper">
+    <div class="sidebar-title">
+      标签列表
+    </div>
+    <div class="row">
+      
+        <a href="https://wylovecat.github.io/tag/tHyJk6N28" class="badge warning">
+          Git
+        </a>
+      
+        <a href="https://wylovecat.github.io/tag/CSNe-Ttwm" class="badge ">
+          C/C++
+        </a>
+      
+        <a href="https://wylovecat.github.io/tag/sEMfEVAVO" class="badge warning">
+          计算机基础
+        </a>
+      
+        <a href="https://wylovecat.github.io/tag/Xml2KtR4g" class="badge warning">
+          算法
+        </a>
+      
+        <a href="https://wylovecat.github.io/tag/markdown" class="badge warning">
+          Markdown
+        </a>
+      
+        <a href="https://wylovecat.github.io/tag/Z3tt3bzbS" class="badge ">
+          数学
+        </a>
+      
+        <a href="https://wylovecat.github.io/tag/4kipjvQ-w" class="badge success">
+          vscode
+        </a>
+      
+        <a href="https://wylovecat.github.io/tag/RYJKhhSlc" class="badge success">
+          hexo
+        </a>
+      
+        <a href="https://wylovecat.github.io/tag/gridea" class="badge secondary">
+          Gridea
+        </a>
+      
+    </div>
+  </div>
+  <div class="paper">
+    Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://wylovecat.github.io/atom.xml" target="_blank">RSS</a>
+  </div>
+</div>
+
+
+    </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+
+<script type="application/javascript">
+
+AOS.init();
+
+hljs.initHighlightingOnLoad()
+
+</script>
+
+
+
+
+  </body>
+</html>
