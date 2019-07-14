@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-    <id>https://wylovecat.github.io</id>
+    <id>https://wylovecat.github.io/</id>
     <title>Gridea</title>
-    <updated>2019-07-14T07:44:41.436Z</updated>
+    <updated>2019-07-14T07:45:58.998Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
-    <link rel="alternate" href="https://wylovecat.github.io"/>
-    <link rel="self" href="https://wylovecat.github.io/atom.xml"/>
+    <link rel="alternate" href="https://wylovecat.github.io/"/>
+    <link rel="self" href="https://wylovecat.github.io//atom.xml"/>
     <subtitle>温故而知新</subtitle>
-    <logo>https://wylovecat.github.io/images/avatar.png</logo>
-    <icon>https://wylovecat.github.io/favicon.ico</icon>
+    <logo>https://wylovecat.github.io//images/avatar.png</logo>
+    <icon>https://wylovecat.github.io//favicon.ico</icon>
     <rights>All rights reserved 2019, Gridea</rights>
     <entry>
         <title type="html"><![CDATA[有趣的GitHub项目]]></title>
-        <id>https://wylovecat.github.io/post/UukfogPTY</id>
-        <link href="https://wylovecat.github.io/post/UukfogPTY">
+        <id>https://wylovecat.github.io//post/UukfogPTY</id>
+        <link href="https://wylovecat.github.io//post/UukfogPTY">
         </link>
         <updated>2019-07-14T07:44:23.000Z</updated>
         <summary type="html"><![CDATA[<p>分享一些有趣、有用的GitHub项目。</p>
@@ -31,8 +31,8 @@
     </entry>
     <entry>
         <title type="html"><![CDATA[使用fgets()替换gets()]]></title>
-        <id>https://wylovecat.github.io/post/Y4cNdIzTy</id>
-        <link href="https://wylovecat.github.io/post/Y4cNdIzTy">
+        <id>https://wylovecat.github.io//post/Y4cNdIzTy</id>
+        <link href="https://wylovecat.github.io//post/Y4cNdIzTy">
         </link>
         <updated>2019-05-06T09:10:32.000Z</updated>
         <content type="html"><![CDATA[<h3 id="原因">原因</h3>
@@ -72,8 +72,8 @@ fgets(name,len,stdin);
     </entry>
     <entry>
         <title type="html"><![CDATA[升级DevC++的编译器]]></title>
-        <id>https://wylovecat.github.io/post/1M3vM-kJi</id>
-        <link href="https://wylovecat.github.io/post/1M3vM-kJi">
+        <id>https://wylovecat.github.io//post/1M3vM-kJi</id>
+        <link href="https://wylovecat.github.io//post/1M3vM-kJi">
         </link>
         <updated>2019-04-23T07:45:40.000Z</updated>
         <content type="html"><![CDATA[<hr>
@@ -90,8 +90,8 @@ fgets(name,len,stdin);
     </entry>
     <entry>
         <title type="html"><![CDATA[进制转换]]></title>
-        <id>https://wylovecat.github.io/post/ZigeFxfIY</id>
-        <link href="https://wylovecat.github.io/post/ZigeFxfIY">
+        <id>https://wylovecat.github.io//post/ZigeFxfIY</id>
+        <link href="https://wylovecat.github.io//post/ZigeFxfIY">
         </link>
         <updated>2019-04-19T09:37:06.000Z</updated>
         <content type="html"><![CDATA[<h1 id="进制转换">进制转换</h1>
@@ -128,8 +128,8 @@ fgets(name,len,stdin);
     </entry>
     <entry>
         <title type="html"><![CDATA[递归与分治（一）]]></title>
-        <id>https://wylovecat.github.io/post/Hkqr-7jgZ</id>
-        <link href="https://wylovecat.github.io/post/Hkqr-7jgZ">
+        <id>https://wylovecat.github.io//post/Hkqr-7jgZ</id>
+        <link href="https://wylovecat.github.io//post/Hkqr-7jgZ">
         </link>
         <updated>2019-03-01T02:50:53.000Z</updated>
         <content type="html"><![CDATA[<h3 id="递归基本思想">递归基本思想</h3>
@@ -196,8 +196,8 @@ fgets(name,len,stdin);
     </entry>
     <entry>
         <title type="html"><![CDATA[枚举算法]]></title>
-        <id>https://wylovecat.github.io/post/jhWRl2dty</id>
-        <link href="https://wylovecat.github.io/post/jhWRl2dty">
+        <id>https://wylovecat.github.io//post/jhWRl2dty</id>
+        <link href="https://wylovecat.github.io//post/jhWRl2dty">
         </link>
         <updated>2019-02-26T09:15:19.000Z</updated>
         <content type="html"><![CDATA[<h3 id="基本原理">基本原理</h3>
@@ -343,8 +343,8 @@ C(d)满足单调性：如果任意d满足C(d)，则所有的d'&lt;=d也满足C(d
     </entry>
     <entry>
         <title type="html"><![CDATA[使用Markdown输入数学符号]]></title>
-        <id>https://wylovecat.github.io/post/W-00jdL8V</id>
-        <link href="https://wylovecat.github.io/post/W-00jdL8V">
+        <id>https://wylovecat.github.io//post/W-00jdL8V</id>
+        <link href="https://wylovecat.github.io//post/W-00jdL8V">
         </link>
         <updated>2019-01-14T08:15:28.000Z</updated>
         <content type="html"><![CDATA[<h4 id="矩阵">矩阵</h4>
@@ -428,8 +428,8 @@ c-16-25.333-24-45-24-59z'/></svg></span></span></span></span></span></span></spa
     </entry>
     <entry>
         <title type="html"><![CDATA[极限的概念与性质]]></title>
-        <id>https://wylovecat.github.io/post/uCn-GTST3</id>
-        <link href="https://wylovecat.github.io/post/uCn-GTST3">
+        <id>https://wylovecat.github.io//post/uCn-GTST3</id>
+        <link href="https://wylovecat.github.io//post/uCn-GTST3">
         </link>
         <updated>2019-01-14T08:08:47.000Z</updated>
         <content type="html"><![CDATA[<h2 id="极限的定义">极限的定义</h2>
@@ -447,8 +447,8 @@ c-16-25.333-24-45-24-59z'/></svg></span></span></span></span></span></span></spa
     </entry>
     <entry>
         <title type="html"><![CDATA[VSCode下配置Python开发环境]]></title>
-        <id>https://wylovecat.github.io/post/INTt_XSMR</id>
-        <link href="https://wylovecat.github.io/post/INTt_XSMR">
+        <id>https://wylovecat.github.io//post/INTt_XSMR</id>
+        <link href="https://wylovecat.github.io//post/INTt_XSMR">
         </link>
         <updated>2019-01-12T07:41:57.000Z</updated>
         <content type="html"><![CDATA[<ol>
@@ -488,8 +488,8 @@ c-16-25.333-24-45-24-59z'/></svg></span></span></span></span></span></span></spa
     </entry>
     <entry>
         <title type="html"><![CDATA[在使用Hexo和Gitpage创建博客所遇的问题与解决方案]]></title>
-        <id>https://wylovecat.github.io/post/soWpN2KEp</id>
-        <link href="https://wylovecat.github.io/post/soWpN2KEp">
+        <id>https://wylovecat.github.io//post/soWpN2KEp</id>
+        <link href="https://wylovecat.github.io//post/soWpN2KEp">
         </link>
         <updated>2019-01-11T07:08:37.000Z</updated>
         <content type="html"><![CDATA[<ul>
