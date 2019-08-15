@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://wylovecat.github.io/</id>
     <title>Gridea</title>
-    <updated>2019-08-15T05:47:41.252Z</updated>
+    <updated>2019-08-15T07:15:29.607Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://wylovecat.github.io/"/>
     <link rel="self" href="https://wylovecat.github.io//atom.xml"/>
@@ -10,6 +10,69 @@
     <logo>https://wylovecat.github.io//images/avatar.png</logo>
     <icon>https://wylovecat.github.io//favicon.ico</icon>
     <rights>All rights reserved 2019, Gridea</rights>
+    <entry>
+        <title type="html"><![CDATA[珠心算测验]]></title>
+        <id>https://wylovecat.github.io//post/S-SCKDM5o</id>
+        <link href="https://wylovecat.github.io//post/S-SCKDM5o">
+        </link>
+        <updated>2019-08-15T07:14:37.000Z</updated>
+        <content type="html"><![CDATA[<h2 id="题目">题目</h2>
+<p><a href="https://turingjudge.com/problem/1804">珠心算测验</a></p>
+<h2 id="阅读与分析">阅读与分析</h2>
+<p>集合中的各个与手持不相同。求有多少个数恰好等于集合中另外两个（不同的）数之和。</p>
+<p>注意：题目求的是数字的个数不是，满足条件的式子的个数入，3+4=7，2+5=7，个数只有1不是2。</p>
+<p>整体分析下来是将不同的两数相加，将结果和剩下的数字比对，不同的就统计下即可。</p>
+<pre><code class="language-c++">for(i:0~n)
+{
+	for(j:i~n)
+	{
+		for(k:j~n)
+		{
+			if(i+j==k &amp;&amp; num[k]==0)
+			{
+				s++;
+				num[k]=1;
+			}
+		}
+	}
+}
+</code></pre>
+<h2 id="ac-代码">AC 代码</h2>
+<pre><code class="language-c++">#include &lt;iostream&gt;
+
+using namespace std;
+int num[10005]={0};
+int a[200]={0},n;
+
+int main() {
+    int s=0;
+    cin&gt;&gt;n;
+    for(int i=1;i&lt;=n;i++)
+    {
+        cin&gt;&gt;a[i];
+        num[a[i]]=1;
+    }
+
+    for(int i=1;i&lt;=n;i++)
+    {
+        for(int j=i+1;j&lt;=n;j++)
+        {
+            int m=a[i]+a[j];
+            if(m&lt;=10000 &amp;&amp; num[m]==1)// 限制总和范围，不然会越界
+            {
+                s++;
+                num[m]=2;
+            }
+        }
+    }
+    cout&lt;&lt;s;
+
+
+    return 0;
+}
+</code></pre>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[回文日期]]></title>
         <id>https://wylovecat.github.io//post/8o-Bcw0Hg</id>
@@ -218,7 +281,7 @@ fgets(name,len,stdin);
 <p>八进制是逢八进一。</p>
 <p>十进制转八进制的话，过程就是不断地将数字除以8，将余数写一边，直到商为0时停止。下方的为二进制的高位，由高位到低位倒序排列余数，高位不够用0来代替。以十进制10转换为八进制例。</p>
 <p><img src="https://cdn.nlark.com/yuque/0/2019/png/292435/1554693614581-4e24b0dc-9e94-4acf-889f-89617bbcc24d.png" alt="image.png"></p>
-<p>十六进制也是类似，需要注意的点是，十六进制的10~15是使用A~F来表示的。</p>
+<p>十六进制也是类似，需要注意的点是，十六进制的10<sub>15是使用A</sub>F来表示的。</p>
 ]]></content>
     </entry>
     <entry>
@@ -234,7 +297,7 @@ fgets(name,len,stdin);
 <li>终止处理办法</li>
 <li>递归处理办法</li>
 </ol>
-<p><strong>递归-阶乘</strong>
+<p><strong>递归-阶乘</strong><br>
 阶乘计算：从键盘输入正整数N（0&lt;=N&lt;=20）,输出N！。</p>
 <pre><code>int factorial(int n){
     if(n==0
@@ -242,7 +305,7 @@ fgets(name,len,stdin);
     return n*factorial(n-1);//递归调用
  }
 </code></pre>
-<p><strong>递归-Fibonacci</strong>
+<p><strong>递归-Fibonacci</strong><br>
 每对兔子每个月不多不少恰好能生一对(一雌一雄)新兔子，而且每对新生兔出生两个月后就成熟并具备生殖能力；另外，假定所有的兔子都不会死亡。假如养了出生的小兔一对，试问第n个月后共有多少对兔子?</p>
 <pre><code>long fib(int n){
     if(n&lt;=1) return 1;
@@ -254,9 +317,9 @@ fgets(name,len,stdin);
 <blockquote>
 <p>给定一组互不相同的字符，求这组字符的全排列</p>
 </blockquote>
-<p>简单场景：
-输入的字符串长度为1，显然直接输出即可
-问题分解：
+<p>简单场景：<br>
+输入的字符串长度为1，显然直接输出即可<br>
+问题分解：<br>
 当输入的字符长度超过1时只需要从字符串中选一个字符作为输出字符串首字符，对其余的字符进行递归处理即可。</p>
 <pre><code>void permutations(string str,int i,int n)
 {
@@ -285,7 +348,7 @@ fgets(name,len,stdin);
 <blockquote>
 <p>给定正整数n和m，计算出n个元素的集合{1,2,...,n}可以划分为多少个不同的由m个非空子集构成的集合。比如上例中含有1个子集的集合有1个，2个子集的集合有3个，3个自由的集合有1个。</p>
 </blockquote>
-<p>假定有S(n,m)种方法把n个元素的集合划分成m个非空子集构成的集合，S(n,m)种不同划分方法可以分成一下两类:
+<p>假定有S(n,m)种方法把n个元素的集合划分成m个非空子集构成的集合，S(n,m)种不同划分方法可以分成一下两类:<br>
 先把n-1个元素划分成m个非空子集，按定义其划分数目为S(n-1,m)再将剩下的一个元素插入到m子集种的任意一个,最后把这两部合起来则可构成n个元素集合的m划分，总共有m * S(n-1,m)种划分。</p>
 ]]></content>
     </entry>
@@ -304,10 +367,10 @@ fgets(name,len,stdin);
 <li>不能遗漏，否则导致结果可能不正确</li>
 <li>不要重复，否则导致效率低下</li>
 </ul>
-<p><strong>优点：</strong>
-问题的解准确且全面
-实现简单，可通过循环/递归实现
-<strong>缺点：</strong>
+<p><strong>优点：</strong><br>
+问题的解准确且全面<br>
+实现简单，可通过循环/递归实现<br>
+<strong>缺点：</strong><br>
 效率相对来说较低</p>
 <p><strong>枚举法解题步骤</strong></p>
 <ol>
@@ -318,40 +381,40 @@ fgets(name,len,stdin);
 <h3 id="经典问题">经典问题</h3>
 <h4 id="模糊数字问题">模糊数字问题</h4>
 <blockquote>
-<p>一张单据上有一个5位数的编码，因为保管不当，其百位已经变得模糊不清。已知这个数是57和67的倍数。现在设计一个算法，输出所有满足这些条件的5位数，并统计这样的数的个数。
+<p>一张单据上有一个5位数的编码，因为保管不当，其百位已经变得模糊不清。已知这个数是57和67的倍数。现在设计一个算法，输出所有满足这些条件的5位数，并统计这样的数的个数。<br>
 1 9 ？9 5</p>
 </blockquote>
 <p>利用for循环 遍历0-9</p>
 <blockquote>
-<p>一张单据上有一个5位数的编码，因为保管不当，其百、千、万位已经变得模糊不清。已知这个数是57和67的倍数。现在设计一个算法，输出所有满足这些条件的5位数，并统计这样的数的个数。
+<p>一张单据上有一个5位数的编码，因为保管不当，其百、千、万位已经变得模糊不清。已知这个数是57和67的倍数。现在设计一个算法，输出所有满足这些条件的5位数，并统计这样的数的个数。<br>
 ？？ ？9 5</p>
 </blockquote>
-<p>三个枚举对象，使用3层for循环遍历
+<p>三个枚举对象，使用3层for循环遍历<br>
 改进：一个枚举对象，for循环遍历 100-999</p>
 <h4 id="百钱百鸡问题">百钱百鸡问题</h4>
 <blockquote>
 <p>鸡翁一，值钱5；鸡母一，值钱三；鸡雏三，值钱一。百钱买百鸡，问鸡翁、鸡母、鸡雏各几何？假定鸡种的价格不变，拥有的钱数为m，需要购买的鸡数为n,试求出所有可能的购买方案总数。</p>
 </blockquote>
-<p>解：
+<p>解：<br>
 枚举对象(n1-鸡翁,n2-鸡母,n3-鸡雏)</p>
 <pre><code>for(n1=0;n1&lt;n;n1++)
     for(n2=0;n2&lt;n;n2++)
         for(n3=0;n3&lt;n;n3++)
             n1+n2+n3==n,5n1+3n2+n3/3==n
 </code></pre>
-<p>新思路：利用枚举对象之间的线性相关
-鸡翁：n1 0~m/5
-鸡母：n2 0~m/3
+<p>新思路：利用枚举对象之间的线性相关<br>
+鸡翁：n1 0~m/5<br>
+鸡母：n2 0~m/3<br>
 鸡雏：n-n1-n2</p>
 <h4 id="数组配对问题">数组配对问题</h4>
 <blockquote>
 <p>给你一个长度为n的数组A和一个正整数k，问从数组中任选两个数使其和是k的倍数，有多少种选法.</p>
 </blockquote>
-<p>(ai+aj)%k==0 =&gt; (ai%k+aj%k)%k==0
-B0 B1 ... Bk-1
-枚举对象：Bij 0&lt;=i&lt;=k-1
-逐一列举：for(i=0;i&lt;k;i++)
-逐一验证: j=(k-i)%k
+<p>(ai+aj)%k<mark>0 =&gt; (ai%k+aj%k)%k</mark>0<br>
+B0 B1 ... Bk-1<br>
+枚举对象：Bij 0&lt;=i&lt;=k-1<br>
+逐一列举：for(i=0;i&lt;k;i++)<br>
+逐一验证: j=(k-i)%k<br>
 Count=bi * bj</p>
 <pre><code>#define LL long long
 void work()
@@ -371,24 +434,24 @@ void work()
 }
 </code></pre>
 <h3 id="枚举算法优化技巧">枚举算法优化技巧</h3>
-<p>枚举对象优化：
-百钱百鸡：参数独立性
-数组配对：枚举对象转换
-枚举过程优化：
+<p>枚举对象优化：<br>
+百钱百鸡：参数独立性<br>
+数组配对：枚举对象转换<br>
+枚举过程优化：<br>
 二分枚举的一般模型</p>
-<p>给定长度为n的单调不下降数列｛a0,...,an-1｝和目标数k，求满足条件ai&gt;=k的最小值i。不存在的情况下输出n。
-枚举对象,0&lt;= i &lt;=n-1
-逐一列举
-一层for循环，按找i从小到大遍历
-逐一验证
-判断ai&gt;=k?第一个满足条件的即为答案
-更有效的枚举方式
+<p>给定长度为n的单调不下降数列｛a0,...,an-1｝和目标数k，求满足条件ai&gt;=k的最小值i。不存在的情况下输出n。<br>
+枚举对象,0&lt;= i &lt;=n-1<br>
+逐一列举<br>
+一层for循环，按找i从小到大遍历<br>
+逐一验证<br>
+判断ai&gt;=k?第一个满足条件的即为答案<br>
+更有效的枚举方式<br>
 二分法</p>
 <h4 id="绳子切割问题">绳子切割问题</h4>
 <p>有N条绳子，他们长度分别为Li(&lt;=1000)。如果从他们中切割处K条长度相同的绳子的话，这K条绳子每条最长能有多长?答案保留到小数点后2位。</p>
-<p>枚举对象：
+<p>枚举对象：<br>
 L,0.00&lt;=L&lt;=1000.00 步长 0.001</p>
-<p>放大100 0-100000
+<p>放大100 0-100000<br>
 mid=50000</p>
 <p>一般化模型</p>
 <ol>
@@ -399,12 +462,12 @@ mid=50000</p>
 <blockquote>
 <p>有一条河，和中间有一些石头，石头的数量以及相邻两块石头之间的距离已知。现在可以一处一些石头，假设最多可以移除m块石头(注意：首尾两块石头不可以移除，且假定所有的石头都处于同一直线)，问最多一时爽m块石头后相邻两块石头之间的最小距离的最大值是多少？</p>
 </blockquote>
-<p>枚举对象：
-StoneSet（S1,S2，...，Sm-1,Sm）
-S1 {2,...,n-1}
-Si {Si-1 + 1,...,n-1}
-逐一列举
-循环 m是动态的
+<p>枚举对象：<br>
+StoneSet（S1,S2，...，Sm-1,Sm）<br>
+S1 {2,...,n-1}<br>
+Si {Si-1 + 1,...,n-1}<br>
+逐一列举<br>
+循环 m是动态的<br>
 递归</p>
 <pre><code>#include MaxStone 1000
 int globalNum;//石头数量
@@ -423,11 +486,11 @@ void recursiveEnum(int t){
     recursiveEnum(t+1);
 }
 </code></pre>
-<p>改进:二分枚举
-问题建模
-C(d)描述为：最多移除m个石头后最近两个石头的距离不小于d
-C(d)满足单调性：如果任意d满足C(d)，则所有的d'&lt;=d也满足C(d'）
-判定：
+<p>改进:二分枚举<br>
+问题建模<br>
+C(d)描述为：最多移除m个石头后最近两个石头的距离不小于d<br>
+C(d)满足单调性：如果任意d满足C(d)，则所有的d'&lt;=d也满足C(d'）<br>
+判定：<br>
 应用贪心思想：</p>
 <ol>
 <li>循环一次考虑相邻石头，如果距离小于d，则去掉一个石头</li>
@@ -538,47 +601,6 @@ c-16-25.333-24-45-24-59z'/></svg></span></span></span></span></span></span></spa
 </annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.39444em;vertical-align:-0.7em;"></span><span class="mop op-limits"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.69444em;"><span style="top:-2.1em;margin-left:0em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">x</span><span class="mrel mtight">→</span><span class="mord mtight">∞</span></span></span></span><span style="top:-2.7em;"><span class="pstrut" style="height:2.7em;"></span><span><span class="mop">lim</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.7em;"><span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault">A</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">↔</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.73354em;vertical-align:-0.0391em;"></span><span class="mord">∀</span><span class="mord mathdefault">ε</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">&gt;</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">0</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">∃</span><span class="mord cjk_fallback">正</span><span class="mord cjk_fallback">整</span><span class="mord cjk_fallback">数</span><span class="mord mathdefault" style="margin-right:0.07847em;">X</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord cjk_fallback">使</span><span class="mord cjk_fallback">得</span><span class="mord cjk_fallback">当</span><span class="mord">∣</span><span class="mord mathdefault">x</span><span class="mord">∣</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">&gt;</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.07847em;">X</span><span class="mord cjk_fallback">时</span><span class="mord cjk_fallback">，</span><span class="mord cjk_fallback">就</span><span class="mord cjk_fallback">有</span><span class="mord">∣</span><span class="mord mathdefault" style="margin-right:0.10764em;">f</span><span class="mopen">(</span><span class="mord mathdefault">x</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">A</span><span class="mord">∣</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">&lt;</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">ε</span><span class="mord">.</span></span></span></span></span></p>
 <p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi mathvariant="normal">类</mi><mi mathvariant="normal">似</mi><mi mathvariant="normal">可</mi><mi mathvariant="normal">定</mi><mi mathvariant="normal">义</mi><mi mathvariant="normal">单</mi><mi mathvariant="normal">侧</mi><mi mathvariant="normal">极</mi><mi mathvariant="normal">限</mi><munder><mi>lim</mi><mo>⁡</mo><mrow><mi>x</mi><mo>→</mo><mo>−</mo><mi mathvariant="normal">∞</mi></mrow></munder><mo>=</mo><mi>A</mi><mi mathvariant="normal">与</mi><munder><mi>lim</mi><mo>⁡</mo><mrow><mi>x</mi><mo>→</mo><mo>+</mo><mi mathvariant="normal">∞</mi></mrow></munder><mo>=</mo><mi>A</mi></mrow><annotation encoding="application/x-tex">类似可定义单侧极限\lim_{x\rightarrow-\infty}=A 与\lim_{x\rightarrow+\infty}=A
 </annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.4527709999999998em;vertical-align:-0.758331em;"></span><span class="mord cjk_fallback">类</span><span class="mord cjk_fallback">似</span><span class="mord cjk_fallback">可</span><span class="mord cjk_fallback">定</span><span class="mord cjk_fallback">义</span><span class="mord cjk_fallback">单</span><span class="mord cjk_fallback">侧</span><span class="mord cjk_fallback">极</span><span class="mord cjk_fallback">限</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mop op-limits"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.69444em;"><span style="top:-2.1em;margin-left:0em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">x</span><span class="mrel mtight">→</span><span class="mord mtight">−</span><span class="mord mtight">∞</span></span></span></span><span style="top:-2.7em;"><span class="pstrut" style="height:2.7em;"></span><span><span class="mop">lim</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.758331em;"><span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1.4527709999999998em;vertical-align:-0.758331em;"></span><span class="mord mathdefault">A</span><span class="mord cjk_fallback">与</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mop op-limits"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.69444em;"><span style="top:-2.1em;margin-left:0em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">x</span><span class="mrel mtight">→</span><span class="mord mtight">+</span><span class="mord mtight">∞</span></span></span></span><span style="top:-2.7em;"><span class="pstrut" style="height:2.7em;"></span><span><span class="mop">lim</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.758331em;"><span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault">A</span></span></span></span></span></p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[VSCode下配置Python开发环境]]></title>
-        <id>https://wylovecat.github.io//post/INTt_XSMR</id>
-        <link href="https://wylovecat.github.io//post/INTt_XSMR">
-        </link>
-        <updated>2019-01-12T07:41:57.000Z</updated>
-        <content type="html"><![CDATA[<ol>
-<li>
-<p>安装python,设置好环境变量</p>
-</li>
-<li>
-<p>打开Vscode,进入Ctrl+Shift+x进入应用商店，搜索python安装拓展. <!-- more --></p>
-</li>
-<li>
-<p>用Vscode打开任意py源文件，按Ctrl+Shift+B,提示没有配置编译环境，点击新增，选择&quot;others&quot;,vscode会自动创建一个tasks.json文件用来配置程序运行的参数。</p>
-</li>
-<li>
-<p>修改command和args参数</p>
-<pre><code class="language-json">&quot;version&quot;: &quot;2.0.0&quot;,
-    &quot;tasks&quot;: [
-        {
-            &quot;label&quot;: &quot;python&quot;,
-            &quot;type&quot;: &quot;shell&quot;,
-            &quot;command&quot;: &quot;python&quot;,
-            &quot;args&quot;: [
-                &quot;${file}&quot;
-            ],
-            &quot;group&quot;: {
-                &quot;kind&quot;: &quot;build&quot;,
-                &quot;isDefault&quot;: true
-            }
-        }
-    ]`
-</code></pre>
-</li>
-<li>
-<p>再按一次Ctrl+Shift+B,程序即可运行。</p>
-</li>
-</ol>
 ]]></content>
     </entry>
 </feed>
