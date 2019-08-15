@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://wylovecat.github.io/</id>
     <title>Gridea</title>
-    <updated>2019-07-14T08:00:37.520Z</updated>
+    <updated>2019-08-15T05:47:41.252Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://wylovecat.github.io/"/>
     <link rel="self" href="https://wylovecat.github.io//atom.xml"/>
@@ -10,6 +10,101 @@
     <logo>https://wylovecat.github.io//images/avatar.png</logo>
     <icon>https://wylovecat.github.io//favicon.ico</icon>
     <rights>All rights reserved 2019, Gridea</rights>
+    <entry>
+        <title type="html"><![CDATA[回文日期]]></title>
+        <id>https://wylovecat.github.io//post/8o-Bcw0Hg</id>
+        <link href="https://wylovecat.github.io//post/8o-Bcw0Hg">
+        </link>
+        <updated>2019-08-15T05:46:43.000Z</updated>
+        <content type="html"><![CDATA[<h2 id="题目">题目</h2>
+<p><a href="https://turingjudge.com/problem/1846">回文日期</a></p>
+<h2 id="阅读与分析">阅读与分析</h2>
+<p>用8位数字表示日期，前4位表示年份，接下来2位表示月份，最后2位代表日期。对范围内的日期进行回文日期的统计。若一个日期是回文的，当且仅当对于所有的i从左向有的第i个数字和第9-i个数字是相同的。</p>
+<p>输入起止日期，统计多少个日期是回文的。</p>
+<p>阅读下来，题目梗概即为在一定范围内统计符合条件的数字个数，即可想到使用枚举法进行处理</p>
+<p>基本框架如下。</p>
+<pre><code class="language-c++">for(int i:date1~date2)
+{
+	if(isPali(i))
+	{
+		num++;
+	}
+}
+</code></pre>
+<p>问题变成，如何判断一个日期是回文的。</p>
+<p>一个思路是将8位数日期的倒序数求出将倒序数与原数比较，相等即是回文。</p>
+<p>另一个思路，将回文日期列举，能发现 20100102，20111102，月日组成的倒数和年相等即是回文。</p>
+<p>此外需要注意，日期必须得是真实存在的。修改框架如下：</p>
+<pre><code class="language-c++">for(int i:date1~date2)
+{
+	if(isReal(i)&amp;&amp;isPali(i))
+	{
+		num++;
+	}
+}
+</code></pre>
+<h2 id="ac代码">AC代码</h2>
+<pre><code class="language-c++">#include &lt;iostream&gt;
+
+using namespace std;
+
+int months[13]={0,31,28,31,30,31,30,31,31,30,31,30,31};
+
+bool isLeap(int year)
+{
+    return (year % 4 == 0 &amp;&amp; year % 100 != 0) || year % 400 == 0;
+}
+
+bool isPali(int date)
+{
+    int y=date/10000;
+
+    int reserve=0;
+    while(date!=y)
+    {
+        int u=date%10;
+        date/=10;
+        reserve= reserve * 10 + u;
+    }
+    return reserve == y;
+
+}
+
+bool isReal(int date)
+{
+    int y=date/10000;
+    int m=date/100%100;
+    int d=date%100;
+
+    if(isLeap(y))
+    {
+        months[2]=29;
+    }else
+    {
+        months[2]=28;
+    }
+
+    return (m &gt;= 1 &amp;&amp; m &lt;= 12) &amp;&amp; (d &gt;= 1 &amp;&amp; d &lt;= months[m]);
+}
+
+int main() {
+
+    int date1,date2,num=0;
+    cin&gt;&gt;date1&gt;&gt;date2;
+    for(int i=date1;i&lt;=date2;i++)
+    {
+        if(isReal(i)&amp;&amp;isPali(i))
+        {
+            num++;
+        }
+    }
+    cout&lt;&lt;num;
+
+    return 0;
+}
+</code></pre>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[有趣的GitHub项目]]></title>
         <id>https://wylovecat.github.io//post/UukfogPTY</id>
@@ -484,19 +579,6 @@ c-16-25.333-24-45-24-59z'/></svg></span></span></span></span></span></span></spa
 <p>再按一次Ctrl+Shift+B,程序即可运行。</p>
 </li>
 </ol>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[在使用Hexo和Gitpage创建博客所遇的问题与解决方案]]></title>
-        <id>https://wylovecat.github.io//post/soWpN2KEp</id>
-        <link href="https://wylovecat.github.io//post/soWpN2KEp">
-        </link>
-        <updated>2019-01-11T07:08:37.000Z</updated>
-        <content type="html"><![CDATA[<ul>
-<li>使用Gulp压缩时报错：AssertionError: Task function must be specified<!--more-->
-错误原因是版本问题，使用<code>gulp -v</code> 查看版本后发现，版本不一致。卸载gulp，并重新安装.
-<code>npm unintsall gulp npm install gulp@3</code></li>
-</ul>
 ]]></content>
     </entry>
 </feed>

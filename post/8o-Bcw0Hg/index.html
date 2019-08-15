@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" >
 
-<title>Markdown | Gridea</title>
+<title>回文日期 | Gridea</title>
 <meta name="description" content="温故而知新">
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -15,6 +15,12 @@
 <link rel="stylesheet" href="https://wylovecat.github.io//styles/main.css">
 
 
+  
+    <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css" />
+  
+
+  
+
 <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
 
 
@@ -23,6 +29,7 @@
 
   </head>
   <body>
+  
     <nav class="navbar border fixed split-nav">
   <div class="nav-brand">
     <h3><a href="https://wylovecat.github.io/">Gridea</a></h3>
@@ -79,40 +86,142 @@
     <div id="top" class="row site">
       <div class="sm-12 md-8 col">
         <div class="paper">
-          <h2 class="current-tag">标签: Markdown</h2>
-          
-  <article class="article">
-    <h2 class="article-title">
-      <a href="https://wylovecat.github.io//post/W-00jdL8V">使用Markdown输入数学符号</a>
-    </h2>
-    <p class="article-meta">
-      2019-01-14
-      
-        <a href="https://wylovecat.github.io//tag/markdown" class="badge warning">
-          Markdown
-        </a>
-      
-    </p>
-    <p class="text-lead">
-      
-    </p>
-    <div class="row">
-      <a href="https://wylovecat.github.io//post/W-00jdL8V" class="readmore-link">
-        <button>
-          Read More
-        </button>
-      </a>
-    </div>
-  </article>
+          <article class="article">
+            <h1>回文日期</h1>
+            <p class="article-meta">
+              2019-08-15
+              
+                <a href="https://wylovecat.github.io//tag/zjXnb_eXv" class="badge success">
+                  noip
+                </a>
+              
+                <a href="https://wylovecat.github.io//tag/cKlT30oiM" class="badge secondary">
+                  模拟
+                </a>
+              
+                <a href="https://wylovecat.github.io//tag/S-CLh9EEX" class="badge warning">
+                  枚举
+                </a>
+              
+            </p>
+            
+            <div class="post-content">
+              <h2 id="题目">题目</h2>
+<p><a href="https://turingjudge.com/problem/1846">回文日期</a></p>
+<h2 id="阅读与分析">阅读与分析</h2>
+<p>用8位数字表示日期，前4位表示年份，接下来2位表示月份，最后2位代表日期。对范围内的日期进行回文日期的统计。若一个日期是回文的，当且仅当对于所有的i从左向有的第i个数字和第9-i个数字是相同的。</p>
+<p>输入起止日期，统计多少个日期是回文的。</p>
+<p>阅读下来，题目梗概即为在一定范围内统计符合条件的数字个数，即可想到使用枚举法进行处理</p>
+<p>基本框架如下。</p>
+<pre><code class="language-c++">for(int i:date1~date2)
+{
+	if(isPali(i))
+	{
+		num++;
+	}
+}
+</code></pre>
+<p>问题变成，如何判断一个日期是回文的。</p>
+<p>一个思路是将8位数日期的倒序数求出将倒序数与原数比较，相等即是回文。</p>
+<p>另一个思路，将回文日期列举，能发现 20100102，20111102，月日组成的倒数和年相等即是回文。</p>
+<p>此外需要注意，日期必须得是真实存在的。修改框架如下：</p>
+<pre><code class="language-c++">for(int i:date1~date2)
+{
+	if(isReal(i)&amp;&amp;isPali(i))
+	{
+		num++;
+	}
+}
+</code></pre>
+<h2 id="ac代码">AC代码</h2>
+<pre><code class="language-c++">#include &lt;iostream&gt;
 
+using namespace std;
 
+int months[13]={0,31,28,31,30,31,30,31,31,30,31,30,31};
+
+bool isLeap(int year)
+{
+    return (year % 4 == 0 &amp;&amp; year % 100 != 0) || year % 400 == 0;
+}
+
+bool isPali(int date)
+{
+    int y=date/10000;
+
+    int reserve=0;
+    while(date!=y)
+    {
+        int u=date%10;
+        date/=10;
+        reserve= reserve * 10 + u;
+    }
+    return reserve == y;
+
+}
+
+bool isReal(int date)
+{
+    int y=date/10000;
+    int m=date/100%100;
+    int d=date%100;
+
+    if(isLeap(y))
+    {
+        months[2]=29;
+    }else
+    {
+        months[2]=28;
+    }
+
+    return (m &gt;= 1 &amp;&amp; m &lt;= 12) &amp;&amp; (d &gt;= 1 &amp;&amp; d &lt;= months[m]);
+}
+
+int main() {
+
+    int date1,date2,num=0;
+    cin&gt;&gt;date1&gt;&gt;date2;
+    for(int i=date1;i&lt;=date2;i++)
+    {
+        if(isReal(i)&amp;&amp;isPali(i))
+        {
+            num++;
+        }
+    }
+    cout&lt;&lt;num;
+
+    return 0;
+}
+</code></pre>
+
+            </div>
+          </article>
         </div>
-        <div class="row flex-edges">
-  
-  
-</div>
+        <div class="paper" data-aos="fade-in">
+          
+            <div class="next-post">
+              <div class="next">
+                下一篇
+              </div>
+              <a href="https://wylovecat.github.io//post/UukfogPTY">
+                <h3 class="post-title">
+                  有趣的GitHub项目
+                </h3>
+              </a>
+            </div>
+          
+        </div>
+        
+          
+            <div class="paper" data-aos="fade-in">
+              <div id="gitalk-container"></div>
+            </div>
+          
 
+          
+        
       </div>
+
       <div class="sm-12 md-4 col sidebar">
   <div class="paper info-container">
     <img src="https://wylovecat.github.io//images/avatar.png?v=1565848057531" class="no-responsive avatar">
@@ -211,7 +320,7 @@
     </div>
     <div class="row">
       
-        <a href="https://wylovecat.github.io//tag/zjXnb_eXv" class="badge ">
+        <a href="https://wylovecat.github.io//tag/zjXnb_eXv" class="badge secondary">
           noip
         </a>
       
@@ -219,11 +328,11 @@
           模拟
         </a>
       
-        <a href="https://wylovecat.github.io//tag/S-CLh9EEX" class="badge secondary">
+        <a href="https://wylovecat.github.io//tag/S-CLh9EEX" class="badge success">
           枚举
         </a>
       
-        <a href="https://wylovecat.github.io//tag/tHyJk6N28" class="badge ">
+        <a href="https://wylovecat.github.io//tag/tHyJk6N28" class="badge secondary">
           Git
         </a>
       
@@ -231,15 +340,15 @@
           C/C++
         </a>
       
-        <a href="https://wylovecat.github.io//tag/sEMfEVAVO" class="badge warning">
+        <a href="https://wylovecat.github.io//tag/sEMfEVAVO" class="badge success">
           计算机基础
         </a>
       
-        <a href="https://wylovecat.github.io//tag/Xml2KtR4g" class="badge success">
+        <a href="https://wylovecat.github.io//tag/Xml2KtR4g" class="badge ">
           算法
         </a>
       
-        <a href="https://wylovecat.github.io//tag/markdown" class="badge warning">
+        <a href="https://wylovecat.github.io//tag/markdown" class="badge success">
           Markdown
         </a>
       
@@ -247,7 +356,7 @@
           数学
         </a>
       
-        <a href="https://wylovecat.github.io//tag/4kipjvQ-w" class="badge secondary">
+        <a href="https://wylovecat.github.io//tag/4kipjvQ-w" class="badge ">
           vscode
         </a>
       
@@ -255,7 +364,7 @@
           hexo
         </a>
       
-        <a href="https://wylovecat.github.io//tag/gridea" class="badge success">
+        <a href="https://wylovecat.github.io//tag/gridea" class="badge ">
           Gridea
         </a>
       
@@ -265,6 +374,7 @@
     Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://wylovecat.github.io//atom.xml" target="_blank">RSS</a>
   </div>
 </div>
+
 
     </div>
 
@@ -277,6 +387,29 @@ AOS.init();
 hljs.initHighlightingOnLoad()
 
 </script>
+
+
+
+  
+    <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+    <script>
+
+      var gitalk = new Gitalk({
+        clientID: '09eba599fe2352041699',
+        clientSecret: '87b54f3fac03f239dfa5a92f9a96207f3f57139f',
+        repo: 'wylovecat.github.io',
+        owner: 'wylovecat',
+        admin: ['wylovecat'],
+        id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+        distractionFreeMode: false  // Facebook-like distraction free mode
+      })
+
+      gitalk.render('gitalk-container')
+
+    </script>
+  
+
+  
 
 
 
