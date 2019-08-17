@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" >
 
-<title>Git | Gridea</title>
+<title>比例简化 | Gridea</title>
 <meta name="description" content="温故而知新">
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -15,6 +15,12 @@
 <link rel="stylesheet" href="https://wylovecat.github.io//styles/main.css">
 
 
+  
+    <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css" />
+  
+
+  
+
 <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
 
 
@@ -23,6 +29,7 @@
 
   </head>
   <body>
+  
     <nav class="navbar border fixed split-nav">
   <div class="nav-brand">
     <h3><a href="https://wylovecat.github.io/">Gridea</a></h3>
@@ -79,41 +86,142 @@
     <div id="top" class="row site">
       <div class="sm-12 md-8 col">
         <div class="paper">
-          <h2 class="current-tag">标签: Git</h2>
-          
-  <article class="article">
-    <h2 class="article-title">
-      <a href="https://wylovecat.github.io//post/UukfogPTY">有趣的GitHub项目</a>
-    </h2>
-    <p class="article-meta">
-      2019-07-14
-      
-        <a href="https://wylovecat.github.io//tag/tHyJk6N28" class="badge secondary">
-          Git
-        </a>
-      
-    </p>
-    <p class="text-lead">
-      <p>分享一些有趣、有用的GitHub项目。</p>
+          <article class="article">
+            <h1>比例简化</h1>
+            <p class="article-meta">
+              2019-08-17
+              
+                <a href="https://wylovecat.github.io//tag/zjXnb_eXv" class="badge success">
+                  noip
+                </a>
+              
+                <a href="https://wylovecat.github.io//tag/cKlT30oiM" class="badge secondary">
+                  模拟
+                </a>
+              
+                <a href="https://wylovecat.github.io//tag/S-CLh9EEX" class="badge success">
+                  枚举
+                </a>
+              
+            </p>
+            
+            <div class="post-content">
+              <h3 id="题目阅读">题目阅读</h3>
+<p><a href="https://turingjudge.com/problem/1805">比例简化</a></p>
+<h3 id="分析">分析</h3>
+<p>现给出支持人数A，反对人数B，以及一个上限L，请你将A比B化简为A’比B’，要求在A’和B’均不大于L且A’和B’互质（两个整数的最大公约数是1）的前提下，A’/B’≥ A/B且A’/B’- A/B的值尽可能小</p>
+<p>整理几个关键信息点</p>
+<ul>
+<li>在A’和B’均不大于L且A’和B’互质</li>
+</ul>
+<p>a&lt;=L &amp;&amp; b&lt;=L &amp;&amp; gcd(a,b)==1</p>
+<ul>
+<li>A’/B’≥ A/B且A’/B’- A/B的值尽可能小</li>
+</ul>
+<p>a/b&gt;=A/B =&gt; a * B &gt;= A *  b &amp;&amp;  a/b 尽可能小</p>
+<p>分析下来就是一道枚举题目，寻找满足条件的最小的a/b的值最小的那对a,b;变成了最值寻找问题</p>
+<pre><code class="language-c++">int min=max;
+for( )
+{
+	if(num&lt;min)
+	{
+		min=num;
+	}
+}
+cout&lt;&lt;num;
+</code></pre>
+<pre><code class="language-c++">ta=L,tb=1;
+for(int a=1;a&lt;=L;a++)
+{
+    for(int b=L;b&gt;=1;b--)
+    {
+        if(gcd(a,b)==1 &amp;&amp; a*B&gt;=A*b &amp;&amp; a*tb&lt;ta*b)
+        {
+            ta=a;
+            tb=b;
+            break;
+        }
+    }
+}
+cout&lt;&lt;ta&lt;&lt;&quot; &quot;&lt;&lt;tb;
+</code></pre>
+<h3 id="ac代码">AC代码</h3>
+<pre><code class="language-c++">#include &lt;iostream&gt;
+#include&lt;cstdio&gt;
+using namespace std;
+/*
+ * a&lt;=L&amp;&amp;b&lt;=L&amp;&amp;gcd(a,b)==1
+ *  a/b&gt;=A/B =》 a*B &gt;= A*b  &amp;&amp; a/b - A/B 尽可能小
+ *  1~100 =》 L   a/b&lt;=L   a&lt;=L*b   b&gt;=a/L
+ *
+ *  a/b &lt;ta/tb
+ *
+ *  枚举
+ * */
 
-    </p>
-    <div class="row">
-      <a href="https://wylovecat.github.io//post/UukfogPTY" class="readmore-link">
-        <button>
-          Read More
-        </button>
-      </a>
-    </div>
-  </article>
+int gcd(int a,int b)
+{
+    while(b!=0)
+    {
+        int r=a%b;
+        a=b;
+        b=r;
+    }
+    return a;
+}
+int main(){
 
+    int A,B,L;
+    cin&gt;&gt;A&gt;&gt;B&gt;&gt;L;
+    int y=gcd(A,B);
+    A/=y;
+    B/=y;
+    int ta=L;
+    int tb=1;
+    for(int a=1;a&lt;=L;a++)
+    {
+        for(int b=L;b&gt;=a/L;b--)
+        {
+            if(gcd(a,b)==1 &amp;&amp; a*B&gt;=A*b &amp;&amp; a*tb&lt;=ta*b)
+            {
+                ta=a;
+                tb=b;
+                break;
+            }
+        }
+    }
+    cout&lt;&lt;ta&lt;&lt;&quot; &quot;&lt;&lt;tb;
+}
+</code></pre>
 
+            </div>
+          </article>
         </div>
-        <div class="row flex-edges">
-  
-  
-</div>
+        <div class="paper" data-aos="fade-in">
+          
+            <div class="next-post">
+              <div class="next">
+                下一篇
+              </div>
+              <a href="https://wylovecat.github.io//post/S-SCKDM5o">
+                <h3 class="post-title">
+                  珠心算测验
+                </h3>
+              </a>
+            </div>
+          
+        </div>
+        
+          
+            <div class="paper" data-aos="fade-in">
+              <div id="gitalk-container"></div>
+            </div>
+          
 
+          
+        
       </div>
+
       <div class="sm-12 md-4 col sidebar">
   <div class="paper info-container">
     <img src="https://wylovecat.github.io//images/avatar.png?v=1566008512649" class="no-responsive avatar">
@@ -216,7 +324,7 @@
     </div>
     <div class="row">
       
-        <a href="https://wylovecat.github.io//tag/zjXnb_eXv" class="badge ">
+        <a href="https://wylovecat.github.io//tag/zjXnb_eXv" class="badge success">
           noip
         </a>
       
@@ -224,11 +332,11 @@
           模拟
         </a>
       
-        <a href="https://wylovecat.github.io//tag/S-CLh9EEX" class="badge warning">
+        <a href="https://wylovecat.github.io//tag/S-CLh9EEX" class="badge secondary">
           枚举
         </a>
       
-        <a href="https://wylovecat.github.io//tag/tHyJk6N28" class="badge success">
+        <a href="https://wylovecat.github.io//tag/tHyJk6N28" class="badge ">
           Git
         </a>
       
@@ -236,31 +344,31 @@
           C/C++
         </a>
       
-        <a href="https://wylovecat.github.io//tag/sEMfEVAVO" class="badge ">
+        <a href="https://wylovecat.github.io//tag/sEMfEVAVO" class="badge warning">
           计算机基础
         </a>
       
-        <a href="https://wylovecat.github.io//tag/Xml2KtR4g" class="badge secondary">
+        <a href="https://wylovecat.github.io//tag/Xml2KtR4g" class="badge success">
           算法
         </a>
       
-        <a href="https://wylovecat.github.io//tag/markdown" class="badge ">
+        <a href="https://wylovecat.github.io//tag/markdown" class="badge success">
           Markdown
         </a>
       
-        <a href="https://wylovecat.github.io//tag/Z3tt3bzbS" class="badge ">
+        <a href="https://wylovecat.github.io//tag/Z3tt3bzbS" class="badge warning">
           数学
         </a>
       
-        <a href="https://wylovecat.github.io//tag/4kipjvQ-w" class="badge secondary">
+        <a href="https://wylovecat.github.io//tag/4kipjvQ-w" class="badge warning">
           vscode
         </a>
       
-        <a href="https://wylovecat.github.io//tag/RYJKhhSlc" class="badge ">
+        <a href="https://wylovecat.github.io//tag/RYJKhhSlc" class="badge success">
           hexo
         </a>
       
-        <a href="https://wylovecat.github.io//tag/gridea" class="badge success">
+        <a href="https://wylovecat.github.io//tag/gridea" class="badge warning">
           Gridea
         </a>
       
@@ -270,6 +378,7 @@
     Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://wylovecat.github.io//atom.xml" target="_blank">RSS</a>
   </div>
 </div>
+
 
     </div>
 
@@ -282,6 +391,29 @@ AOS.init();
 hljs.initHighlightingOnLoad()
 
 </script>
+
+
+
+  
+    <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+    <script>
+
+      var gitalk = new Gitalk({
+        clientID: '09eba599fe2352041699',
+        clientSecret: '87b54f3fac03f239dfa5a92f9a96207f3f57139f',
+        repo: 'wylovecat.github.io',
+        owner: 'wylovecat',
+        admin: ['wylovecat'],
+        id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+        distractionFreeMode: false  // Facebook-like distraction free mode
+      })
+
+      gitalk.render('gitalk-container')
+
+    </script>
+  
+
+  
 
 
 

@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://wylovecat.github.io/</id>
     <title>Gridea</title>
-    <updated>2019-08-15T07:15:29.607Z</updated>
+    <updated>2019-08-17T02:22:02.975Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://wylovecat.github.io/"/>
     <link rel="self" href="https://wylovecat.github.io//atom.xml"/>
@@ -10,6 +10,101 @@
     <logo>https://wylovecat.github.io//images/avatar.png</logo>
     <icon>https://wylovecat.github.io//favicon.ico</icon>
     <rights>All rights reserved 2019, Gridea</rights>
+    <entry>
+        <title type="html"><![CDATA[比例简化]]></title>
+        <id>https://wylovecat.github.io//post/dLtINUDHC</id>
+        <link href="https://wylovecat.github.io//post/dLtINUDHC">
+        </link>
+        <updated>2019-08-17T02:19:39.000Z</updated>
+        <content type="html"><![CDATA[<h3 id="题目阅读">题目阅读</h3>
+<p><a href="https://turingjudge.com/problem/1805">比例简化</a></p>
+<h3 id="分析">分析</h3>
+<p>现给出支持人数A，反对人数B，以及一个上限L，请你将A比B化简为A’比B’，要求在A’和B’均不大于L且A’和B’互质（两个整数的最大公约数是1）的前提下，A’/B’≥ A/B且A’/B’- A/B的值尽可能小</p>
+<p>整理几个关键信息点</p>
+<ul>
+<li>在A’和B’均不大于L且A’和B’互质</li>
+</ul>
+<p>a&lt;=L &amp;&amp; b&lt;=L &amp;&amp; gcd(a,b)==1</p>
+<ul>
+<li>A’/B’≥ A/B且A’/B’- A/B的值尽可能小</li>
+</ul>
+<p>a/b&gt;=A/B =&gt; a * B &gt;= A *  b &amp;&amp;  a/b 尽可能小</p>
+<p>分析下来就是一道枚举题目，寻找满足条件的最小的a/b的值最小的那对a,b;变成了最值寻找问题</p>
+<pre><code class="language-c++">int min=max;
+for( )
+{
+	if(num&lt;min)
+	{
+		min=num;
+	}
+}
+cout&lt;&lt;num;
+</code></pre>
+<pre><code class="language-c++">ta=L,tb=1;
+for(int a=1;a&lt;=L;a++)
+{
+    for(int b=L;b&gt;=1;b--)
+    {
+        if(gcd(a,b)==1 &amp;&amp; a*B&gt;=A*b &amp;&amp; a*tb&lt;ta*b)
+        {
+            ta=a;
+            tb=b;
+            break;
+        }
+    }
+}
+cout&lt;&lt;ta&lt;&lt;&quot; &quot;&lt;&lt;tb;
+</code></pre>
+<h3 id="ac代码">AC代码</h3>
+<pre><code class="language-c++">#include &lt;iostream&gt;
+#include&lt;cstdio&gt;
+using namespace std;
+/*
+ * a&lt;=L&amp;&amp;b&lt;=L&amp;&amp;gcd(a,b)==1
+ *  a/b&gt;=A/B =》 a*B &gt;= A*b  &amp;&amp; a/b - A/B 尽可能小
+ *  1~100 =》 L   a/b&lt;=L   a&lt;=L*b   b&gt;=a/L
+ *
+ *  a/b &lt;ta/tb
+ *
+ *  枚举
+ * */
+
+int gcd(int a,int b)
+{
+    while(b!=0)
+    {
+        int r=a%b;
+        a=b;
+        b=r;
+    }
+    return a;
+}
+int main(){
+
+    int A,B,L;
+    cin&gt;&gt;A&gt;&gt;B&gt;&gt;L;
+    int y=gcd(A,B);
+    A/=y;
+    B/=y;
+    int ta=L;
+    int tb=1;
+    for(int a=1;a&lt;=L;a++)
+    {
+        for(int b=L;b&gt;=a/L;b--)
+        {
+            if(gcd(a,b)==1 &amp;&amp; a*B&gt;=A*b &amp;&amp; a*tb&lt;=ta*b)
+            {
+                ta=a;
+                tb=b;
+                break;
+            }
+        }
+    }
+    cout&lt;&lt;ta&lt;&lt;&quot; &quot;&lt;&lt;tb;
+}
+</code></pre>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[珠心算测验]]></title>
         <id>https://wylovecat.github.io//post/S-SCKDM5o</id>
@@ -582,25 +677,6 @@ c-16-25.333-24-45-24-59z'/></svg></span></span></span></span></span></span></spa
 <p><code>\alpha ,\beta ,\gamma ,\epsilon ,\varepsilon ,\theta ,\psi</code></p>
 <p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>α</mi><mo separator="true">,</mo><mi>β</mi><mo separator="true">,</mo><mi>γ</mi><mo separator="true">,</mo><mi>ϵ</mi><mo separator="true">,</mo><mi>ε</mi><mo separator="true">,</mo><mi>θ</mi><mo separator="true">,</mo><mi>ψ</mi></mrow><annotation encoding="application/x-tex">\alpha ,\beta ,\gamma ,\epsilon ,\varepsilon ,\theta ,\psi
 </annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord mathdefault" style="margin-right:0.0037em;">α</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault" style="margin-right:0.05278em;">β</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault" style="margin-right:0.05556em;">γ</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">ϵ</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">ε</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">θ</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault" style="margin-right:0.03588em;">ψ</span></span></span></span></span></p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[极限的概念与性质]]></title>
-        <id>https://wylovecat.github.io//post/uCn-GTST3</id>
-        <link href="https://wylovecat.github.io//post/uCn-GTST3">
-        </link>
-        <updated>2019-01-14T08:08:47.000Z</updated>
-        <content type="html"><![CDATA[<h2 id="极限的定义">极限的定义</h2>
-<h3 id="数列的极限">数列的极限</h3>
-<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>l</mi><mi>i</mi><mi>m</mi><msub><mi>x</mi><mi>n</mi></msub><mo>=</mo><mi>A</mi><mo>↔</mo><mi mathvariant="normal">∀</mi><mi>ε</mi><mo>&gt;</mo><mn>0</mn><mo separator="true">,</mo><mi mathvariant="normal">∃</mi><mi mathvariant="normal">正</mi><mi mathvariant="normal">整</mi><mi mathvariant="normal">数</mi><mi>N</mi><mi mathvariant="normal">，</mi><mi mathvariant="normal">使</mi><mi mathvariant="normal">得</mi><mi mathvariant="normal">当</mi><mi>n</mi><mo>&gt;</mo><mi>N</mi><mi mathvariant="normal">时</mi><mi mathvariant="normal">就</mi><mi mathvariant="normal">有</mi><mi mathvariant="normal">∣</mi><msub><mi>x</mi><mi>n</mi></msub><mo>−</mo><mi>A</mi><mi mathvariant="normal">∣</mi><mo>&lt;</mo><mi>ε</mi><mi mathvariant="normal">。</mi></mrow><annotation encoding="application/x-tex">limx_n = A \leftrightarrow \forall\varepsilon &gt; 0,\exists 正整数N，使得当n&gt;N时就有 |x_n - A|&lt;\varepsilon 。
-</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.84444em;vertical-align:-0.15em;"></span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord mathdefault">i</span><span class="mord mathdefault">m</span><span class="mord"><span class="mord mathdefault">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">n</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault">A</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">↔</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.73354em;vertical-align:-0.0391em;"></span><span class="mord">∀</span><span class="mord mathdefault">ε</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">&gt;</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord">0</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">∃</span><span class="mord cjk_fallback">正</span><span class="mord cjk_fallback">整</span><span class="mord cjk_fallback">数</span><span class="mord mathdefault" style="margin-right:0.10903em;">N</span><span class="mord cjk_fallback">，</span><span class="mord cjk_fallback">使</span><span class="mord cjk_fallback">得</span><span class="mord cjk_fallback">当</span><span class="mord mathdefault">n</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">&gt;</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.10903em;">N</span><span class="mord cjk_fallback">时</span><span class="mord cjk_fallback">就</span><span class="mord cjk_fallback">有</span><span class="mord">∣</span><span class="mord"><span class="mord mathdefault">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">n</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">A</span><span class="mord">∣</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">&lt;</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">ε</span><span class="mord cjk_fallback">。</span></span></span></span></span></p>
-<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi mathvariant="normal">若</mi><mi mathvariant="normal">数</mi><mi mathvariant="normal">列</mi><mo>{</mo><msub><mi>x</mi><mi>n</mi></msub><mo>}</mo><mi mathvariant="normal">存</mi><mi mathvariant="normal">在</mi><mi mathvariant="normal">极</mi><mi mathvariant="normal">限</mi><mo>(</mo><mi mathvariant="normal">有</mi><mi mathvariant="normal">限</mi><mi mathvariant="normal">数</mi><mo>)</mo><mi mathvariant="normal">，</mi><mi mathvariant="normal">又</mi><mi mathvariant="normal">称</mi><mi mathvariant="normal">数</mi><mi mathvariant="normal">列</mi><mo>{</mo><mi>n</mi><mo>}</mo><mi mathvariant="normal">收</mi><mi mathvariant="normal">敛</mi><mi mathvariant="normal">，</mi><mi mathvariant="normal">否</mi><mi mathvariant="normal">则</mi><mi mathvariant="normal">称</mi><mi mathvariant="normal">数</mi><mi mathvariant="normal">列</mi><mo>{</mo><msub><mi>x</mi><mi>n</mi></msub><mo>}</mo><mi mathvariant="normal">发</mi><mi mathvariant="normal">散</mi><mi mathvariant="normal">。</mi></mrow><annotation encoding="application/x-tex">若数列\{x_n\}存在极限(有限数)，又称数列\{n\}收敛，否则称数列\{x_n\}发散。
-</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord cjk_fallback">若</span><span class="mord cjk_fallback">数</span><span class="mord cjk_fallback">列</span><span class="mopen">{</span><span class="mord"><span class="mord mathdefault">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">n</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose">}</span><span class="mord cjk_fallback">存</span><span class="mord cjk_fallback">在</span><span class="mord cjk_fallback">极</span><span class="mord cjk_fallback">限</span><span class="mopen">(</span><span class="mord cjk_fallback">有</span><span class="mord cjk_fallback">限</span><span class="mord cjk_fallback">数</span><span class="mclose">)</span><span class="mord cjk_fallback">，</span><span class="mord cjk_fallback">又</span><span class="mord cjk_fallback">称</span><span class="mord cjk_fallback">数</span><span class="mord cjk_fallback">列</span><span class="mopen">{</span><span class="mord mathdefault">n</span><span class="mclose">}</span><span class="mord cjk_fallback">收</span><span class="mord cjk_fallback">敛</span><span class="mord cjk_fallback">，</span><span class="mord cjk_fallback">否</span><span class="mord cjk_fallback">则</span><span class="mord cjk_fallback">称</span><span class="mord cjk_fallback">数</span><span class="mord cjk_fallback">列</span><span class="mopen">{</span><span class="mord"><span class="mord mathdefault">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">n</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose">}</span><span class="mord cjk_fallback">发</span><span class="mord cjk_fallback">散</span><span class="mord cjk_fallback">。</span></span></span></span></span></p>
-<h3 id="函数的极限">函数的极限</h3>
-<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><munder><mi>lim</mi><mo>⁡</mo><mrow><mi>x</mi><mo>→</mo><mi mathvariant="normal">∞</mi></mrow></munder><mo>=</mo><mi>A</mi><mo>↔</mo><mi mathvariant="normal">∀</mi><mi>ε</mi><mo>&gt;</mo><mn>0</mn><mo separator="true">,</mo><mi mathvariant="normal">∃</mi><mi mathvariant="normal">正</mi><mi mathvariant="normal">整</mi><mi mathvariant="normal">数</mi><mi>X</mi><mo separator="true">,</mo><mi mathvariant="normal">使</mi><mi mathvariant="normal">得</mi><mi mathvariant="normal">当</mi><mi mathvariant="normal">∣</mi><mi>x</mi><mi mathvariant="normal">∣</mi><mo>&gt;</mo><mi>X</mi><mi mathvariant="normal">时</mi><mi mathvariant="normal">，</mi><mi mathvariant="normal">就</mi><mi mathvariant="normal">有</mi><mi mathvariant="normal">∣</mi><mi>f</mi><mo>(</mo><mi>x</mi><mo>)</mo><mo>−</mo><mi>A</mi><mi mathvariant="normal">∣</mi><mo>&lt;</mo><mi>ε</mi><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\lim_{x\rightarrow\infty}=A\leftrightarrow\forall\varepsilon&gt;0,\exists正整数X,使得当|x|&gt;X时，就有|f(x)-A|&lt;\varepsilon.
-</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.39444em;vertical-align:-0.7em;"></span><span class="mop op-limits"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.69444em;"><span style="top:-2.1em;margin-left:0em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">x</span><span class="mrel mtight">→</span><span class="mord mtight">∞</span></span></span></span><span style="top:-2.7em;"><span class="pstrut" style="height:2.7em;"></span><span><span class="mop">lim</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.7em;"><span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault">A</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">↔</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.73354em;vertical-align:-0.0391em;"></span><span class="mord">∀</span><span class="mord mathdefault">ε</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">&gt;</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">0</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">∃</span><span class="mord cjk_fallback">正</span><span class="mord cjk_fallback">整</span><span class="mord cjk_fallback">数</span><span class="mord mathdefault" style="margin-right:0.07847em;">X</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord cjk_fallback">使</span><span class="mord cjk_fallback">得</span><span class="mord cjk_fallback">当</span><span class="mord">∣</span><span class="mord mathdefault">x</span><span class="mord">∣</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">&gt;</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.07847em;">X</span><span class="mord cjk_fallback">时</span><span class="mord cjk_fallback">，</span><span class="mord cjk_fallback">就</span><span class="mord cjk_fallback">有</span><span class="mord">∣</span><span class="mord mathdefault" style="margin-right:0.10764em;">f</span><span class="mopen">(</span><span class="mord mathdefault">x</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">A</span><span class="mord">∣</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">&lt;</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">ε</span><span class="mord">.</span></span></span></span></span></p>
-<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi mathvariant="normal">类</mi><mi mathvariant="normal">似</mi><mi mathvariant="normal">可</mi><mi mathvariant="normal">定</mi><mi mathvariant="normal">义</mi><mi mathvariant="normal">单</mi><mi mathvariant="normal">侧</mi><mi mathvariant="normal">极</mi><mi mathvariant="normal">限</mi><munder><mi>lim</mi><mo>⁡</mo><mrow><mi>x</mi><mo>→</mo><mo>−</mo><mi mathvariant="normal">∞</mi></mrow></munder><mo>=</mo><mi>A</mi><mi mathvariant="normal">与</mi><munder><mi>lim</mi><mo>⁡</mo><mrow><mi>x</mi><mo>→</mo><mo>+</mo><mi mathvariant="normal">∞</mi></mrow></munder><mo>=</mo><mi>A</mi></mrow><annotation encoding="application/x-tex">类似可定义单侧极限\lim_{x\rightarrow-\infty}=A 与\lim_{x\rightarrow+\infty}=A
-</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.4527709999999998em;vertical-align:-0.758331em;"></span><span class="mord cjk_fallback">类</span><span class="mord cjk_fallback">似</span><span class="mord cjk_fallback">可</span><span class="mord cjk_fallback">定</span><span class="mord cjk_fallback">义</span><span class="mord cjk_fallback">单</span><span class="mord cjk_fallback">侧</span><span class="mord cjk_fallback">极</span><span class="mord cjk_fallback">限</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mop op-limits"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.69444em;"><span style="top:-2.1em;margin-left:0em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">x</span><span class="mrel mtight">→</span><span class="mord mtight">−</span><span class="mord mtight">∞</span></span></span></span><span style="top:-2.7em;"><span class="pstrut" style="height:2.7em;"></span><span><span class="mop">lim</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.758331em;"><span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1.4527709999999998em;vertical-align:-0.758331em;"></span><span class="mord mathdefault">A</span><span class="mord cjk_fallback">与</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mop op-limits"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.69444em;"><span style="top:-2.1em;margin-left:0em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">x</span><span class="mrel mtight">→</span><span class="mord mtight">+</span><span class="mord mtight">∞</span></span></span></span><span style="top:-2.7em;"><span class="pstrut" style="height:2.7em;"></span><span><span class="mop">lim</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.758331em;"><span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault">A</span></span></span></span></span></p>
 ]]></content>
     </entry>
 </feed>
