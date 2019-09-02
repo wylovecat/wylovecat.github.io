@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" >
 
-<title>回文日期 | 咸鱼爱学习</title>
+<title>欧几里得算法与拓展欧几里得 | 咸鱼爱学习</title>
 <meta name="description" content="温故而知新">
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -87,111 +87,87 @@
       <div class="sm-12 md-8 col">
         <div class="paper">
           <article class="article">
-            <h1>回文日期</h1>
+            <h1>欧几里得算法与拓展欧几里得</h1>
             <p class="article-meta">
-              2019-08-15
-              
-                <a href="https://wylovecat.github.io//tag/zjXnb_eXv" class="badge secondary">
-                  noip
-                </a>
-              
-                <a href="https://wylovecat.github.io//tag/cKlT30oiM" class="badge secondary">
-                  模拟
-                </a>
-              
-                <a href="https://wylovecat.github.io//tag/S-CLh9EEX" class="badge secondary">
-                  枚举
-                </a>
+              2019-09-02
               
             </p>
             
             <div class="post-content">
-              <h2 id="题目">题目</h2>
-<p><a href="https://turingjudge.com/problem/1846">回文日期</a></p>
-<h2 id="阅读与分析">阅读与分析</h2>
-<p>用8位数字表示日期，前4位表示年份，接下来2位表示月份，最后2位代表日期。对范围内的日期进行回文日期的统计。若一个日期是回文的，当且仅当对于所有的i从左向有的第i个数字和第9-i个数字是相同的。</p>
-<p>输入起止日期，统计多少个日期是回文的。</p>
-<p>阅读下来，题目梗概即为在一定范围内统计符合条件的数字个数，即可想到使用枚举法进行处理</p>
-<p>基本框架如下。</p>
-<pre><code class="language-c++">for(int i:date1~date2)
+              <h1 id="欧几里得算辗转相除法">欧几里得算(辗转相除法)</h1>
+<h2 id="算法描述">算法描述</h2>
+<p>设 a&gt;=b</p>
+<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>a</mi><mo>÷</mo><mi>b</mi><mo>=</mo><mi>k</mi><mo separator="true">⋅</mo><mo separator="true">⋅</mo><mo separator="true">⋅</mo><mo separator="true">⋅</mo><mo separator="true">⋅</mo><mo separator="true">⋅</mo><mi>r</mi></mrow><annotation encoding="application/x-tex">a \div b = k ······ r    
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.66666em;vertical-align:-0.08333em;"></span><span class="mord mathdefault">a</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">÷</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault">b</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.03148em;">k</span><span class="mpunct">⋅</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mpunct">⋅</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mpunct">⋅</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mpunct">⋅</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mpunct">⋅</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mpunct">⋅</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span></span></span></span></span></p>
+<p>a和b的最大公约数等于b和r的最大公约数。<br>
+gcd(a,b)=gcd(b,a%b),当b为0时，a为(a,b)最大公约数</p>
+<h2 id="c实现">C++实现</h2>
+<pre><code>//递归方式
+int gcd(int a,int b)
 {
-	if(isPali(i))
-	{
-		num++;
-	}
+    if(b==0) return a;
+    else return gcd(b,a%b);
 }
+
+//非递归方式
+while(b!=0)
+{
+    int r=a%b;
+    a=b;
+    b=r;
+}
+cout&lt;&lt;a;
 </code></pre>
-<p>问题变成，如何判断一个日期是回文的。</p>
-<p>一个思路是将8位数日期的倒序数求出将倒序数与原数比较，相等即是回文。</p>
-<p>另一个思路，将回文日期列举，能发现 20100102，20111102，月日组成的倒数和年相等即是回文。</p>
-<p>此外需要注意，日期必须得是真实存在的。修改框架如下：</p>
-<pre><code class="language-c++">for(int i:date1~date2)
+<h2 id="定理证明">定理证明</h2>
+<ol>
+<li>证明a,b的公约数和 b,r的公约数相同,就能证明最大公约数相同
+<ol>
+<li>设a = kb+r (a&gt;=b)。由假设可知，r=a mod b。</li>
+<li>设d为a和b的任意公约数。</li>
+<li>变形可得到式子：r=a-kb,等式两边同除d,可得到式子： r/d = a/d - kb/d =m。</li>
+<li>因为d为a,b的公约数，故a/d 为整数，b/d为整数，故r/d也为整数,可推出d为r的约数。故d是b和r的约数。</li>
+<li>所以，a和b的任意公约数d,也是b和a%b的公约数。</li>
+<li>设 d 是 b,a%b的公约数，则d是b和a-kb的公约数</li>
+<li>设b=xd, a-kb=yd（d是他们的约数，他们则可写成d的倍数形式）。则存在a=kb+yd;</li>
+<li>将等式两边同除d,a/d =kb/d + y=m。y是整数，d是b的约数，所以m未整数，即d是a的约数。</li>
+<li>所以d也是a和b的公约数</li>
+<li>综上，(a,b)和(b,a%b)的公约数集合相同，证得(a,b)和(b,a%b)的公约数是一样的</li>
+<li>所以最大公约数也相同，证明gcd(a,b)=gcd(b,a%b)</li>
+</ol>
+</li>
+</ol>
+<h1 id="拓展欧几里得算法">拓展欧几里得算法</h1>
+<h2 id="定理">定理：</h2>
+<p>给予两个整数a、b,必存在整数x,y使得ax + by = gcd(a,b)。（贝祖等式）<br>
+拓展欧几里得算法就是再辗转相除法的基础上，求的改等式的通解。<br>
+x=x0+(b/gcd(a,b)) * t<br>
+y=y0-(a/gcd(a,b)) * t<br>
+我们知道：a%b = a - (a/b) * b,所以我可以进一步得到<br>
+gcd(a,b) = gcd(b, a%b) :<br>
+gcd(a%b)=b * x1 + ( a - (a/b)* b)* y1<br>
+=b <em>x1 + a</em>y1-(a/b)<em>b</em>y1<br>
+= a * y1 +b*(x1-a/b<em>y1)<br>
+观察可以发现，x=y1,y=x1-a/b</em> y1<br>
+所以我们只要在求解欧几里得的时候同时加上对x,y的更新即可。考虑边界情况，当b=0时，显然此时x=1,y=0;</p>
+<h2 id="代码实现">代码实现</h2>
+<pre><code>int ex_gcd(int a,int b,int &amp;x,int &amp;y)
 {
-	if(isReal(i)&amp;&amp;isPali(i))
-	{
-		num++;
-	}
-}
-</code></pre>
-<h2 id="ac代码">AC代码</h2>
-<pre><code class="language-c++">#include &lt;iostream&gt;
-
-using namespace std;
-
-int months[13]={0,31,28,31,30,31,30,31,31,30,31,30,31};
-
-bool isLeap(int year)
-{
-    return (year % 4 == 0 &amp;&amp; year % 100 != 0) || year % 400 == 0;
-}
-
-bool isPali(int date)
-{
-    int y=date/10000;
-
-    int reserve=0;
-    while(date!=y)
-    {
-        int u=date%10;
-        date/=10;
-        reserve= reserve * 10 + u;
-    }
-    return reserve == y;
-
-}
-
-bool isReal(int date)
-{
-    int y=date/10000;
-    int m=date/100%100;
-    int d=date%100;
-
-    if(isLeap(y))
-    {
-        months[2]=29;
-    }else
-    {
-        months[2]=28;
-    }
-
-    return (m &gt;= 1 &amp;&amp; m &lt;= 12) &amp;&amp; (d &gt;= 1 &amp;&amp; d &lt;= months[m]);
-}
-
-int main() {
-
-    int date1,date2,num=0;
-    cin&gt;&gt;date1&gt;&gt;date2;
-    for(int i=date1;i&lt;=date2;i++)
-    {
-        if(isReal(i)&amp;&amp;isPali(i))
-        {
-            num++;
-        }
-    }
-    cout&lt;&lt;num;
-
-    return 0;
-}
+   if(b==0) {x=1;y=0;return a;}
+   int ans=ex_gcd(b,a%b,x,y);
+   int t=x;
+   x=y;
+   y=t-a/b*y;
+   return ans;
+ }
+ 
+ //精简
+ int ex_gcd(int a,int b,int &amp;x,int &amp;y)
+ {
+   if(b==0) {x=1;y=0;return a;}
+   int ans=ex_gcd(b,a%b,y,x);
+   y-=(a/b)*x;
+   return ans;
+ }
 </code></pre>
 
             </div>
@@ -203,9 +179,9 @@ int main() {
               <div class="next">
                 下一篇
               </div>
-              <a href="https://wylovecat.github.io//post/UukfogPTY">
+              <a href="https://wylovecat.github.io//post/dLtINUDHC">
                 <h3 class="post-title">
-                  有趣的GitHub项目
+                  比例简化
                 </h3>
               </a>
             </div>
@@ -330,7 +306,7 @@ int main() {
           noip
         </a>
       
-        <a href="https://wylovecat.github.io//tag/cKlT30oiM" class="badge ">
+        <a href="https://wylovecat.github.io//tag/cKlT30oiM" class="badge secondary">
           模拟
         </a>
       
@@ -338,11 +314,11 @@ int main() {
           枚举
         </a>
       
-        <a href="https://wylovecat.github.io//tag/tHyJk6N28" class="badge secondary">
+        <a href="https://wylovecat.github.io//tag/tHyJk6N28" class="badge warning">
           Git
         </a>
       
-        <a href="https://wylovecat.github.io//tag/CSNe-Ttwm" class="badge secondary">
+        <a href="https://wylovecat.github.io//tag/CSNe-Ttwm" class="badge success">
           C/C++
         </a>
       
@@ -350,11 +326,11 @@ int main() {
           计算机基础
         </a>
       
-        <a href="https://wylovecat.github.io//tag/Xml2KtR4g" class="badge ">
+        <a href="https://wylovecat.github.io//tag/Xml2KtR4g" class="badge warning">
           算法
         </a>
       
-        <a href="https://wylovecat.github.io//tag/markdown" class="badge success">
+        <a href="https://wylovecat.github.io//tag/markdown" class="badge secondary">
           Markdown
         </a>
       
@@ -366,11 +342,11 @@ int main() {
           vscode
         </a>
       
-        <a href="https://wylovecat.github.io//tag/RYJKhhSlc" class="badge secondary">
+        <a href="https://wylovecat.github.io//tag/RYJKhhSlc" class="badge ">
           hexo
         </a>
       
-        <a href="https://wylovecat.github.io//tag/gridea" class="badge warning">
+        <a href="https://wylovecat.github.io//tag/gridea" class="badge ">
           Gridea
         </a>
       
