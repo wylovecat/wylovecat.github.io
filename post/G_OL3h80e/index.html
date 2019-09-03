@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" >
 
-<title>在使用Hexo和Gitpage创建博客所遇的问题与解决方案 | 咸鱼爱学习</title>
+<title>高精度计算(一) | 咸鱼爱学习</title>
 <meta name="description" content="温故而知新">
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -87,22 +87,96 @@
       <div class="sm-12 md-8 col">
         <div class="paper">
           <article class="article">
-            <h1>在使用Hexo和Gitpage创建博客所遇的问题与解决方案</h1>
+            <h1>高精度计算(一)</h1>
             <p class="article-meta">
-              2019-01-11
+              2019-09-03
               
-                <a href="https://wylovecat.github.io//tag/RYJKhhSlc" class="badge success">
-                  hexo
+                <a href="https://wylovecat.github.io//tag/iqjH4VeE6" class="badge success">
+                  高精度
+                </a>
+              
+                <a href="https://wylovecat.github.io//tag/Xml2KtR4g" class="badge warning">
+                  算法
                 </a>
               
             </p>
             
             <div class="post-content">
-              <ul>
-<li>使用Gulp压缩时报错：AssertionError: Task function must be specified<!--more--><br>
-错误原因是版本问题，使用<code>gulp -v</code> 查看版本后发现，版本不一致。卸载gulp，并重新安装.<br>
-<code>npm unintsall gulp npm install gulp@3</code></li>
-</ul>
+              <h1 id="概述">概述</h1>
+<p>当计算的数值非常大或是对于计算的精度要求非常搞事，用已知的数据类型无法精确地表示数值。可以采用数组来模拟大数运算的过程。</p>
+<h1 id="高精度加法">高精度加法</h1>
+<p>两个大数进行相加计算时，要解决三个问题</p>
+<ol>
+<li>如何存储</li>
+<li>如何计算</li>
+<li>如何输出答案</li>
+</ol>
+<p>先解决第一个问题，数据地存储，由于数据过于庞大，已知的数据类型无法精确地表示数值，会发生数据溢出问题。此时可考虑将数据拆分，将大数分割成若干个0~9数字组成的整体。这样的结构能让我们联想到数组。但是，若是整数数组，在输入时较难将数字存储在各个元素空间内，此时可考虑使用字符串形式进行输入，在存储后再进行转换。</p>
+<pre><code>const int maxn=1e10+5;
+char s1[maxn]={0},s2[maxn]={0};
+cin&gt;&gt;s1&gt;&gt;s2;
+
+</code></pre>
+<p>输入完成后，再去考虑计算问题。首先，字符类型直接相加的结果并不正确，需要将其转化为整数数字。可利用ASCII码差值来进行处理。且在进行计算时，模拟竖式加法计算过程，需要从低位开始向高位相加计算且注意过程中的进位。在相加时，加数和被加数位数可能不同，需要低位对齐。实现低位对齐可在转换时进行倒序存放。</p>
+<pre><code>// 转换过程
+int num[maxn]={0};
+int len=strlen(s);
+
+for(int i=0;i&lt;len;i++)
+{
+    num[i]=s[len-1-i]-'0';
+}
+</code></pre>
+<p>倒序转换好之后，在模拟竖式计算进行处理。注意过程中的进位。</p>
+<pre><code>int ans[maxn]={0};
+for(int i=0;i&lt;maxLen;i++)
+{
+	ans[i]+=num1[i]+num2[i];
+	ans[i+1]=ans[i]/10;//进位
+	ans[i]%=10;//保留余数
+}
+</code></pre>
+<p>计算完成之后可以进行输出，这时候需要注意答案是倒着存放的，需要倒序进行输出并去除前导0;</p>
+<pre><code>int flag=0;
+for(int i=maxLen+1;i&gt;=0;i--)
+{
+	if(ans[i]!=0||i==0) flag=1;
+    if(falg) cout&lt;&lt;ans[i];
+}
+</code></pre>
+<h1 id="高精度减法">高精度减法</h1>
+<p>高精度减法和高精度加法过程类似，字符串输入后模拟竖式进行计算。</p>
+<p>前面数据输入和倒置存放的过程相同就不再重复。再计算过程中需要注意的问题就是可能相减会出现负数，两数相减需要考虑绝对值大小问题。</p>
+<p>计算a-b,若a&gt;=b,ans=a-b;若a&lt;b,ans=-(b-a);故需要判断大小，可根据长度来判断大小，长度相同则使用字符串比较函数，从字符串内容上进行判断。</p>
+<pre><code>int len1=strlen(s1);
+int len2=strlen(s2);
+
+if((len1&gt;len2) || (len2==len1&amp;&amp;strcmp(s1,s2)&gt;=0 )
+{
+    //ans=a-b;
+    for(int i=0;i&lt;len1;i++)
+    {
+        if(num1[i]&lt;num2[i]){
+            num1[i]+=10;
+            num1[i+1]--;
+        }
+        ans[i]=num1[i]-num2[i];
+    }
+}else
+{
+    //ans=-(b-a);
+    for(int i=0;i&lt;len2;i++)
+    {
+        if(num2[i]&lt;num1[i]){
+            num2[i]+=10;
+            num2[i+1]--;
+        }
+        ans[i]=num2[i]-num1[i];
+    }
+    cout&lt;&lt;&quot;-&quot;;
+}
+</code></pre>
+<p>算完后，再和前面一样进行倒序输出答案，注意删除前导0即可。</p>
 
             </div>
           </article>
@@ -113,9 +187,9 @@
               <div class="next">
                 下一篇
               </div>
-              <a href="https://wylovecat.github.io//post/hello-gridea">
+              <a href="https://wylovecat.github.io//post/jZSzkJ5Oq">
                 <h3 class="post-title">
-                  Hello Gridea
+                  欧几里得算法与拓展欧几里得
                 </h3>
               </a>
             </div>
@@ -238,27 +312,27 @@
     </div>
     <div class="row">
       
-        <a href="https://wylovecat.github.io//tag/iqjH4VeE6" class="badge ">
+        <a href="https://wylovecat.github.io//tag/iqjH4VeE6" class="badge success">
           高精度
         </a>
       
-        <a href="https://wylovecat.github.io//tag/Xml2KtR4g" class="badge secondary">
+        <a href="https://wylovecat.github.io//tag/Xml2KtR4g" class="badge success">
           算法
         </a>
       
-        <a href="https://wylovecat.github.io//tag/Z3tt3bzbS" class="badge ">
+        <a href="https://wylovecat.github.io//tag/Z3tt3bzbS" class="badge success">
           数学
         </a>
       
-        <a href="https://wylovecat.github.io//tag/zjXnb_eXv" class="badge warning">
+        <a href="https://wylovecat.github.io//tag/zjXnb_eXv" class="badge secondary">
           noip
         </a>
       
-        <a href="https://wylovecat.github.io//tag/cKlT30oiM" class="badge warning">
+        <a href="https://wylovecat.github.io//tag/cKlT30oiM" class="badge success">
           模拟
         </a>
       
-        <a href="https://wylovecat.github.io//tag/S-CLh9EEX" class="badge warning">
+        <a href="https://wylovecat.github.io//tag/S-CLh9EEX" class="badge secondary">
           枚举
         </a>
       
@@ -266,7 +340,7 @@
           Git
         </a>
       
-        <a href="https://wylovecat.github.io//tag/CSNe-Ttwm" class="badge warning">
+        <a href="https://wylovecat.github.io//tag/CSNe-Ttwm" class="badge success">
           C/C++
         </a>
       
@@ -274,19 +348,19 @@
           计算机基础
         </a>
       
-        <a href="https://wylovecat.github.io//tag/markdown" class="badge warning">
+        <a href="https://wylovecat.github.io//tag/markdown" class="badge ">
           Markdown
         </a>
       
-        <a href="https://wylovecat.github.io//tag/4kipjvQ-w" class="badge success">
+        <a href="https://wylovecat.github.io//tag/4kipjvQ-w" class="badge secondary">
           vscode
         </a>
       
-        <a href="https://wylovecat.github.io//tag/RYJKhhSlc" class="badge secondary">
+        <a href="https://wylovecat.github.io//tag/RYJKhhSlc" class="badge warning">
           hexo
         </a>
       
-        <a href="https://wylovecat.github.io//tag/gridea" class="badge success">
+        <a href="https://wylovecat.github.io//tag/gridea" class="badge warning">
           Gridea
         </a>
       
