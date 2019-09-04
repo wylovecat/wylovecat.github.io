@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://wylovecat.github.io/</id>
     <title>咸鱼爱学习</title>
-    <updated>2019-09-03T08:46:09.286Z</updated>
+    <updated>2019-09-04T16:00:25.883Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://wylovecat.github.io/"/>
     <link rel="self" href="https://wylovecat.github.io//atom.xml"/>
@@ -10,6 +10,100 @@
     <logo>https://wylovecat.github.io//images/avatar.png</logo>
     <icon>https://wylovecat.github.io//favicon.ico</icon>
     <rights>All rights reserved 2019, 咸鱼爱学习</rights>
+    <entry>
+        <title type="html"><![CDATA[归并排序]]></title>
+        <id>https://wylovecat.github.io//post/KcB11JFTx</id>
+        <link href="https://wylovecat.github.io//post/KcB11JFTx">
+        </link>
+        <updated>2019-09-04T15:58:20.000Z</updated>
+        <content type="html"><![CDATA[<h1 id="归并排序">归并排序</h1>
+<p>归并排序是建立在归并操作上的一种有效的排序算法。该算法是采用分治法的一个非常典型的应用。时间复杂度是O(nlogn)</p>
+<h2 id="核心思想">核心思想</h2>
+<p>将一段序列分解知道不能再分解的时候，然后开始逐层合并，并在合并的时候保证他们有序，这样就能保证每次合并后的内容有序，知道合并完成保证了所有的部分全部有序。</p>
+<p>分治三步法：</p>
+<ol>
+<li>划分问题：把序列分成元素个数尽量相等的两半</li>
+<li>递归求解：把两半元素分别排序</li>
+<li>合并问题：把两个有序表合并成一个</li>
+</ol>
+<h2 id="代码实现">代码实现</h2>
+<pre><code class="language-c++">void mergeSort(int a[],int sta,int end,int tmp[])
+{
+    if(sta&lt;end)
+    {
+        int mind=(sta+end)/2;
+        mergeSort(a,first,mid,tmp);//使左边排列有序
+        mergeSort(a,mid+1,end,tmp);//使右边排列有序
+        mergeArray(a,sta,mid,end,tmp);//合并左右两个有序数列
+    }
+}
+</code></pre>
+<h2 id="合并的方法">合并的方法</h2>
+<p>合并时对象是两个已排序好的数列，初始状态下，两个指针分别指向两个带合并数列的第一个元素，然后比较这两个元素的大小，将较小的元素添加大一个新创建的数列中。接着，被复制的数列中的指针后移，指向该较小的后记元素。上述操作一直持续到两个数列中的一个被处理完位置。然后，在未处理完的数列中，剩下的元素被复制到新数组列的尾部。</p>
+<h3 id="合并实现">合并实现</h3>
+<pre><code class="language-c++">Merge(int left[],int right,int tmp[])
+{
+    int i=0,j=0,k=0;
+    while(i&lt;len1&amp;&amp;j&lt;len2)
+    {
+        if(left[i]&lt;right[j])
+        {
+            tmp[k++]=left[i++];
+        }else
+        {
+            tmp[k++]=right[j++];
+        }
+    }
+    while(i&lt;len1) tmp[k++]=left[i++];
+    while(j&lt;len2) tmp[k++]=right[j++];
+}
+
+</code></pre>
+<h2 id="优缺点">优缺点</h2>
+<p>需要使用O(n)的辅助空间，二与之效率相同的快排和堆排需要O(logn)和O(1)的辅助空间，在同类算法中归并排序的空间复杂度略高。</p>
+<p>优点是稳定性。</p>
+<h2 id="变形">变形</h2>
+<ul>
+<li>可以自底向上合并数组的一个个元素对，然后再合并这些有序对，以此类推。这样能避免使用堆栈处理递归调用时的时间和空间开销。</li>
+</ul>
+<p>比较适合用链表组织的数据。</p>
+<ul>
+<li>把数组划分为待排序的多个部分，再对他们递归排序，最后将其合并在一起。适合对存放在二级存储空间的文件进行排序，也被称为多路合并排序。</li>
+</ul>
+<p>原方法也被称之为二路合并排序。</p>
+<h2 id="解决逆序对问题">解决逆序对问题</h2>
+<h3 id="逆序对概念">逆序对概念</h3>
+<p>设A为一个有n个数字的有序集(n&gt;1)，其中所有数字各不相同。如果存在正整数i,j使得1&lt;=i&lt;j&lt;=n而且A[i]&gt;A[j],则&lt;A[i],A[j]&gt;这个有序对称为A的一个逆序对，也称作逆序数。</p>
+<p>逆序对从定义上分析，逆序对就是数列中任意两个数满足大的在前，小的在后的组合。</p>
+<p>所谓逆序对问题，即对给定的数组序列，求其逆序对的数量。</p>
+<p>在算法实现中，略微修改原有的归并排序，当右边序列的元素为较小值是，就统计其产生的逆序对数量，即可完成逆序对的统计。</p>
+<h3 id="代码实现-2">代码实现</h3>
+<pre><code class="language-c++">void msort(int s,int t)
+{
+    if(s==t) return;
+    int mid=(s+t)/2;
+    msort(s,mid);
+    msort(mid+1,t);
+    int i=s,j=mid+1,k=s;
+    while(i&lt;=mid &amp;&amp; j&lt;=t)
+    {
+        if(a[i]&lt;=a[j])
+            r[k++]=a[i++];
+        else
+        {
+            r[k++]=a[j++];
+            ans+=mid-i+1;//统计产生逆序对的数量
+            //mid-i+1为左边剩余元素个数
+        }
+            
+    }
+    while(i&lt;=mid) r[k++]=a[i++];
+    while(j&lt;=t) r[k++]=a[j++];
+    for(int i=s;i&lt;t;i++) a[i]=r[i];
+}
+</code></pre>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[高精度计算(一)]]></title>
         <id>https://wylovecat.github.io//post/G_OL3h80e</id>
@@ -543,74 +637,6 @@ fgets(name,len,stdin);
 <p>十进制转八进制的话，过程就是不断地将数字除以8，将余数写一边，直到商为0时停止。下方的为二进制的高位，由高位到低位倒序排列余数，高位不够用0来代替。以十进制10转换为八进制例。</p>
 <p><img src="https://cdn.nlark.com/yuque/0/2019/png/292435/1554693614581-4e24b0dc-9e94-4acf-889f-89617bbcc24d.png" alt="image.png"></p>
 <p>十六进制也是类似，需要注意的点是，十六进制的10<sub>15是使用A</sub>F来表示的。</p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[递归与分治（一）]]></title>
-        <id>https://wylovecat.github.io//post/Hkqr-7jgZ</id>
-        <link href="https://wylovecat.github.io//post/Hkqr-7jgZ">
-        </link>
-        <updated>2019-03-01T02:50:53.000Z</updated>
-        <content type="html"><![CDATA[<h3 id="递归基本思想">递归基本思想</h3>
-<p><strong>基本要素</strong></p>
-<ol>
-<li>递归终止条件</li>
-<li>终止处理办法</li>
-<li>递归处理办法</li>
-</ol>
-<p><strong>递归-阶乘</strong><br>
-阶乘计算：从键盘输入正整数N（0&lt;=N&lt;=20）,输出N！。</p>
-<pre><code>int factorial(int n){
-    if(n==0
-        return 1;//递归边界
-    return n*factorial(n-1);//递归调用
- }
-</code></pre>
-<p><strong>递归-Fibonacci</strong><br>
-每对兔子每个月不多不少恰好能生一对(一雌一雄)新兔子，而且每对新生兔出生两个月后就成熟并具备生殖能力；另外，假定所有的兔子都不会死亡。假如养了出生的小兔一对，试问第n个月后共有多少对兔子?</p>
-<pre><code>long fib(int n){
-    if(n&lt;=1) return 1;
-    return fib(n-1)+fib(n-2);
-}
-</code></pre>
-<h3 id="递归实例">递归实例</h3>
-<h4 id="全排列问题">全排列问题</h4>
-<blockquote>
-<p>给定一组互不相同的字符，求这组字符的全排列</p>
-</blockquote>
-<p>简单场景：<br>
-输入的字符串长度为1，显然直接输出即可<br>
-问题分解：<br>
-当输入的字符长度超过1时只需要从字符串中选一个字符作为输出字符串首字符，对其余的字符进行递归处理即可。</p>
-<pre><code>void permutations(string str,int i,int n)
-{
-    if(i==n-1){
-        cout&lt;&lt;str&lt;&lt;endl;
-        return;
-    }
-    for(int j=i;j&lt;n;j++){
-        swap(str[i],str[j]);
-        permutations(str,i+1,n);
-        swap(str[i],str[j]);
-    }
-    
-}
-</code></pre>
-<h4 id="stirling数">Stirling数</h4>
-<blockquote>
-<p>n个元素的集合{1,2,...,n}可以划分为若干个非空子集的集合。例如，当n=3时，集合{1,2,3}可以划分为5个不同的非空子集的集合如下：</p>
-</blockquote>
-<pre><code> {{1},{2},{3}}
- {{1,2},{3}}
- {{1,3},{2}}
- {{2,3},{1}}
- {{1,2,3}}
-</code></pre>
-<blockquote>
-<p>给定正整数n和m，计算出n个元素的集合{1,2,...,n}可以划分为多少个不同的由m个非空子集构成的集合。比如上例中含有1个子集的集合有1个，2个子集的集合有3个，3个自由的集合有1个。</p>
-</blockquote>
-<p>假定有S(n,m)种方法把n个元素的集合划分成m个非空子集构成的集合，S(n,m)种不同划分方法可以分成一下两类:<br>
-先把n-1个元素划分成m个非空子集，按定义其划分数目为S(n-1,m)再将剩下的一个元素插入到m子集种的任意一个,最后把这两部合起来则可构成n个元素集合的m划分，总共有m * S(n-1,m)种划分。</p>
 ]]></content>
     </entry>
 </feed>
