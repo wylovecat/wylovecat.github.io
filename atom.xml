@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://wylovecat.github.io/</id>
     <title>咸鱼爱学习</title>
-    <updated>2019-09-05T05:17:41.713Z</updated>
+    <updated>2019-09-05T11:03:40.197Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://wylovecat.github.io/"/>
     <link rel="self" href="https://wylovecat.github.io//atom.xml"/>
@@ -16,48 +16,6 @@
         <link href="https://wylovecat.github.io//post/m6Tq0iSbX">
         </link>
         <updated>2019-09-05T05:16:15.000Z</updated>
-        <content type="html"><![CDATA[<h1 id="核心思想">核心思想</h1>
-<p>先选取一个数字作为基准数，然后进行分类操作，将比基准数小的放到基准数的前两，比基准数大的放到基础数的后面。</p>
-<ul>
-<li>
-<p>划分问题：将数组的各个元素重排后分成左右两个部分，使得左边的任意元素都小于或等于右边的任意元素。是按照值进行划分。</p>
-</li>
-<li>
-<p>递归求解：把左右两部分分别排序</p>
-<p>在快速排序中，算法的主要工作在于划分阶段，而不需要再去合并子问题的解了。它和归并的区别在于，归并需要将两个部分和明后，才能保证，整体有序，而快速排序的子部分有序后，整体就自然有序了。</p>
-</li>
-</ul>
-<h2 id="基准数的选取">基准数的选取</h2>
-<p>选取标准有很多，有选取第一个数作的，有将中间的数，也有随机进行的。</p>
-<ul>
-<li>随机快速排序，使用随机的元素作为中轴</li>
-<li>三平均划分法，以数组最左边、最右边和最中间的元素的中位数作为中轴</li>
-<li>当子数组足够小是（5~15），改用插入排序方法</li>
-<li>一些划分方法的改进。三路划分，将数组分成三段，每段的元素分别小于，等于，大于中轴元素。</li>
-</ul>
-<h2 id="如何实现分类">如何实现分类</h2>
-<p>附设两个指针i和j,它们的初值分别是l和r,设枢轴记录取mid,则首先从j所指位置起向前搜索找到第一个关键字小于mid的记录，然后从i所指位置起向后搜索，找到第一个关键字大于mid的记录，将它们互相互换，重复这两步直至i&gt;j为止。</p>
-<pre><code class="language-c++">void qSort(int l,int r)
-{
-    int i,j,mid,p;
-    i=l;j=r;
-    mid=a[(l+r)/2];// 定义分隔数
-    do{
-        while(a[i]&lt;mid)i++;//在左侧寻找比中间数大的
-        while(a[j]&gt;mid)j--;//在右侧寻找比中间数小的
-        
-        if(i&lt;=j)
-        {
-            swap(a[i],a[j]);
-            i++;j--;
-        }
-    }while(i&lt;=j);
-    
-    if(l&lt;j) qSort(l,j);
-    if(i&lt;r) qSort(i,r);
-}
-</code></pre>
-]]></content>
     </entry>
     <entry>
         <title type="html"><![CDATA[归并排序]]></title>
@@ -65,93 +23,6 @@
         <link href="https://wylovecat.github.io//post/KcB11JFTx">
         </link>
         <updated>2019-09-04T15:58:20.000Z</updated>
-        <content type="html"><![CDATA[<h1 id="归并排序">归并排序</h1>
-<p>归并排序是建立在归并操作上的一种有效的排序算法。该算法是采用分治法的一个非常典型的应用。时间复杂度是O(nlogn)</p>
-<h2 id="核心思想">核心思想</h2>
-<p>将一段序列分解知道不能再分解的时候，然后开始逐层合并，并在合并的时候保证他们有序，这样就能保证每次合并后的内容有序，知道合并完成保证了所有的部分全部有序。</p>
-<p>分治三步法：</p>
-<ol>
-<li>划分问题：把序列分成元素个数尽量相等的两半</li>
-<li>递归求解：把两半元素分别排序</li>
-<li>合并问题：把两个有序表合并成一个</li>
-</ol>
-<h2 id="代码实现">代码实现</h2>
-<pre><code class="language-c++">void mergeSort(int a[],int sta,int end,int tmp[])
-{
-    if(sta&lt;end)
-    {
-        int mind=(sta+end)/2;
-        mergeSort(a,first,mid,tmp);//使左边排列有序
-        mergeSort(a,mid+1,end,tmp);//使右边排列有序
-        mergeArray(a,sta,mid,end,tmp);//合并左右两个有序数列
-    }
-}
-</code></pre>
-<h2 id="合并的方法">合并的方法</h2>
-<p>合并时对象是两个已排序好的数列，初始状态下，两个指针分别指向两个带合并数列的第一个元素，然后比较这两个元素的大小，将较小的元素添加大一个新创建的数列中。接着，被复制的数列中的指针后移，指向该较小的后记元素。上述操作一直持续到两个数列中的一个被处理完位置。然后，在未处理完的数列中，剩下的元素被复制到新数组列的尾部。</p>
-<h3 id="合并实现">合并实现</h3>
-<pre><code class="language-c++">Merge(int left[],int right,int tmp[])
-{
-    int i=0,j=0,k=0;
-    while(i&lt;len1&amp;&amp;j&lt;len2)
-    {
-        if(left[i]&lt;right[j])
-        {
-            tmp[k++]=left[i++];
-        }else
-        {
-            tmp[k++]=right[j++];
-        }
-    }
-    while(i&lt;len1) tmp[k++]=left[i++];
-    while(j&lt;len2) tmp[k++]=right[j++];
-}
-
-</code></pre>
-<h2 id="优缺点">优缺点</h2>
-<p>需要使用O(n)的辅助空间，二与之效率相同的快排和堆排需要O(logn)和O(1)的辅助空间，在同类算法中归并排序的空间复杂度略高。</p>
-<p>优点是稳定性。</p>
-<h2 id="变形">变形</h2>
-<ul>
-<li>可以自底向上合并数组的一个个元素对，然后再合并这些有序对，以此类推。这样能避免使用堆栈处理递归调用时的时间和空间开销。</li>
-</ul>
-<p>比较适合用链表组织的数据。</p>
-<ul>
-<li>把数组划分为待排序的多个部分，再对他们递归排序，最后将其合并在一起。适合对存放在二级存储空间的文件进行排序，也被称为多路合并排序。</li>
-</ul>
-<p>原方法也被称之为二路合并排序。</p>
-<h2 id="解决逆序对问题">解决逆序对问题</h2>
-<h3 id="逆序对概念">逆序对概念</h3>
-<p>设A为一个有n个数字的有序集(n&gt;1)，其中所有数字各不相同。如果存在正整数i,j使得1&lt;=i&lt;j&lt;=n而且A[i]&gt;A[j],则&lt;A[i],A[j]&gt;这个有序对称为A的一个逆序对，也称作逆序数。</p>
-<p>逆序对从定义上分析，逆序对就是数列中任意两个数满足大的在前，小的在后的组合。</p>
-<p>所谓逆序对问题，即对给定的数组序列，求其逆序对的数量。</p>
-<p>在算法实现中，略微修改原有的归并排序，当右边序列的元素为较小值是，就统计其产生的逆序对数量，即可完成逆序对的统计。</p>
-<h3 id="代码实现-2">代码实现</h3>
-<pre><code class="language-c++">void msort(int s,int t)
-{
-    if(s==t) return;
-    int mid=(s+t)/2;
-    msort(s,mid);
-    msort(mid+1,t);
-    int i=s,j=mid+1,k=s;
-    while(i&lt;=mid &amp;&amp; j&lt;=t)
-    {
-        if(a[i]&lt;=a[j])
-            r[k++]=a[i++];
-        else
-        {
-            r[k++]=a[j++];
-            ans+=mid-i+1;//统计产生逆序对的数量
-            //mid-i+1为左边剩余元素个数
-        }
-            
-    }
-    while(i&lt;=mid) r[k++]=a[i++];
-    while(j&lt;=t) r[k++]=a[j++];
-    for(int i=s;i&lt;t;i++) a[i]=r[i];
-}
-</code></pre>
-]]></content>
     </entry>
     <entry>
         <title type="html"><![CDATA[高精度计算(一)]]></title>
@@ -159,82 +30,6 @@
         <link href="https://wylovecat.github.io//post/G_OL3h80e">
         </link>
         <updated>2019-09-03T08:41:37.000Z</updated>
-        <content type="html"><![CDATA[<h1 id="概述">概述</h1>
-<p>当计算的数值非常大或是对于计算的精度要求非常搞事，用已知的数据类型无法精确地表示数值。可以采用数组来模拟大数运算的过程。</p>
-<h1 id="高精度加法">高精度加法</h1>
-<p>两个大数进行相加计算时，要解决三个问题</p>
-<ol>
-<li>如何存储</li>
-<li>如何计算</li>
-<li>如何输出答案</li>
-</ol>
-<p>先解决第一个问题，数据地存储，由于数据过于庞大，已知的数据类型无法精确地表示数值，会发生数据溢出问题。此时可考虑将数据拆分，将大数分割成若干个0~9数字组成的整体。这样的结构能让我们联想到数组。但是，若是整数数组，在输入时较难将数字存储在各个元素空间内，此时可考虑使用字符串形式进行输入，在存储后再进行转换。</p>
-<pre><code>const int maxn=1e10+5;
-char s1[maxn]={0},s2[maxn]={0};
-cin&gt;&gt;s1&gt;&gt;s2;
-
-</code></pre>
-<p>输入完成后，再去考虑计算问题。首先，字符类型直接相加的结果并不正确，需要将其转化为整数数字。可利用ASCII码差值来进行处理。且在进行计算时，模拟竖式加法计算过程，需要从低位开始向高位相加计算且注意过程中的进位。在相加时，加数和被加数位数可能不同，需要低位对齐。实现低位对齐可在转换时进行倒序存放。</p>
-<pre><code>// 转换过程
-int num[maxn]={0};
-int len=strlen(s);
-
-for(int i=0;i&lt;len;i++)
-{
-    num[i]=s[len-1-i]-'0';
-}
-</code></pre>
-<p>倒序转换好之后，在模拟竖式计算进行处理。注意过程中的进位。</p>
-<pre><code>int ans[maxn]={0};
-for(int i=0;i&lt;maxLen;i++)
-{
-	ans[i]+=num1[i]+num2[i];
-	ans[i+1]=ans[i]/10;//进位
-	ans[i]%=10;//保留余数
-}
-</code></pre>
-<p>计算完成之后可以进行输出，这时候需要注意答案是倒着存放的，需要倒序进行输出并去除前导0;</p>
-<pre><code>int flag=0;
-for(int i=maxLen+1;i&gt;=0;i--)
-{
-	if(ans[i]!=0||i==0) flag=1;
-    if(falg) cout&lt;&lt;ans[i];
-}
-</code></pre>
-<h1 id="高精度减法">高精度减法</h1>
-<p>高精度减法和高精度加法过程类似，字符串输入后模拟竖式进行计算。</p>
-<p>前面数据输入和倒置存放的过程相同就不再重复。再计算过程中需要注意的问题就是可能相减会出现负数，两数相减需要考虑绝对值大小问题。</p>
-<p>计算a-b,若a&gt;=b,ans=a-b;若a&lt;b,ans=-(b-a);故需要判断大小，可根据长度来判断大小，长度相同则使用字符串比较函数，从字符串内容上进行判断。</p>
-<pre><code>int len1=strlen(s1);
-int len2=strlen(s2);
-
-if((len1&gt;len2) || (len2==len1&amp;&amp;strcmp(s1,s2)&gt;=0 )
-{
-    //ans=a-b;
-    for(int i=0;i&lt;len1;i++)
-    {
-        if(num1[i]&lt;num2[i]){
-            num1[i]+=10;
-            num1[i+1]--;
-        }
-        ans[i]=num1[i]-num2[i];
-    }
-}else
-{
-    //ans=-(b-a);
-    for(int i=0;i&lt;len2;i++)
-    {
-        if(num2[i]&lt;num1[i]){
-            num2[i]+=10;
-            num2[i+1]--;
-        }
-        ans[i]=num2[i]-num1[i];
-    }
-    cout&lt;&lt;&quot;-&quot;;
-}
-</code></pre>
-<p>算完后，再和前面一样进行倒序输出答案，注意删除前导0即可。</p>
-]]></content>
     </entry>
     <entry>
         <title type="html"><![CDATA[欧几里得算法与拓展欧几里得]]></title>
@@ -242,82 +37,6 @@ if((len1&gt;len2) || (len2==len1&amp;&amp;strcmp(s1,s2)&gt;=0 )
         <link href="https://wylovecat.github.io//post/jZSzkJ5Oq">
         </link>
         <updated>2019-09-02T15:21:27.000Z</updated>
-        <content type="html"><![CDATA[<h1 id="欧几里得算辗转相除法">欧几里得算(辗转相除法)</h1>
-<h2 id="算法描述">算法描述</h2>
-<p>设 a&gt;=b</p>
-<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>a</mi><mo>÷</mo><mi>b</mi><mo>=</mo><mi>k</mi><mo separator="true">⋅</mo><mo separator="true">⋅</mo><mo separator="true">⋅</mo><mo separator="true">⋅</mo><mo separator="true">⋅</mo><mo separator="true">⋅</mo><mi>r</mi></mrow><annotation encoding="application/x-tex">a \div b = k ······ r    
-</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.66666em;vertical-align:-0.08333em;"></span><span class="mord mathdefault">a</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">÷</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault">b</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.03148em;">k</span><span class="mpunct">⋅</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mpunct">⋅</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mpunct">⋅</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mpunct">⋅</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mpunct">⋅</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mpunct">⋅</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span></span></span></span></span></p>
-<p>a和b的最大公约数等于b和r的最大公约数。<br>
-gcd(a,b)=gcd(b,a%b),当b为0时，a为(a,b)最大公约数</p>
-<h2 id="c实现">C++实现</h2>
-<pre><code>//递归方式
-int gcd(int a,int b)
-{
-    if(b==0) return a;
-    else return gcd(b,a%b);
-}
-
-//非递归方式
-while(b!=0)
-{
-    int r=a%b;
-    a=b;
-    b=r;
-}
-cout&lt;&lt;a;
-</code></pre>
-<h2 id="定理证明">定理证明</h2>
-<ol>
-<li>证明a,b的公约数和 b,r的公约数相同,就能证明最大公约数相同
-<ol>
-<li>设a = kb+r (a&gt;=b)。由假设可知，r=a mod b。</li>
-<li>设d为a和b的任意公约数。</li>
-<li>变形可得到式子：r=a-kb,等式两边同除d,可得到式子： r/d = a/d - kb/d =m。</li>
-<li>因为d为a,b的公约数，故a/d 为整数，b/d为整数，故r/d也为整数,可推出d为r的约数。故d是b和r的约数。</li>
-<li>所以，a和b的任意公约数d,也是b和a%b的公约数。</li>
-<li>设 d 是 b,a%b的公约数，则d是b和a-kb的公约数</li>
-<li>设b=xd, a-kb=yd（d是他们的约数，他们则可写成d的倍数形式）。则存在a=kb+yd;</li>
-<li>将等式两边同除d,a/d =kb/d + y=m。y是整数，d是b的约数，所以m未整数，即d是a的约数。</li>
-<li>所以d也是a和b的公约数</li>
-<li>综上，(a,b)和(b,a%b)的公约数集合相同，证得(a,b)和(b,a%b)的公约数是一样的</li>
-<li>所以最大公约数也相同，证明gcd(a,b)=gcd(b,a%b)</li>
-</ol>
-</li>
-</ol>
-<h1 id="拓展欧几里得算法">拓展欧几里得算法</h1>
-<h2 id="定理">定理：</h2>
-<p>给予两个整数a、b,必存在整数x,y使得ax + by = gcd(a,b)。（贝祖等式）<br>
-拓展欧几里得算法就是再辗转相除法的基础上，求的改等式的通解。<br>
-x=x0+(b/gcd(a,b)) * t<br>
-y=y0-(a/gcd(a,b)) * t<br>
-我们知道：a%b = a - (a/b) * b,所以我可以进一步得到<br>
-gcd(a,b) = gcd(b, a%b) :<br>
-gcd(a%b)=b * x1 + ( a - (a/b)* b)* y1<br>
-=b <em>x1 + a</em>y1-(a/b)<em>b</em>y1<br>
-= a * y1 +b*(x1-a/b<em>y1)<br>
-观察可以发现，x=y1,y=x1-a/b</em> y1<br>
-所以我们只要在求解欧几里得的时候同时加上对x,y的更新即可。考虑边界情况，当b=0时，显然此时x=1,y=0;</p>
-<h2 id="代码实现">代码实现</h2>
-<pre><code>int ex_gcd(int a,int b,int &amp;x,int &amp;y)
-{
-   if(b==0) {x=1;y=0;return a;}
-   int ans=ex_gcd(b,a%b,x,y);
-   int t=x;
-   x=y;
-   y=t-a/b*y;
-   return ans;
- }
- 
- //精简
- int ex_gcd(int a,int b,int &amp;x,int &amp;y)
- {
-   if(b==0) {x=1;y=0;return a;}
-   int ans=ex_gcd(b,a%b,y,x);
-   y-=(a/b)*x;
-   return ans;
- }
-</code></pre>
-]]></content>
     </entry>
     <entry>
         <title type="html"><![CDATA[比例简化]]></title>
@@ -325,94 +44,6 @@ gcd(a%b)=b * x1 + ( a - (a/b)* b)* y1<br>
         <link href="https://wylovecat.github.io//post/dLtINUDHC">
         </link>
         <updated>2019-08-17T02:19:39.000Z</updated>
-        <content type="html"><![CDATA[<h3 id="题目阅读">题目阅读</h3>
-<p><a href="https://turingjudge.com/problem/1805">比例简化</a></p>
-<h3 id="分析">分析</h3>
-<p>现给出支持人数A，反对人数B，以及一个上限L，请你将A比B化简为A’比B’，要求在A’和B’均不大于L且A’和B’互质（两个整数的最大公约数是1）的前提下，A’/B’≥ A/B且A’/B’- A/B的值尽可能小</p>
-<p>整理几个关键信息点</p>
-<ul>
-<li>在A’和B’均不大于L且A’和B’互质</li>
-</ul>
-<p>a&lt;=L &amp;&amp; b&lt;=L &amp;&amp; gcd(a,b)==1</p>
-<ul>
-<li>A’/B’≥ A/B且A’/B’- A/B的值尽可能小</li>
-</ul>
-<p>a/b&gt;=A/B =&gt; a * B &gt;= A *  b &amp;&amp;  a/b 尽可能小</p>
-<p>分析下来就是一道枚举题目，寻找满足条件的最小的a/b的值最小的那对a,b;变成了最值寻找问题</p>
-<pre><code class="language-c++">int min=max;
-for( )
-{
-	if(num&lt;min)
-	{
-		min=num;
-	}
-}
-cout&lt;&lt;num;
-</code></pre>
-<pre><code class="language-c++">ta=L,tb=1;
-for(int a=1;a&lt;=L;a++)
-{
-    for(int b=L;b&gt;=1;b--)
-    {
-        if(gcd(a,b)==1 &amp;&amp; a*B&gt;=A*b &amp;&amp; a*tb&lt;ta*b)
-        {
-            ta=a;
-            tb=b;
-            break;
-        }
-    }
-}
-cout&lt;&lt;ta&lt;&lt;&quot; &quot;&lt;&lt;tb;
-</code></pre>
-<h3 id="ac代码">AC代码</h3>
-<pre><code class="language-c++">#include &lt;iostream&gt;
-#include&lt;cstdio&gt;
-using namespace std;
-/*
- * a&lt;=L&amp;&amp;b&lt;=L&amp;&amp;gcd(a,b)==1
- *  a/b&gt;=A/B =》 a*B &gt;= A*b  &amp;&amp; a/b - A/B 尽可能小
- *  1~100 =》 L   a/b&lt;=L   a&lt;=L*b   b&gt;=a/L
- *
- *  a/b &lt;ta/tb
- *
- *  枚举
- * */
-
-int gcd(int a,int b)
-{
-    while(b!=0)
-    {
-        int r=a%b;
-        a=b;
-        b=r;
-    }
-    return a;
-}
-int main(){
-
-    int A,B,L;
-    cin&gt;&gt;A&gt;&gt;B&gt;&gt;L;
-    int y=gcd(A,B);
-    A/=y;
-    B/=y;
-    int ta=L;
-    int tb=1;
-    for(int a=1;a&lt;=L;a++)
-    {
-        for(int b=L;b&gt;=a/L;b--)
-        {
-            if(gcd(a,b)==1 &amp;&amp; a*B&gt;=A*b &amp;&amp; a*tb&lt;=ta*b)
-            {
-                ta=a;
-                tb=b;
-                break;
-            }
-        }
-    }
-    cout&lt;&lt;ta&lt;&lt;&quot; &quot;&lt;&lt;tb;
-}
-</code></pre>
-]]></content>
     </entry>
     <entry>
         <title type="html"><![CDATA[珠心算测验]]></title>
@@ -420,62 +51,6 @@ int main(){
         <link href="https://wylovecat.github.io//post/S-SCKDM5o">
         </link>
         <updated>2019-08-15T07:14:37.000Z</updated>
-        <content type="html"><![CDATA[<h2 id="题目">题目</h2>
-<p><a href="https://turingjudge.com/problem/1804">珠心算测验</a></p>
-<h2 id="阅读与分析">阅读与分析</h2>
-<p>集合中的各个与手持不相同。求有多少个数恰好等于集合中另外两个（不同的）数之和。</p>
-<p>注意：题目求的是数字的个数不是，满足条件的式子的个数入，3+4=7，2+5=7，个数只有1不是2。</p>
-<p>整体分析下来是将不同的两数相加，将结果和剩下的数字比对，不同的就统计下即可。</p>
-<pre><code class="language-c++">for(i:0~n)
-{
-	for(j:i~n)
-	{
-		for(k:j~n)
-		{
-			if(i+j==k &amp;&amp; num[k]==0)
-			{
-				s++;
-				num[k]=1;
-			}
-		}
-	}
-}
-</code></pre>
-<h2 id="ac-代码">AC 代码</h2>
-<pre><code class="language-c++">#include &lt;iostream&gt;
-
-using namespace std;
-int num[10005]={0};
-int a[200]={0},n;
-
-int main() {
-    int s=0;
-    cin&gt;&gt;n;
-    for(int i=1;i&lt;=n;i++)
-    {
-        cin&gt;&gt;a[i];
-        num[a[i]]=1;
-    }
-
-    for(int i=1;i&lt;=n;i++)
-    {
-        for(int j=i+1;j&lt;=n;j++)
-        {
-            int m=a[i]+a[j];
-            if(m&lt;=10000 &amp;&amp; num[m]==1)// 限制总和范围，不然会越界
-            {
-                s++;
-                num[m]=2;
-            }
-        }
-    }
-    cout&lt;&lt;s;
-
-
-    return 0;
-}
-</code></pre>
-]]></content>
     </entry>
     <entry>
         <title type="html"><![CDATA[回文日期]]></title>
@@ -483,94 +58,6 @@ int main() {
         <link href="https://wylovecat.github.io//post/8o-Bcw0Hg">
         </link>
         <updated>2019-08-15T05:46:43.000Z</updated>
-        <content type="html"><![CDATA[<h2 id="题目">题目</h2>
-<p><a href="https://turingjudge.com/problem/1846">回文日期</a></p>
-<h2 id="阅读与分析">阅读与分析</h2>
-<p>用8位数字表示日期，前4位表示年份，接下来2位表示月份，最后2位代表日期。对范围内的日期进行回文日期的统计。若一个日期是回文的，当且仅当对于所有的i从左向有的第i个数字和第9-i个数字是相同的。</p>
-<p>输入起止日期，统计多少个日期是回文的。</p>
-<p>阅读下来，题目梗概即为在一定范围内统计符合条件的数字个数，即可想到使用枚举法进行处理</p>
-<p>基本框架如下。</p>
-<pre><code class="language-c++">for(int i:date1~date2)
-{
-	if(isPali(i))
-	{
-		num++;
-	}
-}
-</code></pre>
-<p>问题变成，如何判断一个日期是回文的。</p>
-<p>一个思路是将8位数日期的倒序数求出将倒序数与原数比较，相等即是回文。</p>
-<p>另一个思路，将回文日期列举，能发现 20100102，20111102，月日组成的倒数和年相等即是回文。</p>
-<p>此外需要注意，日期必须得是真实存在的。修改框架如下：</p>
-<pre><code class="language-c++">for(int i:date1~date2)
-{
-	if(isReal(i)&amp;&amp;isPali(i))
-	{
-		num++;
-	}
-}
-</code></pre>
-<h2 id="ac代码">AC代码</h2>
-<pre><code class="language-c++">#include &lt;iostream&gt;
-
-using namespace std;
-
-int months[13]={0,31,28,31,30,31,30,31,31,30,31,30,31};
-
-bool isLeap(int year)
-{
-    return (year % 4 == 0 &amp;&amp; year % 100 != 0) || year % 400 == 0;
-}
-
-bool isPali(int date)
-{
-    int y=date/10000;
-
-    int reserve=0;
-    while(date!=y)
-    {
-        int u=date%10;
-        date/=10;
-        reserve= reserve * 10 + u;
-    }
-    return reserve == y;
-
-}
-
-bool isReal(int date)
-{
-    int y=date/10000;
-    int m=date/100%100;
-    int d=date%100;
-
-    if(isLeap(y))
-    {
-        months[2]=29;
-    }else
-    {
-        months[2]=28;
-    }
-
-    return (m &gt;= 1 &amp;&amp; m &lt;= 12) &amp;&amp; (d &gt;= 1 &amp;&amp; d &lt;= months[m]);
-}
-
-int main() {
-
-    int date1,date2,num=0;
-    cin&gt;&gt;date1&gt;&gt;date2;
-    for(int i=date1;i&lt;=date2;i++)
-    {
-        if(isReal(i)&amp;&amp;isPali(i))
-        {
-            num++;
-        }
-    }
-    cout&lt;&lt;num;
-
-    return 0;
-}
-</code></pre>
-]]></content>
     </entry>
     <entry>
         <title type="html"><![CDATA[有趣的GitHub项目]]></title>
@@ -581,14 +68,6 @@ int main() {
         <summary type="html"><![CDATA[<p>分享一些有趣、有用的GitHub项目。</p>
 ]]></summary>
         <content type="html"><![CDATA[<p>分享一些有趣、有用的GitHub项目。</p>
-<!--more-->
-<h3 id="git的奇技淫巧">Git的奇技淫巧</h3>
-<p>https://github.com/521xueweihan/git-tips</p>
-<p>列举了Git常用的命令和一些小技巧。</p>
-<h3 id="gridea">Gridea</h3>
-<p>https://github.com/getgridea/gridea</p>
-<p>一个静态博客写作客户端。用了它我就抛弃了Hexo。作者更新的很勤快。</p>
-<h3 id="待续">待续</h3>
 ]]></content>
     </entry>
     <entry>
@@ -597,40 +76,6 @@ int main() {
         <link href="https://wylovecat.github.io//post/Y4cNdIzTy">
         </link>
         <updated>2019-05-06T09:10:32.000Z</updated>
-        <content type="html"><![CDATA[<h3 id="原因">原因</h3>
-<blockquote>
-<p>gets()函数不太安全，容易出现数组溢出问题。</p>
-</blockquote>
-<h3 id="举例">举例：</h3>
-<pre><code>char name[3];
-gets(name);
-
-假设我输入&quot;wangxiaoming&quot;，很明显长度超出限制，但是gets()不会对其进行检查。
-</code></pre>
-<p><strong>使用fgets()来进行更安全的输入。</strong></p>
-<h3 id="描述">描述</h3>
-<blockquote>
-<p>C 库函数 char <em>fgets(char</em> str, int n, FILE *stream) 从指定的流 stream 读取一行，并把它存储在 str 所指向的字符串内。当读取 (n-1) 个字符时，或者读取到换行符时，或者到达文件末尾时，它会停止，具体视情况而定。</p>
-</blockquote>
-<h3 id="声明">声明</h3>
-<p>下面是 fgets() 函数的声明。</p>
-<blockquote>
-<p>char <em>fgets(char</em> str, int n, FILE *stream)</p>
-</blockquote>
-<h3 id="参数">参数</h3>
-<p><strong>str</strong> -- 这是指向一个字符数组的指针，该数组存储了要读取的字符串。</p>
-<p><strong>n</strong> -- 这是要读取的最大字符数（包括最后的空字符）。通常是使用以 str 传递的数组长度。</p>
-<p><strong>stream</strong> -- 这是指向 FILE 对象的指针，该 FILE 对象标识了要从中读取字符的流。</p>
-<h3 id="返回值">返回值</h3>
-<ul>
-<li>如果成功，该函数返回相同的 str 参数。如果到达文件末尾或者没有读取到任何字符，str 的内容保持不变，并返回一个空指针。</li>
-<li>如果发生错误，返回一个空指针。</li>
-</ul>
-<h3 id="使用举例">使用举例</h3>
-<pre><code class="language-c++">char name[len];
-fgets(name,len,stdin);
-</code></pre>
-]]></content>
     </entry>
     <entry>
         <title type="html"><![CDATA[升级DevC++的编译器]]></title>
@@ -638,16 +83,5 @@ fgets(name,len,stdin);
         <link href="https://wylovecat.github.io//post/1M3vM-kJi">
         </link>
         <updated>2019-04-23T07:45:40.000Z</updated>
-        <content type="html"><![CDATA[<hr>
-<h2 id="前言">前言</h2>
-<p>DevC++是采用MinGW来作为C/C++的编译器的，但是由于多年未更新，版本老旧。当然，我们可以继续使用它来进行相关内容学习，如果想对编译器进行更新可以自己下载最新版本的MinGW进行替换。</p>
-<h2 id="安装mingw">安装MinGW</h2>
-<p>MinGW可使用<a href="https://sourceforge.net/projects/mingw/">MinGW Installation Manager</a>进行安装，但是由于资源在境外下载速度比较慢，且在安装后发现版本是在三年前的，虽然比DevC++的新一些。所以推荐采用另一种安装方式<a href="https://nuwen.net/mingw.html#install">MinGW Distro</a>。这个是GCC 8.2.0版本的，并且要用的包全都已经打包好了，下载完成解压即可使用。下载页面分两个，如果在电脑上已经安装好Git可以下载<a href="https://nuwen.net/files/mingw/mingw-16.1-without-git.exe">without-git</a>版本，如果没有就下载<a href="https://nuwen.net/files/mingw/mingw-16.1.exe">完整</a>的就行。</p>
-<p>解压完成后可手动进行环境配置，或者运行里面的自带的bat脚本进行配置。配置完成后打开命令行窗口，输入gcc -v查看版本，观察是否已经成功配置。</p>
-<p><img src="https://cdn.all-dream.com/user/24ea64ea3b034d4ea442e522a4692266/20190423_154705_gcc.png" alt="gcc -v"></p>
-<p>出现上图所示内容代表已经配置成功。</p>
-<h2 id="替换编译器">替换编译器</h2>
-<p>打开DevC++，点击工具-编译环境，在设定编译器配置时，点击第二个绿色加号（由文件夹添加编译器配置），选择我们刚刚解压的MinGW文件夹，他会自动进行配置，点击确定即可完成。</p>
-]]></content>
     </entry>
 </feed>
