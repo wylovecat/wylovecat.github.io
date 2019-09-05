@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://wylovecat.github.io/</id>
     <title>咸鱼爱学习</title>
-    <updated>2019-09-04T16:00:25.883Z</updated>
+    <updated>2019-09-05T05:17:41.713Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://wylovecat.github.io/"/>
     <link rel="self" href="https://wylovecat.github.io//atom.xml"/>
@@ -10,6 +10,55 @@
     <logo>https://wylovecat.github.io//images/avatar.png</logo>
     <icon>https://wylovecat.github.io//favicon.ico</icon>
     <rights>All rights reserved 2019, 咸鱼爱学习</rights>
+    <entry>
+        <title type="html"><![CDATA[快速排序]]></title>
+        <id>https://wylovecat.github.io//post/m6Tq0iSbX</id>
+        <link href="https://wylovecat.github.io//post/m6Tq0iSbX">
+        </link>
+        <updated>2019-09-05T05:16:15.000Z</updated>
+        <content type="html"><![CDATA[<h1 id="核心思想">核心思想</h1>
+<p>先选取一个数字作为基准数，然后进行分类操作，将比基准数小的放到基准数的前两，比基准数大的放到基础数的后面。</p>
+<ul>
+<li>
+<p>划分问题：将数组的各个元素重排后分成左右两个部分，使得左边的任意元素都小于或等于右边的任意元素。是按照值进行划分。</p>
+</li>
+<li>
+<p>递归求解：把左右两部分分别排序</p>
+<p>在快速排序中，算法的主要工作在于划分阶段，而不需要再去合并子问题的解了。它和归并的区别在于，归并需要将两个部分和明后，才能保证，整体有序，而快速排序的子部分有序后，整体就自然有序了。</p>
+</li>
+</ul>
+<h2 id="基准数的选取">基准数的选取</h2>
+<p>选取标准有很多，有选取第一个数作的，有将中间的数，也有随机进行的。</p>
+<ul>
+<li>随机快速排序，使用随机的元素作为中轴</li>
+<li>三平均划分法，以数组最左边、最右边和最中间的元素的中位数作为中轴</li>
+<li>当子数组足够小是（5~15），改用插入排序方法</li>
+<li>一些划分方法的改进。三路划分，将数组分成三段，每段的元素分别小于，等于，大于中轴元素。</li>
+</ul>
+<h2 id="如何实现分类">如何实现分类</h2>
+<p>附设两个指针i和j,它们的初值分别是l和r,设枢轴记录取mid,则首先从j所指位置起向前搜索找到第一个关键字小于mid的记录，然后从i所指位置起向后搜索，找到第一个关键字大于mid的记录，将它们互相互换，重复这两步直至i&gt;j为止。</p>
+<pre><code class="language-c++">void qSort(int l,int r)
+{
+    int i,j,mid,p;
+    i=l;j=r;
+    mid=a[(l+r)/2];// 定义分隔数
+    do{
+        while(a[i]&lt;mid)i++;//在左侧寻找比中间数大的
+        while(a[j]&gt;mid)j--;//在右侧寻找比中间数小的
+        
+        if(i&lt;=j)
+        {
+            swap(a[i],a[j]);
+            i++;j--;
+        }
+    }while(i&lt;=j);
+    
+    if(l&lt;j) qSort(l,j);
+    if(i&lt;r) qSort(i,r);
+}
+</code></pre>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[归并排序]]></title>
         <id>https://wylovecat.github.io//post/KcB11JFTx</id>
@@ -599,44 +648,6 @@ fgets(name,len,stdin);
 <p>出现上图所示内容代表已经配置成功。</p>
 <h2 id="替换编译器">替换编译器</h2>
 <p>打开DevC++，点击工具-编译环境，在设定编译器配置时，点击第二个绿色加号（由文件夹添加编译器配置），选择我们刚刚解压的MinGW文件夹，他会自动进行配置，点击确定即可完成。</p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[进制转换]]></title>
-        <id>https://wylovecat.github.io//post/ZigeFxfIY</id>
-        <link href="https://wylovecat.github.io//post/ZigeFxfIY">
-        </link>
-        <updated>2019-04-19T09:37:06.000Z</updated>
-        <content type="html"><![CDATA[<h1 id="进制转换">进制转换</h1>
-<h2 id="基础">基础</h2>
-<p>十进制与二进制的转换是基础内容，应做到熟练地将十进制的数转为二进制，将二进制的数转为十进制。</p>
-<h3 id="十进制转二进制">十进制转二进制</h3>
-<h4 id="整数转二进制">整数转二进制</h4>
-<p>整数转二进制是最常见的。核心在于除2取余，倒序排列，高位补零。<br /><img src="https://cdn.nlark.com/yuque/0/2019/png/292435/1554633400474-fdf7c01e-f32e-435f-8a9c-a75a7ec3774c.png#align=left&amp;display=inline&amp;height=332&amp;name=image.png&amp;originHeight=664&amp;originWidth=1184&amp;size=87756&amp;status=done&amp;width=592" alt="image.png"><br />不断地将数字除以2，将余数写一边，直到商为0时，停止。下方的为二进制的高位，由高位到低位倒序排列余数，高位不够用0来代替。</p>
-<h4 id="负整数转二进制">负整数转二进制</h4>
-<p>先是将对应的正整数转换成二进制后，对二进制取反然后再加1。以-10为例。10的二进制表达是(00001010),由于高位都是0，所以可以省略，写成(1010) ,（用B来表示表达的是二进制）。</p>
-<ol>
-<li>先取反。取反的意思就是1变成0，0变成1。(00001010)=&gt;(11110101)</li>
-<li>加上1。由于是二进制，所以我们逢二进一。(11110101)=&gt;(11110110)</li>
-</ol>
-<p>由于小数的高位都是1，所以我们也可以将高位省去，只保留(0110)不过注意和正整数进行区别。</p>
-<h4 id="小数转二进制">小数转二进制</h4>
-<p>将小数部分乘以2，取整数(这个整数不是0就是1)，当乘以二后小数部分结果为0或者位数够了，这些整数就是二进制。<br />以0.125为例<br />0.125 * 2 =0.25 整数部分为 0<br />0.25 *  2  = 0.5  整数部分为 0<br />0.5  *  2  = 1.0  整数部分为1，小数部分为0，停止。<br />二进制就为0.001<br />如果是带整数部分的小数进行进制转换，那么分开来处理，先将整数部分，转换成二进制，再将小数部分，转为二进制。<br />**注意 **小数进行二进制转换是存在无法除尽的情况的，这是正常的。根据题意保留足够的位数即可。</p>
-<h3 id="二进制转十进制">二进制转十进制</h3>
-<p>使用按权相加法。</p>
-<h4 id="高位为0">高位为0</h4>
-<p>首先第一步将位数补齐，如果高位是0则是一个正数。将其分离位数，将分离出来的位数按从低位到高位的顺数，依次和2的冥相乘累加。以(1010)为例。<br />分离位数： 1 0 1 0  =》相乘累加 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>0</mn><mo>×</mo><msup><mn>2</mn><mn>0</mn></msup><mo>+</mo><mn>1</mn><mo>×</mo><msup><mn>2</mn><mn>1</mn></msup><mo>+</mo><mn>0</mn><mo>×</mo><msup><mn>2</mn><mn>2</mn></msup><mo>+</mo><mn>1</mn><mo>×</mo><msup><mn>2</mn><mn>3</mn></msup><mo>=</mo><mn>10</mn></mrow><annotation encoding="application/x-tex">0\times2^{0}+1\times2^{1}+0\times2^{2}+1\times2^{3}=10</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.72777em;vertical-align:-0.08333em;"></span><span class="mord">0</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.897438em;vertical-align:-0.08333em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">0</span></span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.72777em;vertical-align:-0.08333em;"></span><span class="mord">1</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.897438em;vertical-align:-0.08333em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">1</span></span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.72777em;vertical-align:-0.08333em;"></span><span class="mord">0</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.897438em;vertical-align:-0.08333em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.72777em;vertical-align:-0.08333em;"></span><span class="mord">1</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.8141079999999999em;vertical-align:0em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">3</span></span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span><span class="mord">0</span></span></span></span></p>
-<h4 id="高位为1">高位为1</h4>
-<p>如果高位为1，则说明是一个负数，那就先减1，再进行取反，在进行转换。以(11110110)<br />减一：(11110101) =&gt; 取反: (00001010)=&gt;按权相加:0<em>2+1</em>2+0<em>2+1</em>2=10</p>
-<h4 id="小数形式">小数形式</h4>
-<p>整数部分和小数部分分开计算。整数部分参考上面。小数部分则是相反。以（0.001）为例。<br />按权相加：<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>0</mn><mo>×</mo><msup><mn>2</mn><mrow><mo>−</mo><mn>1</mn></mrow></msup><mo>+</mo><mn>0</mn><mo>×</mo><msup><mn>2</mn><mrow><mo>−</mo><mn>2</mn></mrow></msup><mo>+</mo><mn>1</mn><mo>×</mo><msup><mn>2</mn><mrow><mo>−</mo><mn>3</mn></mrow></msup><mo>=</mo><mn>0.125</mn></mrow><annotation encoding="application/x-tex">0\times2^{-1}+0\times2^{-2}+1\times2^{-3}=0.125</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.72777em;vertical-align:-0.08333em;"></span><span class="mord">0</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.897438em;vertical-align:-0.08333em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">−</span><span class="mord mtight">1</span></span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.72777em;vertical-align:-0.08333em;"></span><span class="mord">0</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.897438em;vertical-align:-0.08333em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">−</span><span class="mord mtight">2</span></span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.72777em;vertical-align:-0.08333em;"></span><span class="mord">1</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.8141079999999999em;vertical-align:0em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">−</span><span class="mord mtight">3</span></span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">0</span><span class="mord">.</span><span class="mord">1</span><span class="mord">2</span><span class="mord">5</span></span></span></span></p>
-<h2 id="其他进制转换">其他进制转换</h2>
-<p>整体上的方法和十进制与二进制的转换方法类似。转换成x进制的话使用除x取余，倒序排列，高位补零。二进制转换成其他进制还是采用按权相加的方法。</p>
-<h3 id="八进制与十六进制">八进制与十六进制</h3>
-<p>八进制是逢八进一。</p>
-<p>十进制转八进制的话，过程就是不断地将数字除以8，将余数写一边，直到商为0时停止。下方的为二进制的高位，由高位到低位倒序排列余数，高位不够用0来代替。以十进制10转换为八进制例。</p>
-<p><img src="https://cdn.nlark.com/yuque/0/2019/png/292435/1554693614581-4e24b0dc-9e94-4acf-889f-89617bbcc24d.png" alt="image.png"></p>
-<p>十六进制也是类似，需要注意的点是，十六进制的10<sub>15是使用A</sub>F来表示的。</p>
 ]]></content>
     </entry>
 </feed>
