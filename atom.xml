@@ -2,86 +2,86 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://wylovecat.github.io/</id>
     <title>咸鱼爱学习</title>
-    <updated>2019-09-15T00:53:39.696Z</updated>
+    <updated>2020-01-18T06:35:03.761Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://wylovecat.github.io/"/>
-    <link rel="self" href="https://wylovecat.github.io//atom.xml"/>
+    <link rel="self" href="https://wylovecat.github.io/atom.xml"/>
     <subtitle>温故而知新</subtitle>
-    <logo>https://wylovecat.github.io//images/avatar.png</logo>
-    <icon>https://wylovecat.github.io//favicon.ico</icon>
-    <rights>All rights reserved 2019, 咸鱼爱学习</rights>
+    <logo>https://wylovecat.github.io/images/avatar.png</logo>
+    <icon>https://wylovecat.github.io/favicon.ico</icon>
+    <rights>All rights reserved 2020, 咸鱼爱学习</rights>
+    <entry>
+        <title type="html"><![CDATA[质数筛法]]></title>
+        <id>https://wylovecat.github.io/post/tNeVitMwQ</id>
+        <link href="https://wylovecat.github.io/post/tNeVitMwQ">
+        </link>
+        <updated>2020-01-10T08:16:44.000Z</updated>
+    </entry>
     <entry>
         <title type="html"><![CDATA[树]]></title>
-        <id>https://wylovecat.github.io//post/ygPOxCvHb</id>
-        <link href="https://wylovecat.github.io//post/ygPOxCvHb">
+        <id>https://wylovecat.github.io/post/ygPOxCvHb</id>
+        <link href="https://wylovecat.github.io/post/ygPOxCvHb">
         </link>
         <updated>2019-09-15T00:25:31.000Z</updated>
     </entry>
     <entry>
         <title type="html"><![CDATA[快速排序]]></title>
-        <id>https://wylovecat.github.io//post/m6Tq0iSbX</id>
-        <link href="https://wylovecat.github.io//post/m6Tq0iSbX">
+        <id>https://wylovecat.github.io/post/m6Tq0iSbX</id>
+        <link href="https://wylovecat.github.io/post/m6Tq0iSbX">
         </link>
         <updated>2019-09-05T05:16:15.000Z</updated>
     </entry>
     <entry>
         <title type="html"><![CDATA[归并排序]]></title>
-        <id>https://wylovecat.github.io//post/KcB11JFTx</id>
-        <link href="https://wylovecat.github.io//post/KcB11JFTx">
+        <id>https://wylovecat.github.io/post/KcB11JFTx</id>
+        <link href="https://wylovecat.github.io/post/KcB11JFTx">
         </link>
         <updated>2019-09-04T15:58:20.000Z</updated>
     </entry>
     <entry>
         <title type="html"><![CDATA[高精度计算(一)]]></title>
-        <id>https://wylovecat.github.io//post/G_OL3h80e</id>
-        <link href="https://wylovecat.github.io//post/G_OL3h80e">
+        <id>https://wylovecat.github.io/post/G_OL3h80e</id>
+        <link href="https://wylovecat.github.io/post/G_OL3h80e">
         </link>
         <updated>2019-09-03T08:41:37.000Z</updated>
     </entry>
     <entry>
         <title type="html"><![CDATA[欧几里得算法与拓展欧几里得]]></title>
-        <id>https://wylovecat.github.io//post/jZSzkJ5Oq</id>
-        <link href="https://wylovecat.github.io//post/jZSzkJ5Oq">
+        <id>https://wylovecat.github.io/post/jZSzkJ5Oq</id>
+        <link href="https://wylovecat.github.io/post/jZSzkJ5Oq">
         </link>
         <updated>2019-09-02T15:21:27.000Z</updated>
     </entry>
     <entry>
         <title type="html"><![CDATA[比例简化]]></title>
-        <id>https://wylovecat.github.io//post/dLtINUDHC</id>
-        <link href="https://wylovecat.github.io//post/dLtINUDHC">
+        <id>https://wylovecat.github.io/post/dLtINUDHC</id>
+        <link href="https://wylovecat.github.io/post/dLtINUDHC">
         </link>
         <updated>2019-08-17T02:19:39.000Z</updated>
     </entry>
     <entry>
         <title type="html"><![CDATA[珠心算测验]]></title>
-        <id>https://wylovecat.github.io//post/S-SCKDM5o</id>
-        <link href="https://wylovecat.github.io//post/S-SCKDM5o">
+        <id>https://wylovecat.github.io/post/S-SCKDM5o</id>
+        <link href="https://wylovecat.github.io/post/S-SCKDM5o">
         </link>
         <updated>2019-08-15T07:14:37.000Z</updated>
     </entry>
     <entry>
         <title type="html"><![CDATA[回文日期]]></title>
-        <id>https://wylovecat.github.io//post/8o-Bcw0Hg</id>
-        <link href="https://wylovecat.github.io//post/8o-Bcw0Hg">
+        <id>https://wylovecat.github.io/post/8o-Bcw0Hg</id>
+        <link href="https://wylovecat.github.io/post/8o-Bcw0Hg">
         </link>
         <updated>2019-08-15T05:46:43.000Z</updated>
     </entry>
     <entry>
         <title type="html"><![CDATA[有趣的GitHub项目]]></title>
-        <id>https://wylovecat.github.io//post/UukfogPTY</id>
-        <link href="https://wylovecat.github.io//post/UukfogPTY">
+        <id>https://wylovecat.github.io/post/UukfogPTY</id>
+        <link href="https://wylovecat.github.io/post/UukfogPTY">
         </link>
         <updated>2019-07-14T07:44:23.000Z</updated>
         <summary type="html"><![CDATA[<p>分享一些有趣、有用的GitHub项目。</p>
 ]]></summary>
         <content type="html"><![CDATA[<p>分享一些有趣、有用的GitHub项目。</p>
 ]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[使用fgets()替换gets()]]></title>
-        <id>https://wylovecat.github.io//post/Y4cNdIzTy</id>
-        <link href="https://wylovecat.github.io//post/Y4cNdIzTy">
-        </link>
-        <updated>2019-05-06T09:10:32.000Z</updated>
     </entry>
 </feed>

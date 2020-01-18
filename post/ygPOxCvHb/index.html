@@ -7,7 +7,7 @@
 <meta name="description" content="温故而知新">
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<link rel="shortcut icon" href="https://wylovecat.github.io//favicon.ico?v=1568508815669">
+<link rel="shortcut icon" href="https://wylovecat.github.io//favicon.ico?v=1579329164334">
 
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 <link rel="stylesheet" href="https://unpkg.com/papercss@1.6.1/dist/paper.min.css" />
@@ -91,11 +91,11 @@
             <p class="article-meta">
               2019-09-15
               
-                <a href="https://wylovecat.github.io//tag/GyyF0zlSG" class="badge warning">
+                <a href="https://wylovecat.github.io/tag/GyyF0zlSG" class="badge warning">
                   数据结构
                 </a>
               
-                <a href="https://wylovecat.github.io//tag/Xml2KtR4g" class="badge success">
+                <a href="https://wylovecat.github.io/tag/Xml2KtR4g" class="badge secondary">
                   算法
                 </a>
               
@@ -141,7 +141,7 @@
 <h2 id="树的表示方法">树的表示方法</h2>
 <h3 id="自然界的树形表示法">自然界的树形表示法</h3>
 <p>用结点和边表示树。树形表示法一般用于分析问题。<br>
-<img src="https://iimg.com.cn/p/88461ff424222.png" alt="Image _11_.png"></p>
+<img src="https://iimg.com.cn/p/88461ff424222.png" alt="Image _11_.png" loading="lazy"></p>
 <h3 id="括号表示法">括号表示法</h3>
 <p>先将根结点放入一对圆括号中，然后把它的子树按由左而右的顺序·放入括号中，而对子树也采用同样方法处理：同层子树与他的根节点用圆括号括起来，同层子树之间用逗号隔开，最后用比括号括起来。<br>
 如图可写成如下形式：<br>
@@ -193,7 +193,7 @@
 <h2 id="性质1">性质1</h2>
 <p>在二叉树的第i层上之多有2^(i-1)个结点</p>
 <h2 id="性质2">性质2</h2>
-<p>深度谁玩k的二叉树之多有2^(k)-1个结点(k&gt;=1)</p>
+<p>深度设为k的二叉树至多有2^(k)-1个结点(k&gt;=1)</p>
 <h2 id="性质3">性质3</h2>
 <p>对任何一棵二叉树T,如果起终点结点树为n0,度为2的结点数位n2,则n0=n2+1;叶子结点数总比度为2的结点多1.</p>
 <h2 id="性质4">性质4</h2>
@@ -212,20 +212,20 @@
     int level ,order;//结点的层，本层的序号（满二叉树计算方式）
 };
 </code></pre>
-<p><img src="https://iimg.com.cn/p/061ef32482110.png" alt="Image.png"></p>
-<p><img src="https://iimg.com.cn/p/1f829052c0d1f.png" alt="Image _2_.png"></p>
+<figure data-type="image" tabindex="1"><img src="https://iimg.com.cn/p/061ef32482110.png" alt="Image.png" loading="lazy"></figure>
+<figure data-type="image" tabindex="2"><img src="https://iimg.com.cn/p/1f829052c0d1f.png" alt="Image _2_.png" loading="lazy"></figure>
 <p>一般用于完全二叉树或满二叉树。<br>
 对于非完全二叉树来说，需要添加一些不曾在的空结点使之变成完全二叉树使下标之间准确反映树中结点间的逻辑关系。但会造成空间的浪费，在斜树中尤为严重。</p>
 <h2 id="链式存储结构">链式存储结构</h2>
 <p>二叉树是每个结点最多拥有两个孩子，所以为它设计一个数据域和两个指针与是比较自然的想法，我们称这样的链表叫做二叉链表。<br>
-<img src="https://iimg.com.cn/p/1b5e3bf36037e.png" alt="Image _3_.png"></p>
+<img src="https://iimg.com.cn/p/1b5e3bf36037e.png" alt="Image _3_.png" loading="lazy"></p>
 <pre><code>typedef struct node {
     char data;
     struct node *lchild;
     struct node *rchild;
 }node;
 </code></pre>
-<p><img src="https://iimg.com.cn/p/5b0374a058e51.png" alt="Image _4_.png"></p>
+<figure data-type="image" tabindex="3"><img src="https://iimg.com.cn/p/5b0374a058e51.png" alt="Image _4_.png" loading="lazy"></figure>
 <h1 id="二叉树的遍历">二叉树的遍历</h1>
 <p>二叉树的遍历时不重复地访问二叉树中地每一个结点。在访问到每个结点时，可以去除结点中的信息，或对结点作其他的处理。<br>
 如果用L、D、R分别表示遍历左子树、根结点、右子树。限定先左后右的次序，有</p>
@@ -296,11 +296,11 @@
 <p>若考虑在创建时就记录下前驱后继，则将节省大量时间。<br>
 可利用空指针域，存放指向结点在某种遍历次序下的前驱和后继结点的地址。<br>
 我们把这种指向前驱和后继的指针称为线索，加上线索的二叉链表陈伟线索链表，相应的二叉树就称为线索二叉树(Threaded Binary Tree).<br>
-<img src="https://iimg.com.cn/p/1b76b4c007cef.png" alt="Image _5_.png"><br>
+<img src="https://iimg.com.cn/p/1b76b4c007cef.png" alt="Image _5_.png" loading="lazy"><br>
 将所有的空指针域中的rchild改为指向它的后继结点。<br>
-<img src="https://iimg.com.cn/p/1def4d0688d1b.png" alt="Image _6_.png"></p>
+<img src="https://iimg.com.cn/p/1def4d0688d1b.png" alt="Image _6_.png" loading="lazy"></p>
 <p>lchild改为指向当前结点的前驱。<br>
-<img src="https://iimg.com.cn/p/3faf36dee0322.png" alt="Image _7_.png"></p>
+<img src="https://iimg.com.cn/p/3faf36dee0322.png" alt="Image _7_.png" loading="lazy"></p>
 <p>对二叉树以某种次序遍历使其变成线索二叉树的过程称作是线索化。</p>
 <h2 id="新的问题">新的问题</h2>
 <p>如何知道某一结点的指针究竟是指向孩子还是指向前驱后继的？，需要一个区分标记。<br>
@@ -320,13 +320,13 @@
 <li>去线。对树中每个节点，只保留它与第一个孩子（长子）结点的连线，删除它与其他孩子结点之间之间的连线。</li>
 <li>层次调整。以树的根结点为轴心，将整棵树顺时针旋转一定的角度，使之结构层次分明。注意第一个孩子时二叉树结点的左孩子，兄弟转换过来的孩子时结点的右孩子。</li>
 </ol>
-<p><img src="https://iimg.com.cn/p/75c868f97a7c9.png" alt="Image _8_.png"></p>
+<figure data-type="image" tabindex="4"><img src="https://iimg.com.cn/p/75c868f97a7c9.png" alt="Image _8_.png" loading="lazy"></figure>
 <h2 id="森林转化为二叉树">森林转化为二叉树</h2>
 <p>森林是由若干棵树组成的，所以可以理解成森林中的每一棵树都是兄弟，可以按照兄弟的处理办法来操作。</p>
 <ol>
 <li>把每个树转化为二叉树</li>
 <li>第一棵二叉树不动，从第二棵二叉树开始，依次把后一颗二叉树的根结点作为前一棵二叉树的根结点的右孩子，用线连起来。当所有的二叉树连接起来后就得到了由森林转换来的二叉树。<br>
-<img src="https://iimg.com.cn/p/eaa88cbabd495.png" alt="Image _9_.png"></li>
+<img src="https://iimg.com.cn/p/eaa88cbabd495.png" alt="Image _9_.png" loading="lazy"></li>
 </ol>
 <h2 id="二叉树转换为树">二叉树转换为树</h2>
 <p>是树转化为二叉数的逆过程，反过来做即可。</p>
@@ -334,7 +334,7 @@
 <li>加线。若某结点的左孩子结点存在，则将这个左孩子的右孩子结点都作为此结点的孩子。将该结点与这些右孩子结点用先连起来。</li>
 <li>去线。删除原二叉树中所有结点与其右孩子结点的连线</li>
 <li>层次调整。使之结构层次分明。<br>
-<img src="https://iimg.com.cn/p/455caefc08c2d.png" alt="Image _10_.png"></li>
+<img src="https://iimg.com.cn/p/455caefc08c2d.png" alt="Image _10_.png" loading="lazy"></li>
 </ol>
 <h2 id="二叉树转换成森林">二叉树转换成森林</h2>
 <p>判断一棵二叉树能够转换成一棵树还是森林，标准很简单，只要看这颗二叉树的根结点有没有右孩子，有就是森林，没有就是一棵树。</p>
@@ -352,7 +352,7 @@
               <div class="next">
                 下一篇
               </div>
-              <a href="https://wylovecat.github.io//post/m6Tq0iSbX">
+              <a href="https://wylovecat.github.io/post/m6Tq0iSbX">
                 <h3 class="post-title">
                   快速排序
                 </h3>
@@ -373,7 +373,7 @@
 
       <div class="sm-12 md-4 col sidebar">
   <div class="paper info-container">
-    <img src="https://wylovecat.github.io//images/avatar.png?v=1568508815669" class="no-responsive avatar">
+    <img src="https://wylovecat.github.io//images/avatar.png?v=1579329164334" class="no-responsive avatar">
     <div class="text-muted">温故而知新</div>
     <div class="social-container">
       
@@ -398,62 +398,66 @@
         
           
             <li>
-              <a href="https://wylovecat.github.io//post/ygPOxCvHb">树</a>
+              <a href="https://wylovecat.github.io/post/tNeVitMwQ">质数筛法</a>
             </li>
           
         
           
             <li>
-              <a href="https://wylovecat.github.io//post/m6Tq0iSbX">快速排序</a>
+              <a href="https://wylovecat.github.io/post/ygPOxCvHb">树</a>
             </li>
           
         
           
             <li>
-              <a href="https://wylovecat.github.io//post/KcB11JFTx">归并排序</a>
+              <a href="https://wylovecat.github.io/post/m6Tq0iSbX">快速排序</a>
             </li>
           
         
           
             <li>
-              <a href="https://wylovecat.github.io//post/G_OL3h80e">高精度计算(一)</a>
+              <a href="https://wylovecat.github.io/post/KcB11JFTx">归并排序</a>
             </li>
           
         
           
             <li>
-              <a href="https://wylovecat.github.io//post/jZSzkJ5Oq">欧几里得算法与拓展欧几里得</a>
+              <a href="https://wylovecat.github.io/post/G_OL3h80e">高精度计算(一)</a>
             </li>
           
         
           
             <li>
-              <a href="https://wylovecat.github.io//post/dLtINUDHC">比例简化</a>
+              <a href="https://wylovecat.github.io/post/jZSzkJ5Oq">欧几里得算法与拓展欧几里得</a>
             </li>
           
         
           
             <li>
-              <a href="https://wylovecat.github.io//post/S-SCKDM5o">珠心算测验</a>
+              <a href="https://wylovecat.github.io/post/dLtINUDHC">比例简化</a>
             </li>
           
         
           
             <li>
-              <a href="https://wylovecat.github.io//post/8o-Bcw0Hg">回文日期</a>
+              <a href="https://wylovecat.github.io/post/S-SCKDM5o">珠心算测验</a>
             </li>
           
         
           
             <li>
-              <a href="https://wylovecat.github.io//post/UukfogPTY">有趣的GitHub项目</a>
+              <a href="https://wylovecat.github.io/post/8o-Bcw0Hg">回文日期</a>
             </li>
           
         
           
             <li>
-              <a href="https://wylovecat.github.io//post/Y4cNdIzTy">使用fgets()替换gets()</a>
+              <a href="https://wylovecat.github.io/post/UukfogPTY">有趣的GitHub项目</a>
             </li>
+          
+        
+          
+        
           
         
           
@@ -483,59 +487,59 @@
     </div>
     <div class="row">
       
-        <a href="https://wylovecat.github.io//tag/GyyF0zlSG" class="badge secondary">
-          数据结构
-        </a>
-      
-        <a href="https://wylovecat.github.io//tag/Xml2KtR4g" class="badge secondary">
-          算法
-        </a>
-      
-        <a href="https://wylovecat.github.io//tag/CSNe-Ttwm" class="badge secondary">
-          C/C++
-        </a>
-      
-        <a href="https://wylovecat.github.io//tag/iqjH4VeE6" class="badge success">
-          高精度
-        </a>
-      
-        <a href="https://wylovecat.github.io//tag/Z3tt3bzbS" class="badge ">
+        <a href="https://wylovecat.github.io/tag/Z3tt3bzbS" class="badge success">
           数学
         </a>
       
-        <a href="https://wylovecat.github.io//tag/zjXnb_eXv" class="badge ">
+        <a href="https://wylovecat.github.io/tag/CSNe-Ttwm" class="badge warning">
+          C/C++
+        </a>
+      
+        <a href="https://wylovecat.github.io/tag/GyyF0zlSG" class="badge secondary">
+          数据结构
+        </a>
+      
+        <a href="https://wylovecat.github.io/tag/Xml2KtR4g" class="badge ">
+          算法
+        </a>
+      
+        <a href="https://wylovecat.github.io/tag/iqjH4VeE6" class="badge ">
+          高精度
+        </a>
+      
+        <a href="https://wylovecat.github.io/tag/zjXnb_eXv" class="badge ">
           noip
         </a>
       
-        <a href="https://wylovecat.github.io//tag/cKlT30oiM" class="badge secondary">
+        <a href="https://wylovecat.github.io/tag/cKlT30oiM" class="badge warning">
           模拟
         </a>
       
-        <a href="https://wylovecat.github.io//tag/S-CLh9EEX" class="badge warning">
+        <a href="https://wylovecat.github.io/tag/S-CLh9EEX" class="badge secondary">
           枚举
         </a>
       
-        <a href="https://wylovecat.github.io//tag/tHyJk6N28" class="badge ">
+        <a href="https://wylovecat.github.io/tag/tHyJk6N28" class="badge warning">
           Git
         </a>
       
-        <a href="https://wylovecat.github.io//tag/sEMfEVAVO" class="badge secondary">
+        <a href="https://wylovecat.github.io/tag/sEMfEVAVO" class="badge secondary">
           计算机基础
         </a>
       
-        <a href="https://wylovecat.github.io//tag/markdown" class="badge warning">
+        <a href="https://wylovecat.github.io/tag/markdown" class="badge secondary">
           Markdown
         </a>
       
-        <a href="https://wylovecat.github.io//tag/4kipjvQ-w" class="badge secondary">
+        <a href="https://wylovecat.github.io/tag/4kipjvQ-w" class="badge success">
           vscode
         </a>
       
-        <a href="https://wylovecat.github.io//tag/RYJKhhSlc" class="badge secondary">
+        <a href="https://wylovecat.github.io/tag/RYJKhhSlc" class="badge secondary">
           hexo
         </a>
       
-        <a href="https://wylovecat.github.io//tag/gridea" class="badge success">
+        <a href="https://wylovecat.github.io/tag/gridea" class="badge warning">
           Gridea
         </a>
       
