@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" >
 
-<title>质数筛法 | 咸鱼爱学习</title>
+<title>题解：成绩统计 | 咸鱼爱学习</title>
 <meta name="description" content="温故而知新">
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -87,131 +87,115 @@
       <div class="sm-12 md-8 col">
         <div class="paper">
           <article class="article">
-            <h1>质数筛法</h1>
+            <h1>题解：成绩统计</h1>
             <p class="article-meta">
-              2020-01-10
+              2020-01-26
               
-                <a href="https://wylovecat.github.io/tag/Z3tt3bzbS" class="badge success">
-                  数学
-                </a>
-              
-                <a href="https://wylovecat.github.io/tag/CSNe-Ttwm" class="badge ">
+                <a href="https://wylovecat.github.io/tag/CSNe-Ttwm" class="badge secondary">
                   C/C++
                 </a>
               
             </p>
             
             <div class="post-content">
-              <h1 id="质数判断">质数判断</h1>
-<p>我们来看这么一道问题：</p>
-<blockquote>
-<p>给定一个范围N，你需要处理M个某数字是否为质数的询问（每个数字均在范围1-N内）N&lt;=10000000，M&lt;=100000</p>
-</blockquote>
-<p>首先很容易联想到使用枚举法来确定题目的整体框架</p>
-<pre><code class="language-c++">for( i: 1~m)
-{
-    cin&gt;&gt;x;
-    if(x是质数)
-    {
-        yes;
-    }else
-    {
-        no;
-    }
-}
+              <h1 id="题目相关">题目相关</h1>
+<h2 id="题目描述">题目描述</h2>
+<p>有N个学生，每个学生的数据包括学号、姓名、3门课的成绩，从键盘输入N个学生的数据，要求打印出3门课的总平均成绩，以及最高分的学生的数据（包括学号、姓名、3门课成绩）</p>
+<h2 id="输入">输入</h2>
+<p>学生数量N占一行每个学生的学号、姓名、三科成绩占一行，空格分开。</p>
+<h2 id="输出">输出</h2>
+<p>各门课的平均成绩 最高分的学生的数据（包括学号、姓名、3门课成绩）</p>
+<h1 id="分析">分析</h1>
+<p>​	读完题目之后，结合输入、输出要求，可显而易见地发现这是考察结构体及最值寻找的一道题。</p>
+<p>​	根据学生的相关信息，可定义对应的结构体类型。结合题目需求，可额外定义成员变量总分sum;</p>
+<pre><code class="language-c++">typedef struct node{
+    char stuNum[15];
+    char stuName[15];
+    int ch;
+    int ma;
+    int en;
+    int sum;
+}node;
 </code></pre>
-<p>关键在于质数判断部分。</p>
-<p>质数的判断问题我们可以从定义出发。质数，又称素数，是除了1和它自身以外没有其他的因子。</p>
-<pre><code class="language-c++">bool isPrime(int x)
-{
-    if(x==1) return false;
-    for(int i=2;i&lt;x;i++)
+<p>​	可先将主体结构构造好，输入完成后可定义总分数组方便存储，在过程中定义最值变量，依次地和总分进行比较，有出现比他更高的，那么就更新最高分与相应的下标。</p>
+<pre><code class="language-c++">	int maxs=-1,index;
+    for(int i=1;i&lt;=n;i++)
     {
-        if(x%i==0) return false;
+        cin&gt;&gt;stu[i].stuNum&gt;&gt;stu[i].stuName;
+        cin&gt;&gt;stu[i].ch&gt;&gt;stu[i].ma&gt;&gt;stu[i].en;
+        
+        //计算学生的总分
+        stu[i].sum=stu[i].ch+stu[i].ma+stu[i].en;
+        
+        scoreSum[1]+=stu[i].ch;// 统计语文总分
+        scoreSum[2]+=stu[i].ma;// 统计数学总分
+        scoreSum[3]+=stu[i].en;// 统计英语总分
+        
+
+        if(stu[i].sum&gt;maxs)
+        {// 若发现更高的分数，则进行更新
+            maxs=stu[i].sum;
+            index=i;
+        }
     }
-    return true;
-}
 </code></pre>
-<p>稍微计算下整体的时间复杂度，可以发现用时会比较多，那么我们可以思考下优化的地方。整体框架确定后，能优化的地方可从质数判断入手。思考，一个数去除以比它的一半还要大的数，一定是除不尽的，因此，除到x/2就够了。</p>
-<p>再改进一下，一个数若可以进行因数分解，那么分解得到的两个数一个范围小于sqrt(x),另一个一定大于sqrt(x)。故，上述代码我们也只需要遍历到sqrt(x)就可以了。若在2~sqrt(x)找不到约数，那么一定不存在。</p>
-<pre><code class="language-c++">bool isPrime(int x)
-{
-    if(x==1) return false;
-    for(int i=2;i*i&lt;=x;i++)
-    {
-        if(x%i==0) return false;
-    }
-    return true;
-}
+<p>​	接着再依次输出各科的平均分，将总分除以n。注意在总分后*1.0再进行除法，以防出现结果为小数的情况。再输出最高分的学生数据。</p>
+<pre><code class="language-c++">for(int i=1;i&lt;=3;i++)
+        cout&lt;&lt;scoreSum[i]*1.0/n&lt;&lt;&quot; &quot;;
+cout&lt;&lt;&quot;\n&quot;;
+cout&lt;&lt;stu[index].stuNum&lt;&lt;&quot; &quot;&lt;&lt;stu[index].stuName&lt;&lt;&quot; &quot;&lt;&lt;stu[index].ch&lt;&lt;&quot; &quot;&lt;&lt;stu[index].ma&lt;&lt;&quot; &quot;&lt;&lt;stu[index].en;
 </code></pre>
-<p>再进一步进行优化，偶数一定不是质数</p>
-<pre><code class="language-c++">bool isPrime(int x)
-{
-    if(x&lt;2) return false;
-    if(n%2==0) return false;
-    
-    for(int i=3;i*i&lt;=x;i+=2)
-    {
-        if(x%i==0) return false;
-    }
-    return true;
-}
-</code></pre>
-<p>但当m,n很大的时侯这种方式的数量级依旧相当大。在一般的机子它不是一秒钟跑不出结果，它是好几分钟都跑不出结果。有没有更有效率的方法呢？</p>
-<p>我们可以考虑使用筛法来进行处理。</p>
-<h1 id="埃氏筛">埃氏筛</h1>
-<p>根据数学原理：一个合数总是可以分解成若干个质数的乘积，换个角度去理解，也就是说合数是某个质数的倍数。此时如果把质数的倍数都去掉，那么剩下的就是质数了。</p>
-<p>这样的筛选方式叫做埃氏筛，也叫埃拉托色尼选筛法，是数学家埃拉托色尼提出的。</p>
-<p>代码思路：</p>
-<ol>
-<li>从质数2开始进行枚举</li>
-<li>如果数字是质数，将范围内所有该数的倍数标记成非质数</li>
-<li>继续向后枚举，直到遍历完范围内所有的数位置</li>
-</ol>
-<p>代码实现：</p>
+<p>​	完整代码实现</p>
 <pre><code class="language-c++">#include &lt;iostream&gt;
-#include &lt;cstring&gt;
 using namespace std;
 
-bool isPrime[10000005]={0};//标记数组 用来表示数字是否是质数 true-是质数 false-不是质数
+typedef struct node{
+    char stuNum[15];
+    char stuName[15];
+    int ch;
+    int ma;
+    int en;
+    int sum;
+}node;
 
-void aiPrime(int n)
-{// 埃氏筛处理n内的质数
-	memset(isPrime,true,sizeof(isPrime));//所有数字，默认标记为质数 
-	isPrime[1]=false;//修改1的状态，1不是质数
-	
-	for(int i=2;i&lt;=n;i++)//从2开始，枚举范围n内的每个数字 
-	{
-		if(isPrime[i])//如果i是质数
-		{//将n范围内所有i的倍数，标记为非质数 
-			for(int j=2;j*i&lt;=n;j++)
-			{//打底从两倍开始,j*i就是i的倍数 
-				isPrime[i*j]=false;// 标记倍数为非质数 
-			}
-			
-		}
-	}
+int main()
+{
+    int n;
+    cin&gt;&gt;n;
+
+    node *stu=new node[n+1];
+    int *scoreSum=new int[n+1];
+
+    for(int i=1;i&lt;=3;i++)
+        scoreSum[i]=0;
+
+    int maxs=-1,index;
+    for(int i=1;i&lt;=n;i++)
+    {
+        cin&gt;&gt;stu[i].stuNum&gt;&gt;stu[i].stuName;
+        cin&gt;&gt;stu[i].ch&gt;&gt;stu[i].ma&gt;&gt;stu[i].en;
+        stu[i].sum=stu[i].ch+stu[i].ma+stu[i].en;
+        
+        scoreSum[1]+=stu[i].ch;// 统计语文总分
+        scoreSum[2]+=stu[i].ma;// 统计数学总分
+        scoreSum[3]+=stu[i].en;// 统计英语总分
+        
+        if(stu[i].sum&gt;maxs)
+        {// 若发现更高的分数，则进行更新
+            maxs=stu[i].sum;
+            index=i;
+        }
+    }
+    for(int i=1;i&lt;=3;i++)
+        cout&lt;&lt;scoreSum[i]*1.0/n&lt;&lt;&quot; &quot;;
+    cout&lt;&lt;&quot;\n&quot;;
+    cout&lt;&lt;stu[index].stuNum&lt;&lt;&quot; &quot;&lt;&lt;stu[index].stuName&lt;&lt;&quot; &quot;&lt;&lt;stu[index].ch&lt;&lt;&quot; &quot;&lt;&lt;stu[index].ma&lt;&lt;&quot; &quot;&lt;&lt;stu[index].en;
+
+    return 0;
 }
 
-int main(int argc, char** argv) {
-	int n,m,x;
-	cin&gt;&gt;n&gt;&gt;m;
-	aiPrime(n);
-	for(int i=1;i&lt;=m;i++)
-	{
-		cin&gt;&gt;x;
-		if(isPrime[x])
-		{
-			cout&lt;&lt;&quot;yes\n&quot;;
-		}else
-		{
-			cout&lt;&lt;&quot;no\n&quot;;
-		}
-	}
-	 
-	return 0;
-} 
 </code></pre>
+<p>对于这道题目来说，主要考察结构体以及最值的寻找方式。注意中间的实现细节。</p>
 
             </div>
           </article>
@@ -222,9 +206,9 @@ int main(int argc, char** argv) {
               <div class="next">
                 下一篇
               </div>
-              <a href="https://wylovecat.github.io/post/ygPOxCvHb">
+              <a href="https://wylovecat.github.io/post/WlYcqG1Yi">
                 <h3 class="post-title">
-                  树
+                  题解：成绩记录
                 </h3>
               </a>
             </div>
@@ -361,15 +345,15 @@ int main(int argc, char** argv) {
     </div>
     <div class="row">
       
-        <a href="https://wylovecat.github.io/tag/CSNe-Ttwm" class="badge secondary">
+        <a href="https://wylovecat.github.io/tag/CSNe-Ttwm" class="badge warning">
           C/C++
         </a>
       
-        <a href="https://wylovecat.github.io/tag/Z3tt3bzbS" class="badge warning">
+        <a href="https://wylovecat.github.io/tag/Z3tt3bzbS" class="badge secondary">
           数学
         </a>
       
-        <a href="https://wylovecat.github.io/tag/GyyF0zlSG" class="badge secondary">
+        <a href="https://wylovecat.github.io/tag/GyyF0zlSG" class="badge ">
           数据结构
         </a>
       
@@ -377,27 +361,27 @@ int main(int argc, char** argv) {
           算法
         </a>
       
-        <a href="https://wylovecat.github.io/tag/iqjH4VeE6" class="badge secondary">
+        <a href="https://wylovecat.github.io/tag/iqjH4VeE6" class="badge ">
           高精度
         </a>
       
-        <a href="https://wylovecat.github.io/tag/zjXnb_eXv" class="badge secondary">
+        <a href="https://wylovecat.github.io/tag/zjXnb_eXv" class="badge ">
           noip
         </a>
       
-        <a href="https://wylovecat.github.io/tag/cKlT30oiM" class="badge secondary">
+        <a href="https://wylovecat.github.io/tag/cKlT30oiM" class="badge success">
           模拟
         </a>
       
-        <a href="https://wylovecat.github.io/tag/S-CLh9EEX" class="badge ">
+        <a href="https://wylovecat.github.io/tag/S-CLh9EEX" class="badge secondary">
           枚举
         </a>
       
-        <a href="https://wylovecat.github.io/tag/tHyJk6N28" class="badge success">
+        <a href="https://wylovecat.github.io/tag/tHyJk6N28" class="badge ">
           Git
         </a>
       
-        <a href="https://wylovecat.github.io/tag/sEMfEVAVO" class="badge secondary">
+        <a href="https://wylovecat.github.io/tag/sEMfEVAVO" class="badge warning">
           计算机基础
         </a>
       
@@ -409,11 +393,11 @@ int main(int argc, char** argv) {
           vscode
         </a>
       
-        <a href="https://wylovecat.github.io/tag/RYJKhhSlc" class="badge warning">
+        <a href="https://wylovecat.github.io/tag/RYJKhhSlc" class="badge success">
           hexo
         </a>
       
-        <a href="https://wylovecat.github.io/tag/gridea" class="badge success">
+        <a href="https://wylovecat.github.io/tag/gridea" class="badge ">
           Gridea
         </a>
       
