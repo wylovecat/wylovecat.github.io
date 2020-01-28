@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://wylovecat.github.io/</id>
     <title>咸鱼爱学习</title>
-    <updated>2020-01-27T06:56:52.455Z</updated>
+    <updated>2020-01-28T08:02:10.450Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://wylovecat.github.io/"/>
     <link rel="self" href="https://wylovecat.github.io/atom.xml"/>
@@ -10,6 +10,13 @@
     <logo>https://wylovecat.github.io/images/avatar.png</logo>
     <icon>https://wylovecat.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, 咸鱼爱学习</rights>
+    <entry>
+        <title type="html"><![CDATA[题解：完数的判断（C++描述）]]></title>
+        <id>https://wylovecat.github.io/post/WntCGkdyK</id>
+        <link href="https://wylovecat.github.io/post/WntCGkdyK">
+        </link>
+        <updated>2020-01-28T08:01:24.000Z</updated>
+    </entry>
     <entry>
         <title type="html"><![CDATA[题解:报数问题（C++描述）]]></title>
         <id>https://wylovecat.github.io/post/wUbDXy5VZ</id>
@@ -72,12 +79,5 @@
         <link href="https://wylovecat.github.io/post/jZSzkJ5Oq">
         </link>
         <updated>2019-09-02T15:21:27.000Z</updated>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[比例简化]]></title>
-        <id>https://wylovecat.github.io/post/dLtINUDHC</id>
-        <link href="https://wylovecat.github.io/post/dLtINUDHC">
-        </link>
-        <updated>2019-08-17T02:19:39.000Z</updated>
     </entry>
 </feed>

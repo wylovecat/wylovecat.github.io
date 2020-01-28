@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" >
 
-<title>快速排序 | 咸鱼爱学习</title>
+<title>题解：完数的判断（C++描述） | 咸鱼爱学习</title>
 <meta name="description" content="温故而知新">
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -87,13 +87,9 @@
       <div class="sm-12 md-8 col">
         <div class="paper">
           <article class="article">
-            <h1>快速排序</h1>
+            <h1>题解：完数的判断（C++描述）</h1>
             <p class="article-meta">
-              2019-09-05
-              
-                <a href="https://wylovecat.github.io/tag/Xml2KtR4g" class="badge secondary">
-                  算法
-                </a>
+              2020-01-28
               
                 <a href="https://wylovecat.github.io/tag/CSNe-Ttwm" class="badge secondary">
                   C/C++
@@ -102,47 +98,102 @@
             </p>
             
             <div class="post-content">
-              <h1 id="核心思想">核心思想</h1>
-<p>先选取一个数字作为基准数，然后进行分类操作，将比基准数小的放到基准数的前面，比基准数大的放到基础数的后面。</p>
-<ul>
-<li>
-<p>划分问题：将数组的各个元素重排后分成左右两个部分，使得左边的任意元素都小于或等于右边的任意元素。是按照值进行划分。</p>
-</li>
-<li>
-<p>递归求解：把左右两部分分别排序</p>
-<p>在快速排序中，算法的主要工作在于划分阶段，而不需要再去合并子问题的解了。它和归并的区别在于，归并需要将两个部分和明后，才能保证，整体有序，而快速排序的子部分有序后，整体就自然有序了。</p>
-</li>
-</ul>
-<h2 id="基准数的选取">基准数的选取</h2>
-<p>选取标准有很多，有选取第一个数作的，有将中间的数，也有随机进行的。</p>
-<ul>
-<li>随机快速排序，使用随机的元素作为中轴</li>
-<li>三平均划分法，以数组最左边、最右边和最中间的元素的中位数作为中轴</li>
-<li>当子数组足够小是（5~15），改用插入排序方法</li>
-<li>一些划分方法的改进。三路划分，将数组分成三段，每段的元素分别小于，等于，大于中轴元素。</li>
-</ul>
-<h2 id="如何实现分类">如何实现分类</h2>
-<p>附设两个指针i和j,它们的初值分别是l和r,设枢轴记录取mid,则首先从j所指位置起向前搜索找到第一个关键字小于mid的记录，然后从i所指位置起向后搜索，找到第一个关键字大于mid的记录，将它们互相互换，重复这两步直至i&gt;j为止。</p>
-<pre><code class="language-c++">void qSort(int l,int r)
+              <h1 id="题目描述">题目描述</h1>
+<p>一个数如果恰好等于不包含它本身所有因子之和，这个数就称为&quot;完数&quot;。 例如，6的因子为1、2、3，而6=1+2+3，因此6是&quot;完数&quot;。 编程序找出N之内的所有完数，并按下面格式输出其因子</p>
+<h2 id="输入">输入</h2>
+<p>N</p>
+<h2 id="输出">输出</h2>
+<p>? its factors are ? ? ?</p>
+<h2 id="样例输入">样例输入</h2>
+<pre><code>1000
+</code></pre>
+<h2 id="样例输出">样例输出</h2>
+<pre><code>6 its factors are 1 2 3 
+28 its factors are 1 2 4 7 14 
+496 its factors are 1 2 4 8 16 31 62 124 248 
+</code></pre>
+<h1 id="分析">分析</h1>
+<p>题目完整地读下来，我可发现，这道题地关键就在于如何判断完数以及按格式输出完数的所有因子。假设法，存在函数能帮助我们判断数字是否是完数，以及存在函数能帮助我们将数字的所有因子按格式输出，将他们分别起名为isCompNum()和printFactors()。我们可以写出对应的整体框架</p>
+<pre><code class="language-c++">int main()
 {
-    int i,j,mid,p;
-    i=l;j=r;
-    mid=a[(l+r)/2];// 定义分隔数
-    do{
-        while(a[i]&lt;mid)i++;//在左侧寻找比中间数大的
-        while(a[j]&gt;mid)j--;//在右侧寻找比中间数小的
-        
-        if(i&lt;=j)
+    int n;// 存放范围
+    cin&gt;&gt;n;// 输入范围
+    for(int i=6;i&lt;=n;i++)//最小的完数是6，遍历6~n
+    {
+        if(isCompNum(i))// 如果是完数
         {
-            swap(a[i],a[j]);
-            i++;j--;
+            printFactors(i);//按格式输出所有因子
         }
-    }while(i&lt;=j);
-    
-    if(l&lt;j) qSort(l,j);
-    if(i&lt;r) qSort(i,r);
+    }
+    return 0;
 }
 </code></pre>
+<p>接着，完成isCompNum函数以及printFactors函数的具体实现。先从完数的判断开始，从定义出发，一个数如果恰好等于不包含它本身所有因子之和，这个数就称为&quot;完数&quot;。此时我们只需找出数字所有非自身因子，将他们累加，将和与自身进行比较，相同则是完数，不同则不是。</p>
+<pre><code class="language-c++">bool isCompNum(int num)
+{// 判断完数，是的话返回true ,不是返回false
+    int sum=0;// 存储计算不包含本身的所有因子之和
+    for(int i=1;i&lt;num;i++)
+    {//遍历 1~num-1
+        if(num%i==0) sum+=i;// 如果能整除，则i是num的因子，进行累加求和
+    }
+    return sum==num;//返回总和与Num的判断结果
+}
+</code></pre>
+<p>再进行因子的输出，遍历所有的因子，去除掉自身之后输出即可。注意输出格式，最后加上换行。</p>
+<pre><code class="language-c++">void printFactors(int num)
+{// 输出数字num的所有因子
+    cout&lt;&lt;num&lt;&lt;&quot; its factors are&quot;;
+    for(int i=1;i&lt;num;i++)
+    {// 遍历1~num-1
+        if(num%i==0)//如果i是num的因子
+        {
+            cout&lt;&lt;&quot; &quot;&lt;&lt;i;
+        }
+    }
+    cout&lt;&lt;endl;
+}
+</code></pre>
+<p>然后将他们整合起来，即完成了这道题目。</p>
+<pre><code class="language-c++">#include &lt;iostream&gt;
+using namespace std;
+bool isCompNum(int num)
+{// 判断完数，是的话返回true ,不是返回false
+    int sum=0;// 存储计算不包含本身的所有因子之和
+    for(int i=1;i&lt;num;i++)
+    {//遍历 1~num-1
+        if(num%i==0) sum+=i;// 如果能整除，则i是num的因子，进行累加求和
+    }
+    return sum==num;//返回总和与Num的判断结果
+}
+
+void printFactors(int num)
+{// 输出数字num的所有因子
+    cout&lt;&lt;num&lt;&lt;&quot; its factors are&quot;;
+    for(int i=1;i&lt;num;i++)
+    {// 遍历1~num-1
+        if(num%i==0)//如果i是num的因子
+        {
+            cout&lt;&lt;&quot; &quot;&lt;&lt;i;
+        }
+    }
+    cout&lt;&lt;endl;
+}
+int main()
+{
+    int n;// 存放范围
+    cin&gt;&gt;n;// 输入范围
+    for(int i=6;i&lt;=n;i++)//最小的完数是6，遍历6~n
+    {
+        if(isCompNum(i))// 如果是完数
+        {
+            printFactors(i);//按格式输出所有因子
+        }
+    }
+
+    return 0;
+}
+</code></pre>
+<p>通过这道题目，可以练习自定义函数、枚举法及累加求和的使用。</p>
 
             </div>
           </article>
@@ -153,9 +204,9 @@
               <div class="next">
                 下一篇
               </div>
-              <a href="https://wylovecat.github.io/post/KcB11JFTx">
+              <a href="https://wylovecat.github.io/post/wUbDXy5VZ">
                 <h3 class="post-title">
-                  归并排序
+                  题解:报数问题（C++描述）
                 </h3>
               </a>
             </div>
@@ -296,11 +347,11 @@
     </div>
     <div class="row">
       
-        <a href="https://wylovecat.github.io/tag/CSNe-Ttwm" class="badge warning">
+        <a href="https://wylovecat.github.io/tag/CSNe-Ttwm" class="badge success">
           C/C++
         </a>
       
-        <a href="https://wylovecat.github.io/tag/Z3tt3bzbS" class="badge secondary">
+        <a href="https://wylovecat.github.io/tag/Z3tt3bzbS" class="badge ">
           数学
         </a>
       
@@ -312,15 +363,15 @@
           算法
         </a>
       
-        <a href="https://wylovecat.github.io/tag/iqjH4VeE6" class="badge secondary">
+        <a href="https://wylovecat.github.io/tag/iqjH4VeE6" class="badge success">
           高精度
         </a>
       
-        <a href="https://wylovecat.github.io/tag/zjXnb_eXv" class="badge ">
+        <a href="https://wylovecat.github.io/tag/zjXnb_eXv" class="badge success">
           noip
         </a>
       
-        <a href="https://wylovecat.github.io/tag/cKlT30oiM" class="badge warning">
+        <a href="https://wylovecat.github.io/tag/cKlT30oiM" class="badge secondary">
           模拟
         </a>
       
@@ -328,23 +379,23 @@
           枚举
         </a>
       
-        <a href="https://wylovecat.github.io/tag/tHyJk6N28" class="badge success">
+        <a href="https://wylovecat.github.io/tag/tHyJk6N28" class="badge ">
           Git
         </a>
       
-        <a href="https://wylovecat.github.io/tag/sEMfEVAVO" class="badge warning">
+        <a href="https://wylovecat.github.io/tag/sEMfEVAVO" class="badge ">
           计算机基础
         </a>
       
-        <a href="https://wylovecat.github.io/tag/markdown" class="badge secondary">
+        <a href="https://wylovecat.github.io/tag/markdown" class="badge warning">
           Markdown
         </a>
       
-        <a href="https://wylovecat.github.io/tag/4kipjvQ-w" class="badge ">
+        <a href="https://wylovecat.github.io/tag/4kipjvQ-w" class="badge secondary">
           vscode
         </a>
       
-        <a href="https://wylovecat.github.io/tag/RYJKhhSlc" class="badge warning">
+        <a href="https://wylovecat.github.io/tag/RYJKhhSlc" class="badge secondary">
           hexo
         </a>
       
