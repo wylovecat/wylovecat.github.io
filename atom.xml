@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://wylovecat.github.io/</id>
     <title>咸鱼爱学习</title>
-    <updated>2020-01-28T08:02:10.450Z</updated>
+    <updated>2020-02-20T04:07:08.721Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://wylovecat.github.io/"/>
     <link rel="self" href="https://wylovecat.github.io/atom.xml"/>
@@ -11,73 +11,73 @@
     <icon>https://wylovecat.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, 咸鱼爱学习</rights>
     <entry>
+        <title type="html"><![CDATA[Lepton使用手册]]></title>
+        <id>https://wylovecat.github.io/post/-0ZTKQ856/</id>
+        <link href="https://wylovecat.github.io/post/-0ZTKQ856/">
+        </link>
+        <updated>2020-02-20T01:50:54.000Z</updated>
+    </entry>
+    <entry>
         <title type="html"><![CDATA[题解：完数的判断（C++描述）]]></title>
-        <id>https://wylovecat.github.io/post/WntCGkdyK</id>
-        <link href="https://wylovecat.github.io/post/WntCGkdyK">
+        <id>https://wylovecat.github.io/post/WntCGkdyK/</id>
+        <link href="https://wylovecat.github.io/post/WntCGkdyK/">
         </link>
         <updated>2020-01-28T08:01:24.000Z</updated>
     </entry>
     <entry>
         <title type="html"><![CDATA[题解:报数问题（C++描述）]]></title>
-        <id>https://wylovecat.github.io/post/wUbDXy5VZ</id>
-        <link href="https://wylovecat.github.io/post/wUbDXy5VZ">
+        <id>https://wylovecat.github.io/post/wUbDXy5VZ/</id>
+        <link href="https://wylovecat.github.io/post/wUbDXy5VZ/">
         </link>
         <updated>2020-01-27T06:55:33.000Z</updated>
     </entry>
     <entry>
         <title type="html"><![CDATA[题解：成绩统计]]></title>
-        <id>https://wylovecat.github.io/post/EwPC9m7kb</id>
-        <link href="https://wylovecat.github.io/post/EwPC9m7kb">
+        <id>https://wylovecat.github.io/post/EwPC9m7kb/</id>
+        <link href="https://wylovecat.github.io/post/EwPC9m7kb/">
         </link>
         <updated>2020-01-26T03:13:42.000Z</updated>
     </entry>
     <entry>
         <title type="html"><![CDATA[题解：成绩记录]]></title>
-        <id>https://wylovecat.github.io/post/WlYcqG1Yi</id>
-        <link href="https://wylovecat.github.io/post/WlYcqG1Yi">
+        <id>https://wylovecat.github.io/post/WlYcqG1Yi/</id>
+        <link href="https://wylovecat.github.io/post/WlYcqG1Yi/">
         </link>
         <updated>2020-01-26T02:01:37.000Z</updated>
     </entry>
     <entry>
         <title type="html"><![CDATA[质数筛法]]></title>
-        <id>https://wylovecat.github.io/post/tNeVitMwQ</id>
-        <link href="https://wylovecat.github.io/post/tNeVitMwQ">
+        <id>https://wylovecat.github.io/post/tNeVitMwQ/</id>
+        <link href="https://wylovecat.github.io/post/tNeVitMwQ/">
         </link>
         <updated>2020-01-10T08:16:44.000Z</updated>
     </entry>
     <entry>
         <title type="html"><![CDATA[树]]></title>
-        <id>https://wylovecat.github.io/post/ygPOxCvHb</id>
-        <link href="https://wylovecat.github.io/post/ygPOxCvHb">
+        <id>https://wylovecat.github.io/post/ygPOxCvHb/</id>
+        <link href="https://wylovecat.github.io/post/ygPOxCvHb/">
         </link>
         <updated>2019-09-15T00:25:31.000Z</updated>
     </entry>
     <entry>
         <title type="html"><![CDATA[快速排序]]></title>
-        <id>https://wylovecat.github.io/post/m6Tq0iSbX</id>
-        <link href="https://wylovecat.github.io/post/m6Tq0iSbX">
+        <id>https://wylovecat.github.io/post/m6Tq0iSbX/</id>
+        <link href="https://wylovecat.github.io/post/m6Tq0iSbX/">
         </link>
         <updated>2019-09-05T05:16:15.000Z</updated>
     </entry>
     <entry>
         <title type="html"><![CDATA[归并排序]]></title>
-        <id>https://wylovecat.github.io/post/KcB11JFTx</id>
-        <link href="https://wylovecat.github.io/post/KcB11JFTx">
+        <id>https://wylovecat.github.io/post/KcB11JFTx/</id>
+        <link href="https://wylovecat.github.io/post/KcB11JFTx/">
         </link>
         <updated>2019-09-04T15:58:20.000Z</updated>
     </entry>
     <entry>
         <title type="html"><![CDATA[高精度计算(一)]]></title>
-        <id>https://wylovecat.github.io/post/G_OL3h80e</id>
-        <link href="https://wylovecat.github.io/post/G_OL3h80e">
+        <id>https://wylovecat.github.io/post/G_OL3h80e/</id>
+        <link href="https://wylovecat.github.io/post/G_OL3h80e/">
         </link>
         <updated>2019-09-03T08:41:37.000Z</updated>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[欧几里得算法与拓展欧几里得]]></title>
-        <id>https://wylovecat.github.io/post/jZSzkJ5Oq</id>
-        <link href="https://wylovecat.github.io/post/jZSzkJ5Oq">
-        </link>
-        <updated>2019-09-02T15:21:27.000Z</updated>
     </entry>
 </feed>

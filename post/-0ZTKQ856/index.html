@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" >
 
-<title>归并排序 | 咸鱼爱学习</title>
+<title>Lepton使用手册 | 咸鱼爱学习</title>
 <meta name="description" content="温故而知新">
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -87,107 +87,108 @@
       <div class="sm-12 md-8 col">
         <div class="paper">
           <article class="article">
-            <h1>归并排序</h1>
+            <h1>Lepton使用手册</h1>
             <p class="article-meta">
-              2019-09-04
+              2020-02-20
               
-                <a href="https://wylovecat.github.io/tag/Xml2KtR4g/" class="badge secondary">
-                  算法
-                </a>
-              
-                <a href="https://wylovecat.github.io/tag/CSNe-Ttwm/" class="badge secondary">
-                  C/C++
+                <a href="https://wylovecat.github.io/tag/Vy35u5qbs/" class="badge secondary">
+                  工具
                 </a>
               
             </p>
             
             <div class="post-content">
-              <h1 id="归并排序">归并排序</h1>
-<p>归并排序是建立在归并操作上的一种有效的排序算法。该算法是采用分治法的一个非常典型的应用。时间复杂度是O(nlogn)</p>
-<h2 id="核心思想">核心思想</h2>
-<p>将一段序列分解知道不能再分解的时候，然后开始逐层合并，并在合并的时候保证他们有序，这样就能保证每次合并后的内容有序，知道合并完成保证了所有的部分全部有序。</p>
-<p>分治三步法：</p>
+              <p>Lepton 是一个基于GitHub Gist的代码片段管理工具。</p>
+<ul>
+<li>无限数量的 公有/私有 代码片段</li>
+<li>无限数量的标签</li>
+<li>语言组</li>
+<li>支持Markdowm/Jupyter 笔记</li>
+<li>支持企业版GitHub</li>
+<li>沉浸模式</li>
+<li>可定制性</li>
+<li>亮/暗主题</li>
+<li>支持系统 macOs/Win/Linux</li>
+<li>仪表盘化</li>
+<li>可搜索</li>
+<li>可设置代理服务器</li>
+<li><strong>免费</strong></li>
+</ul>
+<h1 id="快捷键">快捷键</h1>
+<table>
+<thead>
+<tr>
+<th>功能</th>
+<th>快捷键</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>New Snippet</td>
+<td>Cmd/Ctrl + N</td>
+<td>创建一个片段</td>
+</tr>
+<tr>
+<td>Edit snippet</td>
+<td>Cmd/Ctrl + E</td>
+<td>编辑一个片段</td>
+</tr>
+<tr>
+<td>Submit</td>
+<td>Cmd/Ctrl + S</td>
+<td>编辑后提交变化</td>
+</tr>
+<tr>
+<td>Cancel</td>
+<td>Cmd/Ctrl + ESC</td>
+<td>不保存直接退出编辑</td>
+</tr>
+<tr>
+<td>Sync</td>
+<td>Cmd/Ctrl + R</td>
+<td>同步远端Gist服务</td>
+</tr>
+<tr>
+<td>Immersive Mode</td>
+<td>Cmd/Ctrl + I</td>
+<td>打开沉浸式模式</td>
+</tr>
+<tr>
+<td>Dashboard</td>
+<td>Cmd/Ctrl + D</td>
+<td>打开仪表盘</td>
+</tr>
+<tr>
+<td>About Page</td>
+<td>Cmd/Ctrl + ,</td>
+<td>打开关于页面</td>
+</tr>
+<tr>
+<td>Search</td>
+<td>Shift + Space</td>
+<td>打开搜索框</td>
+</tr>
+</tbody>
+</table>
+<h1 id="定制化">定制化</h1>
+<p>Lepton的外观可以通过<code>&lt;home_dir&gt;/ .leptonrc !</code>（不存在就创建一个文件）进行定制。</p>
+<ul>
+<li>主题（亮/暗）</li>
+<li>片段</li>
+<li>编辑器</li>
+<li>记录器</li>
+<li>代理服务器</li>
+<li>企业</li>
+</ul>
+<h1 id="技术栈">技术栈</h1>
 <ol>
-<li>划分问题：把序列分成元素个数尽量相等的两半</li>
-<li>递归求解：把两半元素分别排序</li>
-<li>合并问题：把两个有序表合并成一个</li>
+<li>框架：Electron</li>
+<li>Bundler：WebPack,Babel,electron-builder</li>
+<li>语言：ES6，Sass</li>
+<li>数据库：React,Redux Thunk,Redux Form</li>
+<li>Lint : EsLint</li>
 </ol>
-<h2 id="代码实现">代码实现</h2>
-<pre><code class="language-c++">void mergeSort(int a[],int sta,int end,int tmp[])
-{
-    if(sta&lt;end)
-    {
-        int mind=(sta+end)/2;
-        mergeSort(a,first,mid,tmp);//使左边排列有序
-        mergeSort(a,mid+1,end,tmp);//使右边排列有序
-        mergeArray(a,sta,mid,end,tmp);//合并左右两个有序数列
-    }
-}
-</code></pre>
-<h2 id="合并的方法">合并的方法</h2>
-<p>合并时对象是两个已排序好的数列，初始状态下，两个指针分别指向两个带合并数列的第一个元素，然后比较这两个元素的大小，将较小的元素添加大一个新创建的数列中。接着，被复制的数列中的指针后移，指向该较小的后记元素。上述操作一直持续到两个数列中的一个被处理完位置。然后，在未处理完的数列中，剩下的元素被复制到新数组列的尾部。</p>
-<h3 id="合并实现">合并实现</h3>
-<pre><code class="language-c++">Merge(int left[],int right[],int tmp[])
-{
-    int i=0,j=0,k=0;
-    while(i&lt;len1&amp;&amp;j&lt;len2)
-    {
-        if(left[i]&lt;right[j])
-        {
-            tmp[k++]=left[i++];
-        }else
-        {
-            tmp[k++]=right[j++];
-        }
-    }
-    while(i&lt;len1) tmp[k++]=left[i++];
-    while(j&lt;len2) tmp[k++]=right[j++];
-}
-
-</code></pre>
-<h2 id="优缺点">优缺点</h2>
-<p>需要使用O(n)的辅助空间，二与之效率相同的快排和堆排需要O(logn)和O(1)的辅助空间，在同类算法中归并排序的空间复杂度略高。</p>
-<p>优点是稳定性。</p>
-<h2 id="变形">变形</h2>
-<ul>
-<li>可以自底向上合并数组的一个个元素对，然后再合并这些有序对，以此类推。这样能避免使用堆栈处理递归调用时的时间和空间开销。</li>
-</ul>
-<p>比较适合用链表组织的数据。</p>
-<ul>
-<li>把数组划分为待排序的多个部分，再对他们递归排序，最后将其合并在一起。适合对存放在二级存储空间的文件进行排序，也被称为多路合并排序。</li>
-</ul>
-<p>原方法也被称之为二路合并排序。</p>
-<h2 id="解决逆序对问题">解决逆序对问题</h2>
-<h3 id="逆序对概念">逆序对概念</h3>
-<p>设A为一个有n个数字的有序集(n&gt;1)，其中所有数字各不相同。如果存在正整数i,j使得1&lt;=i&lt;j&lt;=n而且A[i]&gt;A[j],则&lt;A[i],A[j]&gt;这个有序对称为A的一个逆序对，也称作逆序数。</p>
-<p>逆序对从定义上分析，逆序对就是数列中任意两个数满足大的在前，小的在后的组合。</p>
-<p>所谓逆序对问题，即对给定的数组序列，求其逆序对的数量。</p>
-<p>在算法实现中，略微修改原有的归并排序，当右边序列的元素为较小值是，就统计其产生的逆序对数量，即可完成逆序对的统计。</p>
-<h3 id="代码实现-2">代码实现</h3>
-<pre><code class="language-c++">void msort(int s,int t)
-{
-    if(s==t) return;
-    int mid=(s+t)/2;
-    msort(s,mid);
-    msort(mid+1,t);
-    int i=s,j=mid+1,k=s;
-    while(i&lt;=mid &amp;&amp; j&lt;=t)
-    {
-        if(a[i]&lt;=a[j])
-            r[k++]=a[i++];
-        else
-        {
-            r[k++]=a[j++];
-            ans+=mid-i+1;//统计产生逆序对的数量
-            //mid-i+1为左边剩余元素个数
-        }
-            
-    }
-    while(i&lt;=mid) r[k++]=a[i++];
-    while(j&lt;=t) r[k++]=a[j++];
-    for(int i=s;i&lt;t;i++) a[i]=r[i];
-}
-</code></pre>
 
             </div>
           </article>
@@ -198,9 +199,9 @@
               <div class="next">
                 下一篇
               </div>
-              <a href="https://wylovecat.github.io/post/G_OL3h80e/">
+              <a href="https://wylovecat.github.io/post/WntCGkdyK/">
                 <h3 class="post-title">
-                  高精度计算(一)
+                  题解：完数的判断（C++描述）
                 </h3>
               </a>
             </div>
@@ -343,43 +344,43 @@
     </div>
     <div class="row">
       
-        <a href="https://wylovecat.github.io/tag/Vy35u5qbs/" class="badge warning">
+        <a href="https://wylovecat.github.io/tag/Vy35u5qbs/" class="badge success">
           工具
         </a>
       
-        <a href="https://wylovecat.github.io/tag/CSNe-Ttwm/" class="badge secondary">
+        <a href="https://wylovecat.github.io/tag/CSNe-Ttwm/" class="badge ">
           C/C++
         </a>
       
-        <a href="https://wylovecat.github.io/tag/Z3tt3bzbS/" class="badge warning">
+        <a href="https://wylovecat.github.io/tag/Z3tt3bzbS/" class="badge ">
           数学
         </a>
       
-        <a href="https://wylovecat.github.io/tag/GyyF0zlSG/" class="badge secondary">
+        <a href="https://wylovecat.github.io/tag/GyyF0zlSG/" class="badge ">
           数据结构
         </a>
       
-        <a href="https://wylovecat.github.io/tag/Xml2KtR4g/" class="badge ">
+        <a href="https://wylovecat.github.io/tag/Xml2KtR4g/" class="badge success">
           算法
         </a>
       
-        <a href="https://wylovecat.github.io/tag/iqjH4VeE6/" class="badge warning">
+        <a href="https://wylovecat.github.io/tag/iqjH4VeE6/" class="badge secondary">
           高精度
         </a>
       
-        <a href="https://wylovecat.github.io/tag/zjXnb_eXv/" class="badge warning">
+        <a href="https://wylovecat.github.io/tag/zjXnb_eXv/" class="badge ">
           noip
         </a>
       
-        <a href="https://wylovecat.github.io/tag/cKlT30oiM/" class="badge ">
+        <a href="https://wylovecat.github.io/tag/cKlT30oiM/" class="badge secondary">
           模拟
         </a>
       
-        <a href="https://wylovecat.github.io/tag/S-CLh9EEX/" class="badge warning">
+        <a href="https://wylovecat.github.io/tag/S-CLh9EEX/" class="badge success">
           枚举
         </a>
       
-        <a href="https://wylovecat.github.io/tag/tHyJk6N28/" class="badge success">
+        <a href="https://wylovecat.github.io/tag/tHyJk6N28/" class="badge secondary">
           Git
         </a>
       
@@ -387,15 +388,15 @@
           计算机基础
         </a>
       
-        <a href="https://wylovecat.github.io/tag/markdown/" class="badge success">
+        <a href="https://wylovecat.github.io/tag/markdown/" class="badge secondary">
           Markdown
         </a>
       
-        <a href="https://wylovecat.github.io/tag/4kipjvQ-w/" class="badge secondary">
+        <a href="https://wylovecat.github.io/tag/4kipjvQ-w/" class="badge warning">
           vscode
         </a>
       
-        <a href="https://wylovecat.github.io/tag/RYJKhhSlc/" class="badge warning">
+        <a href="https://wylovecat.github.io/tag/RYJKhhSlc/" class="badge success">
           hexo
         </a>
       
