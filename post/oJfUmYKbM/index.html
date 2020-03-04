@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" >
 
-<title>关于 | 咸鱼爱学习</title>
+<title>利用码云Gitee和PicGo搭建自己的免费图床 | 咸鱼爱学习</title>
 <meta name="description" content="温故而知新">
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -87,19 +87,72 @@
       <div class="sm-12 md-8 col">
         <div class="paper">
           <article class="article">
-            <h1>关于</h1>
+            <h1>利用码云Gitee和PicGo搭建自己的免费图床</h1>
             <p class="article-meta">
-              2019-01-25
+              2020-03-04
+              
+                <a href="https://wylovecat.github.io/tag/M0JrCmklM/" class="badge success">
+                  markdown
+                </a>
+              
+                <a href="https://wylovecat.github.io/tag/Vy35u5qbs/" class="badge warning">
+                  工具
+                </a>
               
             </p>
             
             <div class="post-content">
-              <p>这是关于的页面，可以在这里向世界介绍你！</p>
+              <h1 id="前言">前言</h1>
+<p>​	为什么有这样的需求？平常也会自己写写博客，更新更新文章，在接触了markdown之后，基本上所有文章都是用markdown语法写的了。在利用markdown进行文章书写的时候有一点比较烦，就是插入图片的问题。不是说插入图片的语法复杂而是国内免费好用的图床比较少。在之前一段时间有用过GitHub的仓库搭建过图床，但是访问速度一直感人，特别是用Typora进行实时预览时基本上都显示不出来。然后就先到了国内的同类平台Gitee码云，结合一直用的很顺手的图床上传工具PicGo搭建自己的免费图床。</p>
+<h1 id="准备">准备</h1>
+<p>​	首先需要去<a href="https://gitee.com/">码云</a>注册一个账号，并新建一个仓库。接着下载<a href="https://picgo.github.io/PicGo-Doc/zh/guide/">PicGO</a>并安装好。</p>
+<h1 id="过程">过程</h1>
+<p>​	点击左下方的插件设置。</p>
+<figure data-type="image" tabindex="1"><img src="https://gitee.com/wyloving/picCloud/raw/master/20200304135820.png" alt="" loading="lazy"></figure>
+<p>​	在搜索框中输入gitee搜索插件，安装右边的gitee-</p>
+<p>uploader。</p>
+<figure data-type="image" tabindex="2"><img src="https://gitee.com/wyloving/picCloud/raw/master/image-20200304135957642.png" alt="" loading="lazy"></figure>
+<p>​	安装好之后退出搜索，点击已安装好的插件的右下角的齿轮图标进行配置。选择配置uploader-gitee。</p>
+<figure data-type="image" tabindex="3"><img src="https://gitee.com/wyloving/picCloud/raw/master/image-20200304140456650.png" alt="" loading="lazy"></figure>
+<p>​	会出现下图的窗口，其中repo和token没有内容必须要自己填写。</p>
+<figure data-type="image" tabindex="4"><img src="https://gitee.com/wyloving/picCloud/raw/master/image-20200304140739673.png" alt="" loading="lazy"></figure>
+<p>​	repo就是你在码云上新建的仓库以用户名/仓库名的方式进行填写，比如我的用户名是xxname，我的仓库名是picture,那么repo就写xxname/picture。</p>
+<p>​	token则需要我们去码云上创建一个。打开码云，点击左侧个人主页旁的齿轮状设置图标。</p>
+<figure data-type="image" tabindex="5"><img src="https://gitee.com/wyloving/picCloud/raw/master/image-20200304141247482.png" alt="" loading="lazy"></figure>
+<p>​	在左侧的安全设置中找到私人令牌，点进去。在点击右上方橘红色的生成新令牌</p>
+<figure data-type="image" tabindex="6"><img src="https://gitee.com/wyloving/picCloud/raw/master/image-20200304141521776.png" alt="" loading="lazy"></figure>
+<figure data-type="image" tabindex="7"><img src="https://gitee.com/wyloving/picCloud/raw/master/image-20200304141547583.png" alt="" loading="lazy"></figure>
+<p>​	在私人令牌描述中随便写个名字比如PicGO，点击全选，再点击提交。会让你输入密码进行验证。成功后会生成一个私人令牌，把他复制下来，这就是你的token。</p>
+<figure data-type="image" tabindex="8"><img src="https://gitee.com/wyloving/picCloud/raw/master/image-20200304141834422.png" alt="" loading="lazy"></figure>
+<p>​	然后，再回到PicGo的Gitee插件设置步骤，把复制下的token复制进去，点击确定就OK了。</p>
+<p>​	点击PicGo设置，往下拉，再选择显示的图床中勾选好gitee。</p>
+<figure data-type="image" tabindex="9"><img src="C:%5CUsers%5Cw-yao%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200304142237050.png" alt="image-20200304142237050" loading="lazy"></figure>
+<p>​	这样在上传去就能将图片上传至Gitee中了。</p>
+<figure data-type="image" tabindex="10"><img src="https://gitee.com/wyloving/picCloud/raw/master/20200304144210.png" alt="" loading="lazy"></figure>
+<h1 id="总结">总结</h1>
+<ol>
+<li>注册码云账号并新建图床仓库</li>
+<li>下载、安装PicGo</li>
+<li>下载、安装gitee插件</li>
+<li>生成私人令牌配置插件</li>
+<li>上传图片</li>
+</ol>
 
             </div>
           </article>
         </div>
         <div class="paper" data-aos="fade-in">
+          
+            <div class="next-post">
+              <div class="next">
+                下一篇
+              </div>
+              <a href="https://wylovecat.github.io/post/-0ZTKQ856/">
+                <h3 class="post-title">
+                  Lepton使用手册
+                </h3>
+              </a>
+            </div>
           
         </div>
         
@@ -241,7 +294,7 @@
     </div>
     <div class="row">
       
-        <a href="https://wylovecat.github.io/tag/M0JrCmklM/" class="badge ">
+        <a href="https://wylovecat.github.io/tag/M0JrCmklM/" class="badge success">
           markdown
         </a>
       
@@ -253,19 +306,19 @@
           C/C++
         </a>
       
-        <a href="https://wylovecat.github.io/tag/Z3tt3bzbS/" class="badge ">
+        <a href="https://wylovecat.github.io/tag/Z3tt3bzbS/" class="badge warning">
           数学
         </a>
       
-        <a href="https://wylovecat.github.io/tag/GyyF0zlSG/" class="badge secondary">
+        <a href="https://wylovecat.github.io/tag/GyyF0zlSG/" class="badge success">
           数据结构
         </a>
       
-        <a href="https://wylovecat.github.io/tag/Xml2KtR4g/" class="badge success">
+        <a href="https://wylovecat.github.io/tag/Xml2KtR4g/" class="badge secondary">
           算法
         </a>
       
-        <a href="https://wylovecat.github.io/tag/iqjH4VeE6/" class="badge success">
+        <a href="https://wylovecat.github.io/tag/iqjH4VeE6/" class="badge secondary">
           高精度
         </a>
       
@@ -273,11 +326,11 @@
           noip
         </a>
       
-        <a href="https://wylovecat.github.io/tag/cKlT30oiM/" class="badge warning">
+        <a href="https://wylovecat.github.io/tag/cKlT30oiM/" class="badge secondary">
           模拟
         </a>
       
-        <a href="https://wylovecat.github.io/tag/S-CLh9EEX/" class="badge ">
+        <a href="https://wylovecat.github.io/tag/S-CLh9EEX/" class="badge warning">
           枚举
         </a>
       
@@ -289,15 +342,15 @@
           计算机基础
         </a>
       
-        <a href="https://wylovecat.github.io/tag/markdown/" class="badge ">
+        <a href="https://wylovecat.github.io/tag/markdown/" class="badge success">
           Markdown
         </a>
       
-        <a href="https://wylovecat.github.io/tag/4kipjvQ-w/" class="badge ">
+        <a href="https://wylovecat.github.io/tag/4kipjvQ-w/" class="badge secondary">
           vscode
         </a>
       
-        <a href="https://wylovecat.github.io/tag/RYJKhhSlc/" class="badge secondary">
+        <a href="https://wylovecat.github.io/tag/RYJKhhSlc/" class="badge ">
           hexo
         </a>
       

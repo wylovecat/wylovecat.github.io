@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://wylovecat.github.io/</id>
     <title>咸鱼爱学习</title>
-    <updated>2020-02-20T04:07:08.721Z</updated>
+    <updated>2020-03-04T08:10:02.433Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://wylovecat.github.io/"/>
     <link rel="self" href="https://wylovecat.github.io/atom.xml"/>
@@ -10,6 +10,13 @@
     <logo>https://wylovecat.github.io/images/avatar.png</logo>
     <icon>https://wylovecat.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, 咸鱼爱学习</rights>
+    <entry>
+        <title type="html"><![CDATA[利用码云Gitee和PicGo搭建自己的免费图床]]></title>
+        <id>https://wylovecat.github.io/post/oJfUmYKbM/</id>
+        <link href="https://wylovecat.github.io/post/oJfUmYKbM/">
+        </link>
+        <updated>2020-03-04T07:57:09.000Z</updated>
+    </entry>
     <entry>
         <title type="html"><![CDATA[Lepton使用手册]]></title>
         <id>https://wylovecat.github.io/post/-0ZTKQ856/</id>
@@ -72,12 +79,5 @@
         <link href="https://wylovecat.github.io/post/KcB11JFTx/">
         </link>
         <updated>2019-09-04T15:58:20.000Z</updated>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[高精度计算(一)]]></title>
-        <id>https://wylovecat.github.io/post/G_OL3h80e/</id>
-        <link href="https://wylovecat.github.io/post/G_OL3h80e/">
-        </link>
-        <updated>2019-09-03T08:41:37.000Z</updated>
     </entry>
 </feed>
