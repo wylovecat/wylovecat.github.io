@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" >
 
-<title>枚举 | 咸鱼爱学习</title>
+<title>高精度计算（二） | 咸鱼爱学习</title>
 <meta name="description" content="温故而知新">
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -15,6 +15,12 @@
 <link rel="stylesheet" href="https://wylovecat.github.io//styles/main.css">
 
 
+  
+    <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css" />
+  
+
+  
+
 <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
 
 
@@ -23,6 +29,7 @@
 
   </head>
   <body>
+  
     <nav class="navbar border fixed split-nav">
   <div class="nav-brand">
     <h3><a href="https://wylovecat.github.io/">咸鱼爱学习</a></h3>
@@ -79,112 +86,163 @@
     <div id="top" class="row site">
       <div class="sm-12 md-8 col">
         <div class="paper">
-          <h2 class="current-tag">标签: 枚举</h2>
-          
-  <article class="article">
-    <h2 class="article-title">
-      <a href="https://wylovecat.github.io/post/dLtINUDHC/">比例简化</a>
-    </h2>
-    <p class="article-meta">
-      2019-08-17
-      
-        <a href="https://wylovecat.github.io/tag/zjXnb_eXv/" class="badge ">
-          noip
-        </a>
-      
-        <a href="https://wylovecat.github.io/tag/cKlT30oiM/" class="badge warning">
-          模拟
-        </a>
-      
-        <a href="https://wylovecat.github.io/tag/S-CLh9EEX/" class="badge warning">
-          枚举
-        </a>
-      
-    </p>
-    <p class="text-lead">
-      
-    </p>
-    <div class="row">
-      <a href="https://wylovecat.github.io/post/dLtINUDHC/" class="readmore-link">
-        <button>
-          Read More
-        </button>
-      </a>
-    </div>
-  </article>
+          <article class="article">
+            <h1>高精度计算（二）</h1>
+            <p class="article-meta">
+              2020-03-23
+              
+                <a href="https://wylovecat.github.io/tag/iqjH4VeE6/" class="badge ">
+                  高精度
+                </a>
+              
+                <a href="https://wylovecat.github.io/tag/Xml2KtR4g/" class="badge secondary">
+                  算法
+                </a>
+              
+            </p>
+            
+            <div class="post-content">
+              <h1 id="大数乘法">大数乘法</h1>
+<p>​	大数乘法处理的过程也是分为三部分。</p>
+<ol>
+<li>存储</li>
+<li>计算</li>
+<li>输出</li>
+</ol>
+<h2 id="分析">分析</h2>
+<p>存储与输出与大数加减法方法一致。区别在于中间计算的过程。在平时，我们使用竖式进行乘法计算时，和加法很相似，从低位开始进行计算，也需要考虑进位操作。区别在于，我们将下面一行的数字相乘计算时，是需要进行错位相加的。</p>
+<figure data-type="image" tabindex="1"><img src="https://gitee.com/wyloving/picCloud/raw/master/20200323145742.png" alt="" loading="lazy"></figure>
+<p>这边的关键之处在于如何体现出错位这一位置关系。</p>
+<table>
+<thead>
+<tr>
+<th>第一行 j</th>
+<th>第二行 i</th>
+<th>答案m</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr>
+<td>0</td>
+<td>2</td>
+<td>2</td>
+</tr>
+<tr>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+</tr>
+<tr>
+<td>1</td>
+<td>1</td>
+<td>2</td>
+</tr>
+<tr>
+<td>1</td>
+<td>2</td>
+<td>3</td>
+</tr>
+</tbody>
+</table>
+<p>可观察到m=i+j。搞清楚位置关系后，中间就好处理了。最后我们都是进行一个相加得到答案，我们可以将相加的过程穿插在中间进行处理。</p>
+<pre><code class="language-c++">// 乘法计算
+// 把第二个数从后往前依次和第一个数进行相乘，最后累加
+for(int i=0;i&lt;l2;i++){
+    for(int j=0;j&lt;l1;j++){
+        int tmp=n2[i]*n1[j];// 算出相乘的结果
+        ans[i+j]+=tmp;//累加
+        //进位处理
+        ans[i+j+1]+=(ans[i+j]/10);
+        ans[i+j]=ans[i+j]%10;
+    }
+}
+</code></pre>
+<p>将中间计算部分处理好之后整道题就完成了70%。</p>
+<h2 id="完整代码">完整代码</h2>
+<pre><code class="language-c++">#include &lt;iostream&gt;
+#include &lt;cstring&gt;
+using namespace std;
+int main(){
+    char s1[2005]={0},s2[2005]={0};
+    int n1[20005]={0},n2[2005]={0},ans[4005]={0};
+    //字符串形式进行输入
+    cin&gt;&gt;s1&gt;&gt;s2;
+    // 倒置转换为整数类型
+    int l1=strlen(s1);
+    int l2=strlen(s2);
+    for(int i=0;i&lt;l1;i++){
+        n1[i]=s1[l1-1-i]-'0';
+    }
+    for(int i=0;i&lt;l2;i++){
+        n2[i]=s2[l2-1-i]-'0';
+    }
 
-  <article class="article">
-    <h2 class="article-title">
-      <a href="https://wylovecat.github.io/post/S-SCKDM5o/">珠心算测验</a>
-    </h2>
-    <p class="article-meta">
-      2019-08-15
-      
-        <a href="https://wylovecat.github.io/tag/zjXnb_eXv/" class="badge success">
-          noip
-        </a>
-      
-        <a href="https://wylovecat.github.io/tag/cKlT30oiM/" class="badge secondary">
-          模拟
-        </a>
-      
-        <a href="https://wylovecat.github.io/tag/S-CLh9EEX/" class="badge ">
-          枚举
-        </a>
-      
-    </p>
-    <p class="text-lead">
-      
-    </p>
-    <div class="row">
-      <a href="https://wylovecat.github.io/post/S-SCKDM5o/" class="readmore-link">
-        <button>
-          Read More
-        </button>
-      </a>
-    </div>
-  </article>
+    // 乘法计算
+    // 把第二个数从后往前依次和第一个数进行相乘，最后累加
+    for(int i=0;i&lt;l2;i++){
+        for(int j=0;j&lt;l1;j++){
+            int tmp=n2[i]*n1[j];
+            ans[i+j]+=tmp;
+            //进位处理
+            ans[i+j+1]+=(ans[i+j]/10);
+            ans[i+j]=ans[i+j]%10;
+        }
+    }
+    
+    // 输出
+    bool flag=false;
+    for(int i=l1+l2;i&gt;=0;i--){
+        if(ans[i]!=0||i==0){
+            flag=true;
+        }
+        if(flag){
+            cout&lt;&lt;ans[i];
+        }
+    }
 
-  <article class="article">
-    <h2 class="article-title">
-      <a href="https://wylovecat.github.io/post/8o-Bcw0Hg/">回文日期</a>
-    </h2>
-    <p class="article-meta">
-      2019-08-15
-      
-        <a href="https://wylovecat.github.io/tag/zjXnb_eXv/" class="badge ">
-          noip
-        </a>
-      
-        <a href="https://wylovecat.github.io/tag/cKlT30oiM/" class="badge ">
-          模拟
-        </a>
-      
-        <a href="https://wylovecat.github.io/tag/S-CLh9EEX/" class="badge ">
-          枚举
-        </a>
-      
-    </p>
-    <p class="text-lead">
-      
-    </p>
-    <div class="row">
-      <a href="https://wylovecat.github.io/post/8o-Bcw0Hg/" class="readmore-link">
-        <button>
-          Read More
-        </button>
-      </a>
-    </div>
-  </article>
+    return 0;
+}
 
+</code></pre>
 
+            </div>
+          </article>
         </div>
-        <div class="row flex-edges">
-  
-  
-</div>
+        <div class="paper" data-aos="fade-in">
+          
+            <div class="next-post">
+              <div class="next">
+                下一篇
+              </div>
+              <a href="https://wylovecat.github.io/post/aTb47DjFP/">
+                <h3 class="post-title">
+                  题解：进制转换
+                </h3>
+              </a>
+            </div>
+          
+        </div>
+        
+          
+            <div class="paper" data-aos="fade-in">
+              <div id="gitalk-container"></div>
+            </div>
+          
 
+          
+        
       </div>
+
       <div class="sm-12 md-4 col sidebar">
   <div class="paper info-container">
     <img src="https://wylovecat.github.io//images/avatar.png?v=1584949078072" class="no-responsive avatar">
@@ -317,31 +375,31 @@
     </div>
     <div class="row">
       
-        <a href="https://wylovecat.github.io/tag/iqjH4VeE6/" class="badge secondary">
+        <a href="https://wylovecat.github.io/tag/iqjH4VeE6/" class="badge warning">
           高精度
         </a>
       
-        <a href="https://wylovecat.github.io/tag/Xml2KtR4g/" class="badge warning">
+        <a href="https://wylovecat.github.io/tag/Xml2KtR4g/" class="badge secondary">
           算法
         </a>
       
-        <a href="https://wylovecat.github.io/tag/cKlT30oiM/" class="badge warning">
+        <a href="https://wylovecat.github.io/tag/cKlT30oiM/" class="badge secondary">
           模拟
         </a>
       
-        <a href="https://wylovecat.github.io/tag/Z3tt3bzbS/" class="badge success">
+        <a href="https://wylovecat.github.io/tag/Z3tt3bzbS/" class="badge secondary">
           数学
         </a>
       
-        <a href="https://wylovecat.github.io/tag/M0JrCmklM/" class="badge secondary">
+        <a href="https://wylovecat.github.io/tag/M0JrCmklM/" class="badge success">
           markdown
         </a>
       
-        <a href="https://wylovecat.github.io/tag/Vy35u5qbs/" class="badge ">
+        <a href="https://wylovecat.github.io/tag/Vy35u5qbs/" class="badge success">
           工具
         </a>
       
-        <a href="https://wylovecat.github.io/tag/CSNe-Ttwm/" class="badge secondary">
+        <a href="https://wylovecat.github.io/tag/CSNe-Ttwm/" class="badge warning">
           C/C++
         </a>
       
@@ -349,35 +407,35 @@
           数据结构
         </a>
       
-        <a href="https://wylovecat.github.io/tag/zjXnb_eXv/" class="badge secondary">
+        <a href="https://wylovecat.github.io/tag/zjXnb_eXv/" class="badge warning">
           noip
         </a>
       
-        <a href="https://wylovecat.github.io/tag/S-CLh9EEX/" class="badge secondary">
+        <a href="https://wylovecat.github.io/tag/S-CLh9EEX/" class="badge warning">
           枚举
         </a>
       
-        <a href="https://wylovecat.github.io/tag/tHyJk6N28/" class="badge success">
+        <a href="https://wylovecat.github.io/tag/tHyJk6N28/" class="badge secondary">
           Git
         </a>
       
-        <a href="https://wylovecat.github.io/tag/sEMfEVAVO/" class="badge secondary">
+        <a href="https://wylovecat.github.io/tag/sEMfEVAVO/" class="badge success">
           计算机基础
         </a>
       
-        <a href="https://wylovecat.github.io/tag/markdown/" class="badge ">
+        <a href="https://wylovecat.github.io/tag/markdown/" class="badge warning">
           Markdown
         </a>
       
-        <a href="https://wylovecat.github.io/tag/4kipjvQ-w/" class="badge ">
+        <a href="https://wylovecat.github.io/tag/4kipjvQ-w/" class="badge warning">
           vscode
         </a>
       
-        <a href="https://wylovecat.github.io/tag/RYJKhhSlc/" class="badge ">
+        <a href="https://wylovecat.github.io/tag/RYJKhhSlc/" class="badge secondary">
           hexo
         </a>
       
-        <a href="https://wylovecat.github.io/tag/gridea/" class="badge ">
+        <a href="https://wylovecat.github.io/tag/gridea/" class="badge warning">
           Gridea
         </a>
       
@@ -387,6 +445,7 @@
     Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://wylovecat.github.io//atom.xml" target="_blank">RSS</a>
   </div>
 </div>
+
 
     </div>
 
@@ -399,6 +458,29 @@ AOS.init();
 hljs.initHighlightingOnLoad()
 
 </script>
+
+
+
+  
+    <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+    <script>
+
+      var gitalk = new Gitalk({
+        clientID: '09eba599fe2352041699',
+        clientSecret: '87b54f3fac03f239dfa5a92f9a96207f3f57139f',
+        repo: 'wylovecat.github.io',
+        owner: 'wylovecat',
+        admin: ['wylovecat'],
+        id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+        distractionFreeMode: false  // Facebook-like distraction free mode
+      })
+
+      gitalk.render('gitalk-container')
+
+    </script>
+  
+
+  
 
 
 
