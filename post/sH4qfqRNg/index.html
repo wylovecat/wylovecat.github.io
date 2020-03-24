@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" >
 
-<title>回文日期 | 咸鱼爱学习</title>
+<title>高精度计算（三） | 咸鱼爱学习</title>
 <meta name="description" content="温故而知新">
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -87,111 +87,90 @@
       <div class="sm-12 md-8 col">
         <div class="paper">
           <article class="article">
-            <h1>回文日期</h1>
+            <h1>高精度计算（三）</h1>
             <p class="article-meta">
-              2019-08-15
+              2020-03-24
               
-                <a href="https://wylovecat.github.io/tag/zjXnb_eXv/" class="badge warning">
+                <a href="https://wylovecat.github.io/tag/iqjH4VeE6/" class="badge success">
+                  高精度
+                </a>
+              
+                <a href="https://wylovecat.github.io/tag/zjXnb_eXv/" class="badge success">
                   noip
                 </a>
               
-                <a href="https://wylovecat.github.io/tag/cKlT30oiM/" class="badge secondary">
-                  模拟
-                </a>
-              
-                <a href="https://wylovecat.github.io/tag/S-CLh9EEX/" class="badge ">
-                  枚举
+                <a href="https://wylovecat.github.io/tag/Xml2KtR4g/" class="badge ">
+                  算法
                 </a>
               
             </p>
             
             <div class="post-content">
-              <h2 id="题目">题目</h2>
-<p><a href="https://turingjudge.com/problem/1846">回文日期</a></p>
-<h2 id="阅读与分析">阅读与分析</h2>
-<p>用8位数字表示日期，前4位表示年份，接下来2位表示月份，最后2位代表日期。对范围内的日期进行回文日期的统计。若一个日期是回文的，当且仅当对于所有的i从左向有的第i个数字和第9-i个数字是相同的。</p>
-<p>输入起止日期，统计多少个日期是回文的。</p>
-<p>阅读下来，题目梗概即为在一定范围内统计符合条件的数字个数，即可想到使用枚举法进行处理</p>
-<p>基本框架如下。</p>
-<pre><code class="language-c++">for(int i:date1~date2)
-{
-	if(isPali(i))
-	{
-		num++;
-	}
+              <p>若我们只考虑求解相除的商。</p>
+<h2 id="高精除低精">高精除低精</h2>
+<h3 id="过程分析">过程分析</h3>
+<p>所谓高精除低精指的是被除数值特别的大，除数值的范围在int类型范围内。</p>
+<figure data-type="image" tabindex="1"><img src="https://gitee.com/wyloving/picCloud/raw/master/20200323214104.png" alt="" loading="lazy"></figure>
+<p>在模拟开竖式的过程当中，可以发现，除法和加、减、乘不一样，他是从高位开始计算的。所以，除法是不需要进行倒置存放的。过程当中我们也能发现，每一次都是将之前计算的余数和后面的数字结合成新的数字再进行除法计算。</p>
+<pre><code class="language-c++">int x=0;//存储余数
+for(int i=0;i&lt;l;i++){
+    //组成新的数字
+    x=x*10+a[i];
+    //除法计算
+    ans[i]=x/b;
+    x=x%b;
 }
 </code></pre>
-<p>问题变成，如何判断一个日期是回文的。</p>
-<p>一个思路是将8位数日期的倒序数求出将倒序数与原数比较，相等即是回文。</p>
-<p>另一个思路，将回文日期列举，能发现 20100102，20111102，月日组成的倒数和年相等即是回文。</p>
-<p>此外需要注意，日期必须得是真实存在的。修改框架如下：</p>
-<pre><code class="language-c++">for(int i:date1~date2)
-{
-	if(isReal(i)&amp;&amp;isPali(i))
-	{
-		num++;
-	}
-}
-</code></pre>
-<h2 id="ac代码">AC代码</h2>
+<p>最后进行输出时，从前往后进行输出即可，注意下将前导0去除掉。</p>
+<h3 id="完整代码">完整代码</h3>
 <pre><code class="language-c++">#include &lt;iostream&gt;
-
+#include &lt;cstring&gt;
 using namespace std;
+int main(){
+    char s1[50005]={0};
+    int a[50005]={0},ans[50005]={0};
+    int b;
+    cin&gt;&gt;s1&gt;&gt;b;
+    int l=strlen(s1);
 
-int months[13]={0,31,28,31,30,31,30,31,31,30,31,30,31};
-
-bool isLeap(int year)
-{
-    return (year % 4 == 0 &amp;&amp; year % 100 != 0) || year % 400 == 0;
-}
-
-bool isPali(int date)
-{
-    int y=date/10000;
-
-    int reserve=0;
-    while(date!=y)
-    {
-        int u=date%10;
-        date/=10;
-        reserve= reserve * 10 + u;
+    for(int i=0;i&lt;l;i++){
+        a[i]=s1[i]-'0';
     }
-    return reserve == y;
-
-}
-
-bool isReal(int date)
-{
-    int y=date/10000;
-    int m=date/100%100;
-    int d=date%100;
-
-    if(isLeap(y))
-    {
-        months[2]=29;
-    }else
-    {
-        months[2]=28;
+    int x=0;//存储余数
+    for(int i=0;i&lt;l;i++){
+        //组成新的数字
+        x=x*10+a[i];
+        //除法计算
+        ans[i]=x/b;
+        x=x%b;
     }
 
-    return (m &gt;= 1 &amp;&amp; m &lt;= 12) &amp;&amp; (d &gt;= 1 &amp;&amp; d &lt;= months[m]);
-}
 
-int main() {
-
-    int date1,date2,num=0;
-    cin&gt;&gt;date1&gt;&gt;date2;
-    for(int i=date1;i&lt;=date2;i++)
-    {
-        if(isReal(i)&amp;&amp;isPali(i))
-        {
-            num++;
+    //输出，去除前导0
+    bool flag=false;
+    for(int i=0;i&lt;l;i++){
+        if(ans[i]!=0||i==l-1){
+            flag=true;
+        }
+        if(flag){
+            cout&lt;&lt;ans[i];
         }
     }
-    cout&lt;&lt;num;
 
     return 0;
 }
+
+</code></pre>
+<h2 id="拓展">拓展</h2>
+<p>若进行两个大数进行相除又该如何处理呢？之前的解题思路就不再合适了。<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>17</mn><mo>÷</mo><mn>3</mn><mo>=</mo><mn>5</mn><mo>⋯</mo><mn>2</mn></mrow><annotation encoding="application/x-tex">17\div 3 =5 \cdots2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.72777em;vertical-align:-0.08333em;"></span><span class="mord">1</span><span class="mord">7</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">÷</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">3</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">5</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="minner">⋯</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">2</span></span></span></span> 可以理解成5个3和一个2组合成了17。若我们要求出他们的商，只需求出17最多有几个3组成。我们可以用减法来对除法进行模拟，将被除数不断地减去除数，答案称为下一轮地被除数，直到被除数小于除数位置，循环次数即我们寻找的商。</p>
+<p>给出伪代码：</p>
+<pre><code class="language-c++">//cmp(int a[],int b[]) 比较a,b所代表数字的大小，a&lt;b即返回-1
+//bidNumMinus(int a[],int b[]) 两个大数相减，并把结果更新至a中
+while(cmp(a,b)&gt;=0){
+    bigNumMinus(a,b);
+    ans++;
+}
+cout&lt;&lt;ans;
 </code></pre>
 
             </div>
@@ -203,9 +182,9 @@ int main() {
               <div class="next">
                 下一篇
               </div>
-              <a href="https://wylovecat.github.io/post/UukfogPTY/">
+              <a href="https://wylovecat.github.io/post/4TikL8fmo/">
                 <h3 class="post-title">
-                  有趣的GitHub项目
+                  高精度计算（二）
                 </h3>
               </a>
             </div>
@@ -356,19 +335,19 @@ int main() {
     </div>
     <div class="row">
       
-        <a href="https://wylovecat.github.io/tag/iqjH4VeE6/" class="badge warning">
+        <a href="https://wylovecat.github.io/tag/iqjH4VeE6/" class="badge secondary">
           高精度
         </a>
       
-        <a href="https://wylovecat.github.io/tag/zjXnb_eXv/" class="badge secondary">
+        <a href="https://wylovecat.github.io/tag/zjXnb_eXv/" class="badge warning">
           noip
         </a>
       
-        <a href="https://wylovecat.github.io/tag/Xml2KtR4g/" class="badge warning">
+        <a href="https://wylovecat.github.io/tag/Xml2KtR4g/" class="badge success">
           算法
         </a>
       
-        <a href="https://wylovecat.github.io/tag/cKlT30oiM/" class="badge secondary">
+        <a href="https://wylovecat.github.io/tag/cKlT30oiM/" class="badge warning">
           模拟
         </a>
       
@@ -376,27 +355,27 @@ int main() {
           数学
         </a>
       
-        <a href="https://wylovecat.github.io/tag/M0JrCmklM/" class="badge ">
+        <a href="https://wylovecat.github.io/tag/M0JrCmklM/" class="badge secondary">
           markdown
         </a>
       
-        <a href="https://wylovecat.github.io/tag/Vy35u5qbs/" class="badge ">
+        <a href="https://wylovecat.github.io/tag/Vy35u5qbs/" class="badge warning">
           工具
         </a>
       
-        <a href="https://wylovecat.github.io/tag/CSNe-Ttwm/" class="badge secondary">
+        <a href="https://wylovecat.github.io/tag/CSNe-Ttwm/" class="badge success">
           C/C++
         </a>
       
-        <a href="https://wylovecat.github.io/tag/GyyF0zlSG/" class="badge success">
+        <a href="https://wylovecat.github.io/tag/GyyF0zlSG/" class="badge warning">
           数据结构
         </a>
       
-        <a href="https://wylovecat.github.io/tag/S-CLh9EEX/" class="badge ">
+        <a href="https://wylovecat.github.io/tag/S-CLh9EEX/" class="badge secondary">
           枚举
         </a>
       
-        <a href="https://wylovecat.github.io/tag/tHyJk6N28/" class="badge success">
+        <a href="https://wylovecat.github.io/tag/tHyJk6N28/" class="badge warning">
           Git
         </a>
       
@@ -408,15 +387,15 @@ int main() {
           Markdown
         </a>
       
-        <a href="https://wylovecat.github.io/tag/4kipjvQ-w/" class="badge success">
+        <a href="https://wylovecat.github.io/tag/4kipjvQ-w/" class="badge warning">
           vscode
         </a>
       
-        <a href="https://wylovecat.github.io/tag/RYJKhhSlc/" class="badge success">
+        <a href="https://wylovecat.github.io/tag/RYJKhhSlc/" class="badge ">
           hexo
         </a>
       
-        <a href="https://wylovecat.github.io/tag/gridea/" class="badge success">
+        <a href="https://wylovecat.github.io/tag/gridea/" class="badge ">
           Gridea
         </a>
       
