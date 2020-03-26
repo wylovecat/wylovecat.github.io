@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" >
 
-<title>题解:报数问题（C++描述） | 咸鱼爱学习</title>
+<title>引用变量相关 | 咸鱼爱学习</title>
 <meta name="description" content="温故而知新">
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -87,116 +87,114 @@
       <div class="sm-12 md-8 col">
         <div class="paper">
           <article class="article">
-            <h1>题解:报数问题（C++描述）</h1>
+            <h1>引用变量相关</h1>
             <p class="article-meta">
-              2020-01-27
+              2020-03-26
               
-                <a href="https://wylovecat.github.io/tag/CSNe-Ttwm/" class="badge success">
+                <a href="https://wylovecat.github.io/tag/CSNe-Ttwm/" class="badge secondary">
                   C/C++
                 </a>
               
             </p>
             
             <div class="post-content">
-              <h1 id="题目相关">题目相关</h1>
-<h2 id="题目描述">题目描述</h2>
-<p>有n人围成一圈，顺序排号。从第1个人开始报数（从1到3报数），凡报到3的人退出圈子，问最后留下的是原来的第几号的那位。</p>
-<h2 id="输入">输入</h2>
-<p>初始人数n</p>
-<h2 id="输出">输出</h2>
-<p>最后一人的初始编号</p>
-<h1 id="分析">分析</h1>
-<p>​	在读完题目发现，这道题目就是需要我们模拟循环报数的过程，可以想象一下小时候玩击鼓传花时候的情景。这道题目的难点在于如何判断某个同学是不是还在队伍中，不是简单的判断是否是3的倍数，这种方法，仅适用于不循环的报数，一旦首尾相连，倍数的判断就不太合适了。</p>
-<h3 id="构造数组表明学生的状态">构造数组表明学生的状态</h3>
-<p>​	每个同学在这道题目中的数据信息有两个，学号（编号），是否在队伍中（在/不在）。如何采用一定的方法，将这两者结合起来则能迅速处理这一问题。此时，我们可以构造一个标记数组，将这两者结合起来。将数组的下标作为学生学号，存储的内容用来表示学生状态。共有两个状态，我们可以使用布尔类型(bool)数组分别用true和false来表示两种状态，也可以使用整数类型数组表示对应状态,为了方便从下标1开始，开辟空间时可开辟人数+1的空间。</p>
-<pre><code class="language-c++">//开辟bool类型数组stu，用来表示各个学生的状态
-//stu[x] 为true 表示报到了3不在队伍中， false 表示还在队伍中
-bool *stu = new bool[n + 1];// n 为学生人数
+              <h1 id="相关概念">相关概念</h1>
+<p>​	引用变量是复合类型。引用是已定义的变量的别名。引用变量的主要作用是用作函数的形参。通过将引用变量用作参数，函数将使用原视数据，而不是其副本。这样除了指针之外，引用也为函数处理大型结构提供了一种非常方便的途径，同时对于射击类来说，引用也是必不可少的。</p>
+<h1 id="创建引用变量">创建引用变量</h1>
+<p>C++给&amp;符号赋予了另一个含义，将其用来声明引用。例如，要将stu作为student变量的别名，可以这样做：</p>
+<pre><code class="language-c++">int student;
+int &amp;stu = student;
 </code></pre>
-<h3 id="利用取余实现模拟循环">利用取余实现模拟循环</h3>
-<p>​	该题的另一个难点在于怎么进行循环?无论是 从1~3反复进行报数还是，n个同学围成一圈，都涉及到了这一点。一种方法是判断，当判断到结尾时，将值重新改成开头。类似下面这样</p>
-<pre><code class="language-c++">if(num==3) num=1;
-if(i==n) i=1;
-
+<p>其中，&amp;不是地址运算符，而是类型标识符的一部分。他们指向相同的值和内存单元。且，必须在声明引用时将其初始化，而不能像指针一样先声明在再赋值。</p>
+<pre><code class="language-c++">int students;
+int &amp; stu;
+stu = students;//这是错的
 </code></pre>
-<p>但这么写有些麻烦，也得需要考虑变化过程对他的影响。这事我们可以考虑另一种方法，使用取余符号(%)进行模拟。</p>
-<p>已知%符号的作用是获取余数，例如 7%5=2。当能整除时，结果为0。所以当一个数字%n时，结果一定在0~n-1之间。并且当a%b,a&lt;b时，a%b=a。利用这些特性可以写出这样的一个式子:x=(x+1)%n ,这样x能变成x+1；当x为n-1时，x会变成0，不断重复x就能在0<sub>n-1之间循环。若想在1</sub>n之间循环可以修改成x=x%n+1。</p>
-<pre><code class="language-c++">int i = 1;      //学生的学号 1~n
-while (ren &gt; 1) //循环报数，直到剩下一个人
-{
-    if (stu[i] == false) // 如果在队伍中
-    {
-        num = num % 3 + 1; //报数
-        if (num == 3)
-        {                  //报到3
-            stu[i] = true; //退出队伍
-            ren--;         //在队伍中的人数减一
-        }
-    }
-
-    i = i % n + 1; //下一个学生的编号
-}
-</code></pre>
-<h3 id="枚举法找出最后剩下的人的编号">枚举法找出最后剩下的人的编号</h3>
-<p>最后只剩下最后一人，必定是这样的状态:所有人都是true,只有他是false。那么我们只需要枚举遍历下，找出状态为false的即可。</p>
-<pre><code class="language-c++">for (int j = 1; j &lt;= n; j++)
-{//枚举学号1~n的同学
-    if (stu[j] == false)
-    {//当状态为false,则说明j在队伍中
-    	cout &lt;&lt; j;//输出编号
-    	break;//结束循环
-    }
-}
-</code></pre>
-<h1 id="代码实现">代码实现</h1>
+<h1 id="将引用用作函数参数">将引用用作函数参数</h1>
+<p>​	用作函数参数时，使得函数中的变量名成为调用程序中变量的别名。这种传递参数的方法称为按引用传递。按引用传递允许被调用的函数能够访问调用函数中的变量。</p>
 <pre><code class="language-c++">#include &lt;iostream&gt;
-#include &lt;cstring&gt;
 using namespace std;
-int main()
-{
-    //n-存储人数 num-报的数字 ren-留下的人数
-    int n, num = 0, ren; 
-    
-    cin &gt;&gt; n;            // 输入在人数
-    ren = n;             //确定在队伍中的人数
-
-    //开辟bool类型数组stu，用来表示各个学生的状态
-    //stu[x] 为true 表示报到了3不在队伍中， false 表示还在队伍中
-    bool *stu = new bool[n + 1];
-
-    //初始化 stu,使初始值为false
-    memset(stu, false, sizeof(bool) * (n + 1));
-
-    int i = 1;      //学生的学号 1~n
-    while (ren &gt; 1) //循环报数，直到剩下一个人
-    {
-        if (stu[i] == false) // 如果在队伍中
-        {
-            num = num % 3 + 1; //报数
-            if (num == 3)
-            {                  //报到3
-                stu[i] = true; //退出队伍
-                ren--;         //在队伍中的人数减一
-            }
-        }
-
-        i = i % n + 1; //下一个学生的编号
-    }
-
-    for (int j = 1; j &lt;= n; j++)
-    {//枚举学号1~n的同学
-        if (stu[j] == false)
-        {//当状态为false,则说明j在队伍中
-            cout &lt;&lt; j;//输出编号
-            break;//结束循环
-        }
-    }
-
+void swap(int &amp;a,int &amp;b){
+    int t=a;
+    a=b;
+    b=t;
+}
+int main(){
+    int a,b;
+    cin&gt;&gt;a&gt;&gt;b;
+    swap(a,b);
+    cout&lt;&lt;a&lt;&lt;&quot; &quot;&lt;&lt;b;
     return 0;
 }
 
 </code></pre>
-<p>做题时，可从全局角度出发，将题目分解成若干个小问题，解决后再整合起来。通过本题，可以练习数组的构造使用以及循环的处理。</p>
+<h2 id="引用的特别之处">引用的特别之处</h2>
+<p>若想让函数使用传递给他的信息，而不对这些信息进行修改，同时又想使用引用，则应该使用常量引用。当数据比较大（如结构和类）时，引用参数将很有用。</p>
+<pre><code class="language-c++">double refcube(const double &amp;ra);
+</code></pre>
+<p>使用参数传递给接收引用参数的函数时，对于传递引用的限制更严格。</p>
+<pre><code class="language-c++">int fun(int &amp;a){
+    return 2+a;
+}
+int main(){
+	int a;
+	cin&gt;&gt;a;
+    cout&lt;&lt;fun(a+3);//错误的引用
+    return 0;
+}
+</code></pre>
+<p>程序中的引用是错误的。函数参数中a是一个变量的别名，则实参应该是一个变量，否则代码不合理。</p>
+<pre><code class="language-c++">int fun(const int &amp;a){// 常量引用
+    return 2+a;
+}
+int main(){
+	int a;
+	cin&gt;&gt;a;
+    cout&lt;&lt;fun(a+3);//此时将使用临时变量来存储值
+    return 0;
+}
+</code></pre>
+<p>如果函数调用的参数不是佐治或与相应的const引用参数的类型不匹配，则C++将创建类型正确的匿名变量，将函数调用的参数的值传递给该匿名变量，并让参数来引用该变量。</p>
+<h2 id="尽可能使用const">尽可能使用const</h2>
+<p>理由如下</p>
+<ul>
+<li>使用const可以避免无意中修改数据的编程错误</li>
+<li>使用const使函数能够处理const和非const实参，否则只能接受非const数据。</li>
+<li>使用const引用使函数能正确生成并使用临时变量。</li>
+</ul>
+<h2 id="将引用用于结构">将引用用于结构</h2>
+<p>使用结构引用参数的方式与使用基本变量引用相同，只需在声明结构参数时使用引用运算符&amp;即可。</p>
+<pre><code class="language-c++">typedef struct{
+    int data;
+    int made;
+}node;
+void set_fun(node * ft);// 在函数中将指向该结构的引用作为参数
+</code></pre>
+<h2 id="何时使用引用参数">何时使用引用参数</h2>
+<p>使用引用参数的两个主要原因</p>
+<ul>
+<li>能修改调用函数中的数据对象，相比较指针会更方便</li>
+<li>通过传递引用而不是整个数据对象，可以提高程序的运行速度</li>
+</ul>
+<p>当数据较大时，例如结构和类对象，推荐使用引用参数，引用参数实际上时基于指针的代码的另一个接口。</p>
+<ol>
+<li>对于使用传递的值而不作修改的函数
+<ol>
+<li>数据对象很小，如内置数据或小型结构，则按值传递</li>
+<li>数据对象时数组，则使用指针，并将指针声明为指向const的指针</li>
+<li>数据对象是较大的结构，则使用const 指针或const引用。</li>
+<li>数据对象时类对象，则使用const引用</li>
+</ol>
+</li>
+<li>对于修改调用函数中数据的函数
+<ol>
+<li>数据对象是内置数据类型，使用指针。</li>
+<li>数据对象是数组，使用指针。</li>
+<li>数据对象是结构，使用指针或引用。</li>
+<li>数据对象是类对象，则使用引用。</li>
+</ol>
+</li>
+</ol>
 
             </div>
           </article>
@@ -207,9 +205,9 @@ int main()
               <div class="next">
                 下一篇
               </div>
-              <a href="https://wylovecat.github.io/post/EwPC9m7kb/">
+              <a href="https://wylovecat.github.io/post/k_wx6EVNW/">
                 <h3 class="post-title">
-                  题解：成绩统计
+                  最长上升子序列
                 </h3>
               </a>
             </div>
@@ -364,7 +362,7 @@ int main()
     </div>
     <div class="row">
       
-        <a href="https://wylovecat.github.io/tag/CSNe-Ttwm/" class="badge secondary">
+        <a href="https://wylovecat.github.io/tag/CSNe-Ttwm/" class="badge success">
           C/C++
         </a>
       
@@ -376,19 +374,19 @@ int main()
           算法
         </a>
       
-        <a href="https://wylovecat.github.io/tag/iqjH4VeE6/" class="badge warning">
+        <a href="https://wylovecat.github.io/tag/iqjH4VeE6/" class="badge success">
           高精度
         </a>
       
-        <a href="https://wylovecat.github.io/tag/cKlT30oiM/" class="badge ">
+        <a href="https://wylovecat.github.io/tag/cKlT30oiM/" class="badge success">
           模拟
         </a>
       
-        <a href="https://wylovecat.github.io/tag/Z3tt3bzbS/" class="badge warning">
+        <a href="https://wylovecat.github.io/tag/Z3tt3bzbS/" class="badge secondary">
           数学
         </a>
       
-        <a href="https://wylovecat.github.io/tag/M0JrCmklM/" class="badge warning">
+        <a href="https://wylovecat.github.io/tag/M0JrCmklM/" class="badge success">
           markdown
         </a>
       
@@ -396,27 +394,27 @@ int main()
           工具
         </a>
       
-        <a href="https://wylovecat.github.io/tag/GyyF0zlSG/" class="badge secondary">
+        <a href="https://wylovecat.github.io/tag/GyyF0zlSG/" class="badge success">
           数据结构
         </a>
       
-        <a href="https://wylovecat.github.io/tag/S-CLh9EEX/" class="badge secondary">
+        <a href="https://wylovecat.github.io/tag/S-CLh9EEX/" class="badge warning">
           枚举
         </a>
       
-        <a href="https://wylovecat.github.io/tag/tHyJk6N28/" class="badge success">
+        <a href="https://wylovecat.github.io/tag/tHyJk6N28/" class="badge secondary">
           Git
         </a>
       
-        <a href="https://wylovecat.github.io/tag/sEMfEVAVO/" class="badge ">
+        <a href="https://wylovecat.github.io/tag/sEMfEVAVO/" class="badge warning">
           计算机基础
         </a>
       
-        <a href="https://wylovecat.github.io/tag/markdown/" class="badge secondary">
+        <a href="https://wylovecat.github.io/tag/markdown/" class="badge success">
           Markdown
         </a>
       
-        <a href="https://wylovecat.github.io/tag/4kipjvQ-w/" class="badge secondary">
+        <a href="https://wylovecat.github.io/tag/4kipjvQ-w/" class="badge success">
           vscode
         </a>
       
@@ -424,7 +422,7 @@ int main()
           hexo
         </a>
       
-        <a href="https://wylovecat.github.io/tag/gridea/" class="badge secondary">
+        <a href="https://wylovecat.github.io/tag/gridea/" class="badge success">
           Gridea
         </a>
       
