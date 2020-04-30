@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" >
 
-<title>在使用Hexo和Gitpage创建博客所遇的问题与解决方案 | 咸鱼爱学习</title>
+<title>信息学奥赛一本通_1133_输出亲朋字符串 | 咸鱼爱学习</title>
 <meta name="description" content="温故而知新">
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -87,22 +87,55 @@
       <div class="sm-12 md-8 col">
         <div class="paper">
           <article class="article">
-            <h1>在使用Hexo和Gitpage创建博客所遇的问题与解决方案</h1>
+            <h1>信息学奥赛一本通_1133_输出亲朋字符串</h1>
             <p class="article-meta">
-              2019-01-11
+              2020-04-30
               
-                <a href="https://wylovecat.github.io/tag/RYJKhhSlc/" class="badge secondary">
-                  hexo
+                <a href="https://wylovecat.github.io/tag/FNlWtNQpA/" class="badge ">
+                  题解
+                </a>
+              
+                <a href="https://wylovecat.github.io/tag/S-CLh9EEX/" class="badge ">
+                  枚举
                 </a>
               
             </p>
             
             <div class="post-content">
-              <ul>
-<li>使用Gulp压缩时报错：AssertionError: Task function must be specified<!--more--><br>
-错误原因是版本问题，使用<code>gulp -v</code> 查看版本后发现，版本不一致。卸载gulp，并重新安装.<br>
-<code>npm unintsall gulp npm install gulp@3</code></li>
-</ul>
+              <h1 id="题目相关">题目相关</h1>
+<p>##【题目描述】<br>
+编写程序，求给定字符串s的亲朋字符串s1。<br>
+亲朋字符串s1定义如下：给定字符串s的第一个字符的ASCII值加第二个字符的ASCII值，得到第一个亲朋字符； 给定字符串s的第二个字符的ASCII值加第三个字符的ASCII值，得到第二个亲朋字符；依此类推，直到给定字符串s的倒数第二个字符。亲朋字符串的最后一个字符由给定字符串s的最后一个字符ASCII值加s的第一个字符的ASCII值。</p>
+<h2 id="输入">【输入】</h2>
+<p>输入一行，一个长度大于等于2，小于等于100的字符串。字符串中每个字符的ASCII值不大于63。</p>
+<h2 id="输出">【输出】</h2>
+<p>输出一行，为变换后的亲朋字符串。输入保证变换后的字符串只有一行。</p>
+<h2 id="输入样例">【输入样例】</h2>
+<p>1234</p>
+<h2 id="输出样例">【输出样例】</h2>
+<p>cege</p>
+<h2 id="来源">来源</h2>
+<p>http://ybt.ssoier.cn:8088/problem_show.php?pid=1133</p>
+<h1 id="分析">分析</h1>
+<p>遍历整个字符串s，设长度为len。新字符串的内容<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>s</mi><mn>1</mn><mo>[</mo><mi>i</mi><mo>]</mo><mo>=</mo><mi>s</mi><mo>[</mo><mi>i</mi><mo>]</mo><mo>+</mo><mi>s</mi><mo>[</mo><mi>i</mi><mo>+</mo><mn>1</mn><mo>]</mo></mrow><annotation encoding="application/x-tex">s1[i]=s[i]+s[i+1]</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">s</span><span class="mord">1</span><span class="mopen">[</span><span class="mord mathdefault">i</span><span class="mclose">]</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">s</span><span class="mopen">[</span><span class="mord mathdefault">i</span><span class="mclose">]</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">s</span><span class="mopen">[</span><span class="mord mathdefault">i</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">1</span><span class="mclose">]</span></span></span></span>。最后一个字符<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>s</mi><mn>1</mn><mo>[</mo><mi>l</mi><mi>e</mi><mi>n</mi><mo>−</mo><mn>1</mn><mo>]</mo><mo>=</mo><mi>s</mi><mo>[</mo><mi>l</mi><mi>e</mi><mi>n</mi><mn>1</mn><mo>−</mo><mn>1</mn><mo>]</mo><mo>+</mo><mi>s</mi><mo>[</mo><mn>1</mn><mo>]</mo></mrow><annotation encoding="application/x-tex">s1[len-1]=s[len1-1]+s[1]</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">s</span><span class="mord">1</span><span class="mopen">[</span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord mathdefault">e</span><span class="mord mathdefault">n</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">1</span><span class="mclose">]</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">s</span><span class="mopen">[</span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord mathdefault">e</span><span class="mord mathdefault">n</span><span class="mord">1</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">1</span><span class="mclose">]</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">s</span><span class="mopen">[</span><span class="mord">1</span><span class="mclose">]</span></span></span></span>。再次进行总结，其实能发现，若将字符串首尾连成环，新的字符串的内容等于当前位置与后一个的ASCII值相加的总和。s1[i]=s[i]+s[(i+1) % len ]</p>
+<h1 id="代码实现">代码实现</h1>
+<pre><code>#include &lt;iostream&gt;
+#include &lt;cstdio&gt;
+#include &lt;cstring&gt;
+using namespace std;
+
+int main()
+{
+	char s[105]={0},s1[105]={0};
+	gets(s);
+	int len=strlen(s);
+	for(int i=0;i&lt;len;i++){
+		s1[i]=s[i]+s[(i+1)%len];
+	}
+	cout&lt;&lt;s1;
+	return 0;
+} 
+</code></pre>
 
             </div>
           </article>
@@ -113,9 +146,9 @@
               <div class="next">
                 下一篇
               </div>
-              <a href="https://wylovecat.github.io/post/hello-gridea/">
+              <a href="https://wylovecat.github.io/post/5Ewb0MPXV/">
                 <h3 class="post-title">
-                  Hello Gridea
+                  算法效率分析
                 </h3>
               </a>
             </div>
@@ -274,11 +307,11 @@
     </div>
     <div class="row">
       
-        <a href="https://wylovecat.github.io/tag/FNlWtNQpA/" class="badge ">
+        <a href="https://wylovecat.github.io/tag/FNlWtNQpA/" class="badge warning">
           题解
         </a>
       
-        <a href="https://wylovecat.github.io/tag/S-CLh9EEX/" class="badge secondary">
+        <a href="https://wylovecat.github.io/tag/S-CLh9EEX/" class="badge success">
           枚举
         </a>
       
@@ -286,7 +319,7 @@
           算法
         </a>
       
-        <a href="https://wylovecat.github.io/tag/CSNe-Ttwm/" class="badge secondary">
+        <a href="https://wylovecat.github.io/tag/CSNe-Ttwm/" class="badge warning">
           C/C++
         </a>
       
@@ -294,35 +327,35 @@
           noip
         </a>
       
-        <a href="https://wylovecat.github.io/tag/iqjH4VeE6/" class="badge secondary">
+        <a href="https://wylovecat.github.io/tag/iqjH4VeE6/" class="badge warning">
           高精度
         </a>
       
-        <a href="https://wylovecat.github.io/tag/cKlT30oiM/" class="badge warning">
+        <a href="https://wylovecat.github.io/tag/cKlT30oiM/" class="badge secondary">
           模拟
         </a>
       
-        <a href="https://wylovecat.github.io/tag/Z3tt3bzbS/" class="badge secondary">
+        <a href="https://wylovecat.github.io/tag/Z3tt3bzbS/" class="badge warning">
           数学
         </a>
       
-        <a href="https://wylovecat.github.io/tag/M0JrCmklM/" class="badge ">
+        <a href="https://wylovecat.github.io/tag/M0JrCmklM/" class="badge secondary">
           markdown
         </a>
       
-        <a href="https://wylovecat.github.io/tag/Vy35u5qbs/" class="badge secondary">
+        <a href="https://wylovecat.github.io/tag/Vy35u5qbs/" class="badge ">
           工具
         </a>
       
-        <a href="https://wylovecat.github.io/tag/GyyF0zlSG/" class="badge success">
+        <a href="https://wylovecat.github.io/tag/GyyF0zlSG/" class="badge secondary">
           数据结构
         </a>
       
-        <a href="https://wylovecat.github.io/tag/tHyJk6N28/" class="badge warning">
+        <a href="https://wylovecat.github.io/tag/tHyJk6N28/" class="badge secondary">
           Git
         </a>
       
-        <a href="https://wylovecat.github.io/tag/sEMfEVAVO/" class="badge success">
+        <a href="https://wylovecat.github.io/tag/sEMfEVAVO/" class="badge secondary">
           计算机基础
         </a>
       
@@ -330,7 +363,7 @@
           Markdown
         </a>
       
-        <a href="https://wylovecat.github.io/tag/4kipjvQ-w/" class="badge secondary">
+        <a href="https://wylovecat.github.io/tag/4kipjvQ-w/" class="badge warning">
           vscode
         </a>
       
