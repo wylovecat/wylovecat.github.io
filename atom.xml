@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://wylovecat.github.io/</id>
     <title>咸鱼爱学习</title>
-    <updated>2020-05-02T08:25:01.888Z</updated>
+    <updated>2020-05-02T10:20:15.515Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://wylovecat.github.io/"/>
     <link rel="self" href="https://wylovecat.github.io/atom.xml"/>
@@ -10,6 +10,13 @@
     <logo>https://wylovecat.github.io/images/avatar.png</logo>
     <icon>https://wylovecat.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, 咸鱼爱学习</rights>
+    <entry>
+        <title type="html"><![CDATA[信息学奥赛一本通_1136_密码翻译]]></title>
+        <id>https://wylovecat.github.io/post/8HKF0_bvN/</id>
+        <link href="https://wylovecat.github.io/post/8HKF0_bvN/">
+        </link>
+        <updated>2020-05-02T10:19:32.000Z</updated>
+    </entry>
     <entry>
         <title type="html"><![CDATA[信息学奥赛一本通_1134_合法C标识符]]></title>
         <id>https://wylovecat.github.io/post/LC1gACTjd/</id>
@@ -72,12 +79,5 @@
         <link href="https://wylovecat.github.io/post/oJfUmYKbM/">
         </link>
         <updated>2020-03-04T07:57:09.000Z</updated>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[Lepton使用手册]]></title>
-        <id>https://wylovecat.github.io/post/-0ZTKQ856/</id>
-        <link href="https://wylovecat.github.io/post/-0ZTKQ856/">
-        </link>
-        <updated>2020-02-20T01:50:54.000Z</updated>
     </entry>
 </feed>
