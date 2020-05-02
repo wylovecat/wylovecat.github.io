@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" >
 
-<title>比例简化 | 咸鱼爱学习</title>
+<title>信息学奥赛一本通_1134_合法C标识符 | 咸鱼爱学习</title>
 <meta name="description" content="温故而知新">
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -87,111 +87,98 @@
       <div class="sm-12 md-8 col">
         <div class="paper">
           <article class="article">
-            <h1>比例简化</h1>
+            <h1>信息学奥赛一本通_1134_合法C标识符</h1>
             <p class="article-meta">
-              2019-08-17
+              2020-05-02
               
-                <a href="https://wylovecat.github.io/tag/zjXnb_eXv/" class="badge secondary">
-                  noip
+                <a href="https://wylovecat.github.io/tag/FNlWtNQpA/" class="badge secondary">
+                  题解
                 </a>
               
-                <a href="https://wylovecat.github.io/tag/cKlT30oiM/" class="badge secondary">
-                  模拟
-                </a>
-              
-                <a href="https://wylovecat.github.io/tag/S-CLh9EEX/" class="badge secondary">
-                  枚举
+                <a href="https://wylovecat.github.io/tag/CSNe-Ttwm/" class="badge warning">
+                  C/C++
                 </a>
               
             </p>
             
             <div class="post-content">
-              <h3 id="题目阅读">题目阅读</h3>
-<p><a href="https://turingjudge.com/problem/1805">比例简化</a></p>
-<h3 id="分析">分析</h3>
-<p>现给出支持人数A，反对人数B，以及一个上限L，请你将A比B化简为A’比B’，要求在A’和B’均不大于L且A’和B’互质（两个整数的最大公约数是1）的前提下，A’/B’≥ A/B且A’/B’- A/B的值尽可能小</p>
-<p>整理几个关键信息点</p>
-<ul>
-<li>在A’和B’均不大于L且A’和B’互质</li>
-</ul>
-<p>a&lt;=L &amp;&amp; b&lt;=L &amp;&amp; gcd(a,b)==1</p>
-<ul>
-<li>A’/B’≥ A/B且A’/B’- A/B的值尽可能小</li>
-</ul>
-<p>a/b&gt;=A/B =&gt; a * B &gt;= A *  b &amp;&amp;  a/b 尽可能小</p>
-<p>分析下来就是一道枚举题目，寻找满足条件的最小的a/b的值最小的那对a,b;变成了最值寻找问题</p>
-<pre><code class="language-c++">int min=max;
-for( )
-{
-	if(num&lt;min)
-	{
-		min=num;
-	}
-}
-cout&lt;&lt;num;
-</code></pre>
-<pre><code class="language-c++">ta=L,tb=1;
-for(int a=1;a&lt;=L;a++)
-{
-    for(int b=L;b&gt;=1;b--)
-    {
-        if(gcd(a,b)==1 &amp;&amp; a*B&gt;=A*b &amp;&amp; a*tb&lt;ta*b)
-        {
-            ta=a;
-            tb=b;
-            break;
-        }
-    }
-}
-cout&lt;&lt;ta&lt;&lt;&quot; &quot;&lt;&lt;tb;
-</code></pre>
-<h3 id="ac代码">AC代码</h3>
+              <h1 id="题目相关">题目相关</h1>
+<h2 id="题目描述">【题目描述】</h2>
+<p>给定一个不包含空白符的字符串，请判断是否是C语言合法的标识符号(注：题目保证这些字符串一定不是C语言的保留字)。<br>
+C语言标识符要求：</p>
+<ol>
+<li>非保留字；</li>
+<li>只包含字母、数字及下划线（“_”）。</li>
+<li>不以数字开头。</li>
+</ol>
+<h2 id="输入">【输入】</h2>
+<p>一行，包含一个字符串，字符串中不包含任何空白字符，且长度不大于20。</p>
+<h2 id="输出">【输出】</h2>
+<p>一行，如果它是C语言的合法标识符，则输出yes，否则输出no。</p>
+<h2 id="输入样例">【输入样例】</h2>
+<p>RKPEGX9R;TWyYcp</p>
+<h2 id="输出样例">【输出样例】</h2>
+<p>no</p>
+<h2 id="来源">【来源】</h2>
+<p>http://ybt.ssoier.cn:8088/problem_show.php?pid=1134</p>
+<h1 id="分析">分析</h1>
+<p>由于题目已保证字符串不是保留字，所以我们只需考虑条件2与条件3。条件3：不以数字开头容易判断。稍复杂的就是条件2的判断。此时可以考虑采用自带的函数进行处理。在头文件cctype中包含了一些可用的函数。</p>
+<table>
+<thead>
+<tr>
+<th>函数</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>isalnum</td>
+<td>检查字符c是十进制数还是大写还是小写字母</td>
+</tr>
+<tr>
+<td>isalpha</td>
+<td>检查字符c是否是字母</td>
+</tr>
+<tr>
+<td>islower</td>
+<td>检查字符是否为小写字母，检查c是否是小写字母</td>
+</tr>
+<tr>
+<td>isupper</td>
+<td>检查字符是否为大写字母，检查参数c是否为大写字母。</td>
+</tr>
+</tbody>
+</table>
+<h1 id="代码实现">代码实现</h1>
 <pre><code class="language-c++">#include &lt;iostream&gt;
-#include&lt;cstdio&gt;
+#include &lt;cctype&gt;
+
 using namespace std;
-/*
- * a&lt;=L&amp;&amp;b&lt;=L&amp;&amp;gcd(a,b)==1
- *  a/b&gt;=A/B =》 a*B &gt;= A*b  &amp;&amp; a/b - A/B 尽可能小
- *  1~100 =》 L   a/b&lt;=L   a&lt;=L*b   b&gt;=a/L
- *
- *  a/b &lt;ta/tb
- *
- *  枚举
- * */
 
-int gcd(int a,int b)
+int main()
 {
-    while(b!=0)
-    {
-        int r=a%b;
-        a=b;
-        b=r;
-    }
-    return a;
+	char s[25]={0};
+	bool flag=true;
+	cin&gt;&gt;s;
+	
+	if(s[0]&gt;='0'&amp;&amp;s[0]&lt;='9'){
+		flag=false;
+	}
+	
+	for(int i=0;s[i]!=0;i++){
+		if(!isalnum(s[i])&amp;&amp;s[i]!='_'){
+			flag=false;
+		}
+	}
+	
+	if(flag){
+		cout&lt;&lt;&quot;yes&quot;;
+	}else{
+		cout&lt;&lt;&quot;no&quot;;
+	}
+	return 0;
 }
-int main(){
 
-    int A,B,L;
-    cin&gt;&gt;A&gt;&gt;B&gt;&gt;L;
-    int y=gcd(A,B);
-    A/=y;
-    B/=y;
-    int ta=L;
-    int tb=1;
-    for(int a=1;a&lt;=L;a++)
-    {
-        for(int b=L;b&gt;=a/L;b--)
-        {
-            if(gcd(a,b)==1 &amp;&amp; a*B&gt;=A*b &amp;&amp; a*tb&lt;=ta*b)
-            {
-                ta=a;
-                tb=b;
-                break;
-            }
-        }
-    }
-    cout&lt;&lt;ta&lt;&lt;&quot; &quot;&lt;&lt;tb;
-}
 </code></pre>
 
             </div>
@@ -203,9 +190,9 @@ int main(){
               <div class="next">
                 下一篇
               </div>
-              <a href="https://wylovecat.github.io/post/S-SCKDM5o/">
+              <a href="https://wylovecat.github.io/post/GmnQXK1ZW/">
                 <h3 class="post-title">
-                  珠心算测验
+                  信息学奥赛一本通_1133_输出亲朋字符串
                 </h3>
               </a>
             </div>
@@ -366,31 +353,31 @@ int main(){
     </div>
     <div class="row">
       
-        <a href="https://wylovecat.github.io/tag/FNlWtNQpA/" class="badge secondary">
+        <a href="https://wylovecat.github.io/tag/FNlWtNQpA/" class="badge ">
           题解
         </a>
       
-        <a href="https://wylovecat.github.io/tag/CSNe-Ttwm/" class="badge secondary">
+        <a href="https://wylovecat.github.io/tag/CSNe-Ttwm/" class="badge ">
           C/C++
         </a>
       
-        <a href="https://wylovecat.github.io/tag/S-CLh9EEX/" class="badge ">
+        <a href="https://wylovecat.github.io/tag/S-CLh9EEX/" class="badge success">
           枚举
         </a>
       
-        <a href="https://wylovecat.github.io/tag/Xml2KtR4g/" class="badge ">
+        <a href="https://wylovecat.github.io/tag/Xml2KtR4g/" class="badge secondary">
           算法
         </a>
       
-        <a href="https://wylovecat.github.io/tag/zjXnb_eXv/" class="badge secondary">
+        <a href="https://wylovecat.github.io/tag/zjXnb_eXv/" class="badge ">
           noip
         </a>
       
-        <a href="https://wylovecat.github.io/tag/iqjH4VeE6/" class="badge warning">
+        <a href="https://wylovecat.github.io/tag/iqjH4VeE6/" class="badge ">
           高精度
         </a>
       
-        <a href="https://wylovecat.github.io/tag/cKlT30oiM/" class="badge success">
+        <a href="https://wylovecat.github.io/tag/cKlT30oiM/" class="badge secondary">
           模拟
         </a>
       
@@ -410,7 +397,7 @@ int main(){
           数据结构
         </a>
       
-        <a href="https://wylovecat.github.io/tag/tHyJk6N28/" class="badge ">
+        <a href="https://wylovecat.github.io/tag/tHyJk6N28/" class="badge success">
           Git
         </a>
       
@@ -418,11 +405,11 @@ int main(){
           计算机基础
         </a>
       
-        <a href="https://wylovecat.github.io/tag/markdown/" class="badge ">
+        <a href="https://wylovecat.github.io/tag/markdown/" class="badge secondary">
           Markdown
         </a>
       
-        <a href="https://wylovecat.github.io/tag/4kipjvQ-w/" class="badge secondary">
+        <a href="https://wylovecat.github.io/tag/4kipjvQ-w/" class="badge success">
           vscode
         </a>
       
@@ -430,7 +417,7 @@ int main(){
           hexo
         </a>
       
-        <a href="https://wylovecat.github.io/tag/gridea/" class="badge success">
+        <a href="https://wylovecat.github.io/tag/gridea/" class="badge secondary">
           Gridea
         </a>
       
