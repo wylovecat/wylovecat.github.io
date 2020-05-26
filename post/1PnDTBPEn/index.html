@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" >
 
-<title>归并排序 | 咸鱼爱学习</title>
+<title>信息学奥赛一本通_1137_加密的病历单 | 咸鱼爱学习</title>
 <meta name="description" content="温故而知新">
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -87,12 +87,16 @@
       <div class="sm-12 md-8 col">
         <div class="paper">
           <article class="article">
-            <h1>归并排序</h1>
+            <h1>信息学奥赛一本通_1137_加密的病历单</h1>
             <p class="article-meta">
-              2019-09-04
+              2020-05-26
               
-                <a href="https://wylovecat.github.io/tag/Xml2KtR4g/" class="badge secondary">
-                  算法
+                <a href="https://wylovecat.github.io/tag/FNlWtNQpA/" class="badge ">
+                  题解
+                </a>
+              
+                <a href="https://wylovecat.github.io/tag/zjXnb_eXv/" class="badge success">
+                  noip
                 </a>
               
                 <a href="https://wylovecat.github.io/tag/CSNe-Ttwm/" class="badge secondary">
@@ -102,91 +106,105 @@
             </p>
             
             <div class="post-content">
-              <h1 id="归并排序">归并排序</h1>
-<p>归并排序是建立在归并操作上的一种有效的排序算法。该算法是采用分治法的一个非常典型的应用。时间复杂度是O(nlogn)</p>
-<h2 id="核心思想">核心思想</h2>
-<p>将一段序列分解知道不能再分解的时候，然后开始逐层合并，并在合并的时候保证他们有序，这样就能保证每次合并后的内容有序，知道合并完成保证了所有的部分全部有序。</p>
-<p>分治三步法：</p>
+              <h1 id="题目相关">题目相关</h1>
+<h3 id="题目描述">【题目描述】</h3>
+<p>小英是药学专业大三的学生，暑假期间获得了去医院药房实习的机会。</p>
+<p>在药房实习期间，小英扎实的专业基础获得了医生的一致好评，得知小英在计算概论中取得过好成绩后，主任又额外交给她一项任务，解密抗战时期被加密过的一些伤员的名单。</p>
+<p>经过研究，小英发现了如下加密规律(括号中是一个“原文 -&gt; 密文”的例子)</p>
+<p>1.原文中所有的字符都在字母表中被循环左移了三个位置（dec  -&gt; abz）</p>
+<p>2.逆序存储（abcd -&gt; dcba ）</p>
+<p>3.大小写反转（abXY -&gt; ABxy）</p>
+<h3 id="输入">【输入】</h3>
+<p>一个加密的字符串。(长度小于50且只包含大小写字母)</p>
+<h3 id="输出">【输出】</h3>
+<p>输出解密后的字符串。</p>
+<h3 id="输入样例">【输入样例】</h3>
+<h3 id="gsoowfasoq"><code>GSOOWFASOq</code></h3>
+<h3 id="输出样例">【输出样例】</h3>
+<h3 id="trvdizrrvj"><code>Trvdizrrvj!</code></h3>
+<h3 id="来源">【来源】</h3>
+<p><a href="http://ybt.ssoier.cn:8088/problem_show.php?pid=1137">1137_加密的病历单</a></p>
+<h1 id="分析">分析</h1>
+<p>当我们已知加密的过程后，若想得到原文，只需对加密后的内容反向处理即可。<br>
+加密过程：</p>
 <ol>
-<li>划分问题：把序列分成元素个数尽量相等的两半</li>
-<li>递归求解：把两半元素分别排序</li>
-<li>合并问题：把两个有序表合并成一个</li>
+<li>原文中所有的字符都在字母表中被循环左移了三个位置（dec  -&gt; abz）</li>
+<li>逆序存储（abcd -&gt; dcba ）</li>
+<li>大小写反转（abXY -&gt; ABxy）</li>
 </ol>
-<h2 id="代码实现">代码实现</h2>
-<pre><code class="language-c++">void mergeSort(int a[],int sta,int end,int tmp[])
-{
-    if(sta&lt;end)
-    {
-        int mind=(sta+end)/2;
-        mergeSort(a,first,mid,tmp);//使左边排列有序
-        mergeSort(a,mid+1,end,tmp);//使右边排列有序
-        mergeArray(a,sta,mid,end,tmp);//合并左右两个有序数列
-    }
+<p>那么相对应的解密过程：</p>
+<ol>
+<li>将所有的字符都在字母表中<strong>循环右移了三个位置</strong></li>
+</ol>
+<p>先解决循环右移，右移不难，将当前位置的赋值给下标+3位置处的即可。</p>
+<pre><code>s[i+3]=s[i]
+</code></pre>
+<p>麻烦的地方在于如何进行循环移动。一种方式我们可以进行特判，加上对最后三个位置的字母判断，进行区别处理即可。另一种方式是使用取模符号来模拟循环的效果。</p>
+<pre><code>x=(x+1)%k 
+</code></pre>
+<p>这样就能使x在0~ k-1的范围内右移1位进行循环了。我们要对a~z进行循环处理。一共26个英文字母，我们可以对0 ~ 25 进行循环,只要再加上能使'a' ~ ‘z’ 或 ‘A’ ~ 'Z'对0 ~ 25进行映射对应即可。只需利用ASCII码值，将小写-'a' ,将大写-'A'即可产生映射。</p>
+<pre><code>if(c是小写){
+	c=(c-'a‘+3)%26+'a';
+}else if(c是大写){
+	c=(c-'A'+3)%26+'A';
 }
 </code></pre>
-<h2 id="合并的方法">合并的方法</h2>
-<p>合并时对象是两个已排序好的数列，初始状态下，两个指针分别指向两个带合并数列的第一个元素，然后比较这两个元素的大小，将较小的元素添加大一个新创建的数列中。接着，被复制的数列中的指针后移，指向该较小的后记元素。上述操作一直持续到两个数列中的一个被处理完位置。然后，在未处理完的数列中，剩下的元素被复制到新数组列的尾部。</p>
-<h3 id="合并实现">合并实现</h3>
-<pre><code class="language-c++">Merge(int left[],int right[],int tmp[])
+<ol start="2">
+<li>逆序存储<br>
+若已知字符串长度len。我们可以找找逆序规律出来</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>逆序后位置</th>
+<th>逆序前位置</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>len-1</td>
+</tr>
+<tr>
+<td>1</td>
+<td>len-2</td>
+</tr>
+<tr>
+<td>2</td>
+<td>len-3</td>
+</tr>
+<tr>
+<td>i</td>
+<td>len-i-1</td>
+</tr>
+</tbody>
+</table>
+<p>通过列表可找出对应的逆序下标转换规律。</p>
+<ol start="3">
+<li>大小写反转</li>
+</ol>
+<p>利用大小写ASCII码值之间的差值为32进行处理。大写的码值小于小写的。所以大写转小写是+32 ，小写转大写是-32。也可以利用cctype中的toupper()和tolower()函数进行转换。</p>
+<h1 id="代码实现">代码实现</h1>
+<pre><code class="language-c++">#include &lt;iostream&gt;
+#include &lt;cstdio&gt;
+
+using namespace std;
+
+int main()
 {
-    int i=0,j=0,k=0;
-    while(i&lt;len1&amp;&amp;j&lt;len2)
-    {
-        if(left[i]&lt;right[j])
-        {
-            tmp[k++]=left[i++];
-        }else
-        {
-            tmp[k++]=right[j++];
-        }
-    }
-    while(i&lt;len1) tmp[k++]=left[i++];
-    while(j&lt;len2) tmp[k++]=right[j++];
+	char str[85]={0};
+	gets(str);
+	for(int i=0;str[i]!=0;i++){
+		if(isupper(str[i])){
+			str[i]=((str[i]-'A')+1)%26+'A';
+		}else if(islower(str[i])){
+			str[i]=((str[i]-'a')+1)%26+'a';
+		}
+	}
+	cout&lt;&lt;str;
+	return 0;
 }
 
-</code></pre>
-<h2 id="优缺点">优缺点</h2>
-<p>需要使用O(n)的辅助空间，二与之效率相同的快排和堆排需要O(logn)和O(1)的辅助空间，在同类算法中归并排序的空间复杂度略高。</p>
-<p>优点是稳定性。</p>
-<h2 id="变形">变形</h2>
-<ul>
-<li>可以自底向上合并数组的一个个元素对，然后再合并这些有序对，以此类推。这样能避免使用堆栈处理递归调用时的时间和空间开销。</li>
-</ul>
-<p>比较适合用链表组织的数据。</p>
-<ul>
-<li>把数组划分为待排序的多个部分，再对他们递归排序，最后将其合并在一起。适合对存放在二级存储空间的文件进行排序，也被称为多路合并排序。</li>
-</ul>
-<p>原方法也被称之为二路合并排序。</p>
-<h2 id="解决逆序对问题">解决逆序对问题</h2>
-<h3 id="逆序对概念">逆序对概念</h3>
-<p>设A为一个有n个数字的有序集(n&gt;1)，其中所有数字各不相同。如果存在正整数i,j使得1&lt;=i&lt;j&lt;=n而且A[i]&gt;A[j],则&lt;A[i],A[j]&gt;这个有序对称为A的一个逆序对，也称作逆序数。</p>
-<p>逆序对从定义上分析，逆序对就是数列中任意两个数满足大的在前，小的在后的组合。</p>
-<p>所谓逆序对问题，即对给定的数组序列，求其逆序对的数量。</p>
-<p>在算法实现中，略微修改原有的归并排序，当右边序列的元素为较小值是，就统计其产生的逆序对数量，即可完成逆序对的统计。</p>
-<h3 id="代码实现-2">代码实现</h3>
-<pre><code class="language-c++">void msort(int s,int t)
-{
-    if(s==t) return;
-    int mid=(s+t)/2;
-    msort(s,mid);
-    msort(mid+1,t);
-    int i=s,j=mid+1,k=s;
-    while(i&lt;=mid &amp;&amp; j&lt;=t)
-    {
-        if(a[i]&lt;=a[j])
-            r[k++]=a[i++];
-        else
-        {
-            r[k++]=a[j++];
-            ans+=mid-i+1;//统计产生逆序对的数量
-            //mid-i+1为左边剩余元素个数
-        }
-            
-    }
-    while(i&lt;=mid) r[k++]=a[i++];
-    while(j&lt;=t) r[k++]=a[j++];
-    for(int i=s;i&lt;t;i++) a[i]=r[i];
-}
 </code></pre>
 
             </div>
@@ -198,9 +216,9 @@
               <div class="next">
                 下一篇
               </div>
-              <a href="https://wylovecat.github.io/post/G_OL3h80e/">
+              <a href="https://wylovecat.github.io/post/8HKF0_bvN/">
                 <h3 class="post-title">
-                  高精度计算(一)
+                  信息学奥赛一本通_1136_密码翻译
                 </h3>
               </a>
             </div>
@@ -369,7 +387,7 @@
           题解
         </a>
       
-        <a href="https://wylovecat.github.io/tag/zjXnb_eXv/" class="badge warning">
+        <a href="https://wylovecat.github.io/tag/zjXnb_eXv/" class="badge secondary">
           noip
         </a>
       
@@ -377,35 +395,35 @@
           C/C++
         </a>
       
-        <a href="https://wylovecat.github.io/tag/S-CLh9EEX/" class="badge secondary">
+        <a href="https://wylovecat.github.io/tag/S-CLh9EEX/" class="badge warning">
           枚举
         </a>
       
-        <a href="https://wylovecat.github.io/tag/Xml2KtR4g/" class="badge secondary">
+        <a href="https://wylovecat.github.io/tag/Xml2KtR4g/" class="badge ">
           算法
         </a>
       
-        <a href="https://wylovecat.github.io/tag/iqjH4VeE6/" class="badge secondary">
+        <a href="https://wylovecat.github.io/tag/iqjH4VeE6/" class="badge success">
           高精度
         </a>
       
-        <a href="https://wylovecat.github.io/tag/cKlT30oiM/" class="badge warning">
+        <a href="https://wylovecat.github.io/tag/cKlT30oiM/" class="badge secondary">
           模拟
         </a>
       
-        <a href="https://wylovecat.github.io/tag/Z3tt3bzbS/" class="badge ">
+        <a href="https://wylovecat.github.io/tag/Z3tt3bzbS/" class="badge secondary">
           数学
         </a>
       
-        <a href="https://wylovecat.github.io/tag/M0JrCmklM/" class="badge secondary">
+        <a href="https://wylovecat.github.io/tag/M0JrCmklM/" class="badge warning">
           markdown
         </a>
       
-        <a href="https://wylovecat.github.io/tag/Vy35u5qbs/" class="badge ">
+        <a href="https://wylovecat.github.io/tag/Vy35u5qbs/" class="badge secondary">
           工具
         </a>
       
-        <a href="https://wylovecat.github.io/tag/GyyF0zlSG/" class="badge secondary">
+        <a href="https://wylovecat.github.io/tag/GyyF0zlSG/" class="badge warning">
           数据结构
         </a>
       
@@ -413,23 +431,23 @@
           Git
         </a>
       
-        <a href="https://wylovecat.github.io/tag/sEMfEVAVO/" class="badge secondary">
+        <a href="https://wylovecat.github.io/tag/sEMfEVAVO/" class="badge success">
           计算机基础
         </a>
       
-        <a href="https://wylovecat.github.io/tag/markdown/" class="badge ">
+        <a href="https://wylovecat.github.io/tag/markdown/" class="badge secondary">
           Markdown
         </a>
       
-        <a href="https://wylovecat.github.io/tag/4kipjvQ-w/" class="badge warning">
+        <a href="https://wylovecat.github.io/tag/4kipjvQ-w/" class="badge ">
           vscode
         </a>
       
-        <a href="https://wylovecat.github.io/tag/RYJKhhSlc/" class="badge warning">
+        <a href="https://wylovecat.github.io/tag/RYJKhhSlc/" class="badge secondary">
           hexo
         </a>
       
-        <a href="https://wylovecat.github.io/tag/gridea/" class="badge secondary">
+        <a href="https://wylovecat.github.io/tag/gridea/" class="badge success">
           Gridea
         </a>
       
